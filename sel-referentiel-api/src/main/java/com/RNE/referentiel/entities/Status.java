@@ -3,7 +3,6 @@ package com.RNE.referentiel.entities;
 import java.io.Serializable;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import jakarta.persistence.Entity;
@@ -21,18 +20,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Statut implements Serializable {
+public class Status implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-  private String codeStatut;
-  private String titreStatut;
+  private String statusCode;
+  private String statutTtitle;
   private String description;
   
   @Enumerated(EnumType.STRING)
-  private Categorie categorie;
+  private Category category;
   @ManyToMany(mappedBy = "statuts")
   
   private Set<Section> sections;

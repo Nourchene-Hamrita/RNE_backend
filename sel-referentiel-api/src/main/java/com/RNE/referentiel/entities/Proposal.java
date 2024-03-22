@@ -17,13 +17,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Proposition implements Serializable {
+public class Proposal implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	  @Id
-	   private String codeProposition;
+	   private String proposalCode;
 	   private String texteFr;
 	   private String texteAr;
 	   @Enumerated(EnumType.STRING)

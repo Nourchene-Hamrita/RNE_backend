@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -32,15 +29,15 @@ public class Section implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	   @Id
-	   private String codeSection;
-	   private String titreSectionFr;
-	   private String titreSectionAr;
+	   private String sectionCode;
+	   private String sectionTitleFr;
+	   private String sectionTiteAr;
 	   
 	   @Enumerated(EnumType.STRING)
 	   private Activation activation;
 	   @ManyToMany
 	  
-	   private Set<Statut> statuts;
+	   private Set<Status> statuts;
 	   @OneToMany(mappedBy = "section",cascade = CascadeType.ALL)
 	   private List<Article>articles;
 

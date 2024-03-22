@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CodePostal implements Serializable {
+public class PostalCode implements Serializable {
 	 /**
 	 * 
 	 */
@@ -28,11 +28,11 @@ public class CodePostal implements Serializable {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
        private Long id;
-       private String codePostal;
+       private String postalCode;
        
        @ManyToOne
        @JsonBackReference
-       private Ville ville;
+       private City city;
 
 
        

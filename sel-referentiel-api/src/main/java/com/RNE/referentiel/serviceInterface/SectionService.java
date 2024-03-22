@@ -10,11 +10,11 @@ public interface SectionService {
 	
 	public List<Section>getAllSections();
 	
-	public Section getSectionByCode(String codeSection);
+	public Section getSectionByCode(String sectionCode);
 	
-	public Section updateSection(String codeSection,Section section);
+	public Section updateSection(String sectionCode,Section section);
 	
 	public List<Section>getActivatedSection();
 	
-	public void deleteSection(String codeSection); 
+	public void deleteSection(String sectionCode); 
 }

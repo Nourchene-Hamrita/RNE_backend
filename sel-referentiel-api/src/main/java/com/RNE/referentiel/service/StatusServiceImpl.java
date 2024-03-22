@@ -5,48 +5,48 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.RNE.referentiel.entities.Statut;
-import com.RNE.referentiel.entities.Ville;
-import com.RNE.referentiel.repositories.StatutRepository;
-import com.RNE.referentiel.repositories.VilleRepository;
-import com.RNE.referentiel.serviceInterface.StatutService;
+import com.RNE.referentiel.entities.Status;
+
+import com.RNE.referentiel.repositories.StatusRepository;
+
+import com.RNE.referentiel.serviceInterface.StatusService;
 
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class StatusServiceImpl implements StatutService {
+public class StatusServiceImpl implements StatusService {
    
-	private StatutRepository statutRepository;
+	private StatusRepository statutRepository;
 	
 	
 	//save statut service
 	@Override
-	public Statut saveStatut(Statut statut) {
+	public Status saveStatut(Status statut) {
 		
 		return statutRepository.save(statut) ;
 	}
 
     //get statut by code service
 	@Override
-	public  Statut getStatutByCode(String codeStatut) {
-		Optional<Statut> existStatut =statutRepository.findById(codeStatut);
+	public  Status getStatutByCode(String statusCode) {
+		Optional<Status> existStatut =statutRepository.findById(statusCode);
 		return existStatut.get();
 	}
     // get all statut services
 	@Override
-	public List<Statut> getAllStatut() {
+	public List<Status> getAllStatut() {
 		
 		return statutRepository.findAll();
 	}
    //update statut service
 	@Override
-	public Statut updateStatut(String codeStatut, Statut statut) {
-		Statut existStatut=statutRepository.findById(codeStatut).orElse(null);
-		existStatut.setTitreStatut(statut.getTitreStatut());
+	public Status updateStatut(String statusCode, Status statut) {
+		Status existStatut=statutRepository.findById(statusCode).orElse(null);
+		existStatut.setStatutTtitle(statut.getStatutTtitle());
 		existStatut.setDescription(statut.getDescription());
-		existStatut.setCategorie(statut.getCategorie());
+		existStatut.setCategory(statut.getCategory());
 	
 		return statutRepository.save(existStatut);
 	}

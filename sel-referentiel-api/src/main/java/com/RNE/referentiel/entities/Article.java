@@ -27,15 +27,15 @@ public class Article implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	   @Id
-	   private String codeArticle;
-	   private String titreArticleFr;
-	   private String titreArticleAr;
+	   private String articleCode;
+	   private String articleTitleFr;
+	   private String articleTitleAr;
 	   
 	   @Enumerated(EnumType.STRING)
 	   private Activation activation;
 	   
 	   @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
-	   private List<Proposition> proposition;
+	   private List<Proposal> proposal;
 	   
 	   @ManyToOne
 	   private Section section;
