@@ -27,7 +27,7 @@ public class Status implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
   private String statusCode;
-  private String statutTtitle;
+  private String statutTitle;
   private String description;
   
   @Enumerated(EnumType.STRING)
