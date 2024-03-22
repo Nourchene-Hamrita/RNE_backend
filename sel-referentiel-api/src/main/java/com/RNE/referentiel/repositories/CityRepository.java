@@ -9,6 +9,6 @@ import com.RNE.referentiel.entities.City;
 
 public interface CityRepository extends JpaRepository<City,String> {
  
-	@Query("SELECT v FROM City c WHERE c.activation='Activate' ")
+	@Query("SELECT c FROM City c WHERE c.activation='Activate' ")
 	 List<City> getActivatedCity();
 }
