@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.entities.Article;
-import com.RNE.referentiel.serviceInterface.ArticleServiceImpl;
+import com.RNE.referentiel.serviceInterface.ArticleService;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 
 @RestController
 @RequestMapping("/api/v1/referentiel/articles")
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class ArticleController {
 
 
-	private ArticleServiceImpl articleService;
+	private ArticleService articleService;
 	
 	 @PostMapping
 	    public ResponseEntity<Article> createArticle(@RequestBody Article article) {

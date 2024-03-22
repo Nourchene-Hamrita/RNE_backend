@@ -6,13 +6,13 @@ import com.RNE.referentiel.entities.Article;
 
 
 
-public interface ArticleServiceImpl {
+public interface ArticleService {
 	
 	public Article saveArticle(Article article);
-	public Article articleById(String codeArticle);
+	public Article articleById(String articleCode);
 	public List<Article>getAllArticle();
-	public Article  updateArticle(String codeArticle,Article article);
+	public Article  updateArticle(String articleCode,Article article);
 	
-	public void   deleteArticle(String codeArticle);
+	public void   deleteArticle(String articleCode);
 
 }

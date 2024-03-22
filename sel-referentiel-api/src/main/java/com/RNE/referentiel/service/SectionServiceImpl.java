@@ -39,19 +39,19 @@ public class SectionServiceImpl implements SectionService {
 	}
 
 @Override
-public Section getSectionByCode(String codeSection) {
-	Optional<Section> section =sectionRepo.findById(codeSection);
+public Section getSectionByCode(String sectionCode) {
+	Optional<Section> section =sectionRepo.findById(sectionCode);
 	return section.get();
 }
 
 
 //update section service
 	@Override
-	public Section updateSection(String codeSection, Section section) {
+	public Section updateSection(String sectionCode, Section section) {
 		
-		Section existSection=sectionRepo.findById(codeSection).orElse(null);
-		existSection.setTitreSectionFr(section.getTitreSectionFr());
-		existSection.setTitreSectionAr(section.getTitreSectionAr());
+		Section existSection=sectionRepo.findById(sectionCode).orElse(null);
+		existSection.setSectionTitleFr(section.getSectionTitleFr());
+		existSection.setSectionTiteAr(section.getSectionTiteAr());
 		existSection.setActivation(section.getActivation());
 		existSection.setStatuts(section.getStatuts());
 		existSection.setArticles(section.getArticles());
@@ -67,8 +67,8 @@ public List<Section> getActivatedSection() {
 	return sectionRepo.getActivatedSection();
 }
 @Override
-public void deleteSection(String codeSection) {
-	sectionRepo.deleteById(codeSection);
+public void deleteSection(String sectionCode) {
+	sectionRepo.deleteById(sectionCode);
 }
 
 

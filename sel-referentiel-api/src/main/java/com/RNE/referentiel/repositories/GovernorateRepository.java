@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.RNE.referentiel.entities.Gouvernerat;
+import com.RNE.referentiel.entities.Governorate;
 
 @Repository
-public interface GouverneratRepository extends JpaRepository<Gouvernerat,String> {
+public interface GovernorateRepository extends JpaRepository<Governorate,String> {
     
-	@Query("SELECT g FROM Gouvernerat g WHERE g.activation = 'Activer' ")
-	 List<Gouvernerat>getActivatedGouv();
+	@Query("SELECT g FROM Governorate g WHERE g.activation = 'Activer' ")
+	 List<Governorate>getActivatedGov();
 }

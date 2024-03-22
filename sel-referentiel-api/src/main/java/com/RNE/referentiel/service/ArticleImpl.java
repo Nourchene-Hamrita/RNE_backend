@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.repositories.ArticleRepository;
-import com.RNE.referentiel.serviceInterface.ArticleServiceImpl;
+import com.RNE.referentiel.serviceInterface.ArticleService;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ArticleImpl implements ArticleServiceImpl{
+public class ArticleImpl implements ArticleService{
 	
 private ArticleRepository articleRepository;
 
@@ -21,12 +21,6 @@ public Article saveArticle(Article article) {
 	// TODO Auto-generated method stub
 	return articleRepository.save(article);}
 
-@Override
-public Article articleById(String codeArticle) {
-	// TODO Auto-generated method stub
-	 Article	existArticle=articleRepository.findById(codeArticle).orElse(null);
-	return existArticle;
-}
 
 @Override
 public List<Article> getAllArticle() {
@@ -35,26 +29,31 @@ public List<Article> getAllArticle() {
 }
 
 @Override
-public Article updateArticle(String codeArticle, Article article) {
+public Article updateArticle(String articleCode, Article article) {
 	// TODO Auto-generated method stub
-	Article	existArticle=articleRepository.findById(codeArticle).orElse(null);
-	 existArticle.setCodeArticle(article.getCodeArticle());
-	 existArticle.setTitreArticleFr(article.getTitreArticleFr());
-	 existArticle.setTitreArticleAr(article.getTitreArticleAr());
+	Article	existArticle=articleRepository.findById(articleCode).orElse(null);
+	 existArticle.setArticleCode(article.getArticleCode());
+	 existArticle.setArticleTitleFr(article.getArticleTitleFr());
+	 existArticle.setArticleTitleAr(article.getArticleTitleAr());
 	 existArticle.setActivation(article.getActivation());
-	 existArticle.setProposition(article.getProposition());
+	 existArticle.setProposal(article.getProposal());
 	 
 	return articleRepository.save(existArticle);
 }
 
 @Override
-public void deleteArticle(String codeArticle) {
+public void deleteArticle(String articleCode) {
 	
-	articleRepository.deleteById(codeArticle);
+	articleRepository.deleteById(articleCode);
 	// TODO Auto-generated method stub
 	
 }
 
-
+@Override
+public Article articleById(String articleCode) {
+	// TODO Auto-generated method stub
+	Article	existArticle=articleRepository.findById(articleCode).orElse(null);
+	return existArticle;
+}
 
 }

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RNE.referentiel.entities.Statut;
-import com.RNE.referentiel.serviceInterface.StatutService;
+import com.RNE.referentiel.entities.Status;
+import com.RNE.referentiel.serviceInterface.StatusService;
 
 
 import lombok.AllArgsConstructor;
@@ -24,31 +24,31 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class StatusController {
   
-	private StatutService statutService;
+	private StatusService statutService;
 	
 	@PostMapping
-	public ResponseEntity<Statut> saveStatut(@RequestBody Statut statut){
-		return new ResponseEntity<Statut>(statutService.saveStatut(statut),HttpStatus.CREATED);
+	public ResponseEntity<Status> saveStatut(@RequestBody Status statut){
+		return new ResponseEntity<Status>(statutService.saveStatut(statut),HttpStatus.CREATED);
 	}
 	@GetMapping
-	public ResponseEntity<List<Statut>> getAllStatut(){
-		return new ResponseEntity<List<Statut>>(statutService.getAllStatut(),HttpStatus.OK);
+	public ResponseEntity<List<Status>> getAllStatut(){
+		return new ResponseEntity<List<Status>>(statutService.getAllStatut(),HttpStatus.OK);
 	}
 	
 	@GetMapping("{codeStatut}")
-	public ResponseEntity<Statut> getStatutByCode(@PathVariable String codeStatut){
-		return new ResponseEntity<Statut>(statutService.getStatutByCode(codeStatut), HttpStatus.OK);
+	public ResponseEntity<Status> getStatutByCode(@PathVariable String statusCode){
+		return new ResponseEntity<Status>(statutService.getStatutByCode(statusCode), HttpStatus.OK);
 		
 	}
 	
 	@PutMapping("update/{codeStatut}")
-	public ResponseEntity<Statut> updateStatut(@PathVariable String codeStatut ,@RequestBody Statut statut){
-		return new ResponseEntity<Statut>(statutService.updateStatut(codeStatut, statut),HttpStatus.OK);
+	public ResponseEntity<Status> updateStatut(@PathVariable String statusCode ,@RequestBody Status statut){
+		return new ResponseEntity<Status>(statutService.updateStatut(statusCode, statut),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("delete/{codeStatut}")
-	public ResponseEntity<String> deleteCodePostal(@PathVariable String codeStatut){
-		statutService.deleteStatut(codeStatut);
-		return new  ResponseEntity<String>("Statut successfully deleted!", HttpStatus.OK);
+	public ResponseEntity<String> deleteCodePostal(@PathVariable String statusCode){
+		statutService.deleteStatut(statusCode);
+		return new  ResponseEntity<String>("Status successfully deleted!", HttpStatus.OK);
 	}
 }

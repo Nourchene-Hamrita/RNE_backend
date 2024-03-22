@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,22 +21,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gouvernerat implements Serializable {
+public class Governorate implements Serializable {
   
 	 /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-   private String codeGouv;
-   private String nomGouvFr;
-   private String nomGouvAr;
+   private String govCode;
+   private String govNameFr;
+   private String govNamevAr;
    @Enumerated(EnumType.STRING)
    private Activation activation;
    
-   @OneToMany(mappedBy = "gouvernerat",cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "governorate",cascade = CascadeType.ALL)
    @JsonIgnore
-	  private List<Ville>villes;
+	  private List<City> cities;
 
 
    
