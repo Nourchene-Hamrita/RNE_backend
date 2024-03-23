@@ -37,7 +37,7 @@ public class Section implements Serializable {
 	   private Activation activation;
 	   @ManyToMany
 	  
-	   private Set<Status> statuts;
+	   private Set<Status> status;
 	   @OneToMany(mappedBy = "section",cascade = CascadeType.ALL)
 	   private List<Article>articles;
 
