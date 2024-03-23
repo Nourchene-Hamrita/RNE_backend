@@ -53,7 +53,7 @@ public Section getSectionByCode(String sectionCode) {
 		existSection.setSectionTitleFr(section.getSectionTitleFr());
 		existSection.setSectionTiteAr(section.getSectionTiteAr());
 		existSection.setActivation(section.getActivation());
-		existSection.setStatuts(section.getStatuts());
+		existSection.setStatus(section.getStatus());
 		existSection.setArticles(section.getArticles());
 		
 		
