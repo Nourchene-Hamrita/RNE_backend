@@ -15,47 +15,47 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CityServiceImpl implements CityService {
    
-	private CityRepository villeRepository;
+	private CityRepository cityRepository;
 	
 	
-	//save ville service
+	//save city service
 	@Override
-	public City saveCity(City ville) {
+	public City saveCity(City city) {
 		
-		return villeRepository.save(ville) ;
+		return cityRepository.save(city) ;
 	}
 
-    //get ville by code service
+    //get city by code service
 	@Override
 	public City getCityByCode(String cityCode) {
-		Optional<City> existVille =villeRepository.findById(cityCode);
-		return existVille.get();
+		Optional<City> existCity =cityRepository.findById(cityCode);
+		return existCity.get();
 	}
-    // get all villes services
+    // get all cities services
 	@Override
 	public List<City> getAllCity() {
 		
-		return villeRepository.findAll();
+		return cityRepository.findAll();
 	}
-   //update ville service
+   //update city service
 	@Override
-	public City updateCity(String cityCode, City ville) {
-		City existVille=villeRepository.findById(cityCode).orElse(null);
-		existVille.setCityNameFr(ville.getCityNameFr());
-		existVille.setCityNameAr(ville.getCityNameAr());
-		existVille.setActivation(ville.getActivation());
-		existVille.setGovernerote(ville.getGovernerote());
-		return villeRepository.save(existVille);
+	public City updateCity(String cityCode, City city) {
+		City existCity=cityRepository.findById(cityCode).orElse(null);
+		existCity.setCityNameFr(city.getCityNameFr());
+		existCity.setCityNameAr(city.getCityNameAr());
+		existCity.setActivation(city.getActivation());
+		existCity.setGovernorate(city.getGovernorate());
+		return cityRepository.save(existCity);
 	}
 
 	@Override
 	public List<City> getActivatedCity() {
 		
-		return villeRepository.getActivatedCity();
+		return cityRepository.getActivatedCity();
 	}
 	@Override
 	public void deleteCity(String cityCode) {
-		villeRepository.deleteById(cityCode);
+		cityRepository.deleteById(cityCode);
 	}
 
 }

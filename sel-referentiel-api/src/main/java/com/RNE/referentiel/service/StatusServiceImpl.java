@@ -21,30 +21,30 @@ public class StatusServiceImpl implements StatusService {
 	private StatusRepository statutRepository;
 	
 	
-	//save statut service
+	//save status service
 	@Override
 	public Status saveStatut(Status statut) {
 		
 		return statutRepository.save(statut) ;
 	}
 
-    //get statut by code service
+    //get status by code service
 	@Override
 	public  Status getStatutByCode(String statusCode) {
 		Optional<Status> existStatut =statutRepository.findById(statusCode);
 		return existStatut.get();
 	}
-    // get all statut services
+    // get all status services
 	@Override
 	public List<Status> getAllStatut() {
 		
 		return statutRepository.findAll();
 	}
-   //update statut service
+   //update status service
 	@Override
 	public Status updateStatut(String statusCode, Status statut) {
 		Status existStatut=statutRepository.findById(statusCode).orElse(null);
-		existStatut.setStatutTtitle(statut.getStatutTtitle());
+		existStatut.setStatusTitle(statut.getStatusTitle());
 		existStatut.setDescription(statut.getDescription());
 		existStatut.setCategory(statut.getCategory());
 	

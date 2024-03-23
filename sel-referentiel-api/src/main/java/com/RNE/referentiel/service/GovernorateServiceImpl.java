@@ -22,7 +22,7 @@ public class GovernorateServiceImpl implements GovernorateService {
 	private GovernorateRepository gouverneratRepo;
 	
 	
-	//service for creating a new gouv
+	//service for creating a new Governorate
 	@Override
 	
 	public Governorate saveGovernorate(Governorate gouv) {
@@ -31,7 +31,7 @@ public class GovernorateServiceImpl implements GovernorateService {
 		 
 	}
 
-   //get list of gouvernerat
+   //get list of Governorate
 	@Override
 	public List<Governorate> getAllGovernorates() {
 		
@@ -51,8 +51,6 @@ public Governorate updateGovernorate(String govCode, Governorate gouv) {
 
   if(existing.isPresent()) {
     Governorate gouvernerat = existing.get();
-
-  
     gouvernerat.setGovNameFr(gouv.getGovNameFr());
     gouvernerat.setGovNamevAr(gouv.getGovNamevAr());
     gouvernerat.setActivation(gouv.getActivation());

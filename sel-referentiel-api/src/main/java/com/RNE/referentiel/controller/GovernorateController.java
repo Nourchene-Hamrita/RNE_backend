@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/v1/referentiel/gouvernerats")
+@RequestMapping("/api/referentiel/governorates")
 @AllArgsConstructor
 public class GovernorateController {
   
@@ -39,18 +39,18 @@ public class GovernorateController {
 	public ResponseEntity<List<Governorate>>getAllGouvernerat(){
 		return new ResponseEntity<List<Governorate>>(gouverneratService.getAllGovernorates(),HttpStatus.OK);
 	}
-	//get gouv by code
-	@GetMapping("/{codeGouv}")
+	//get governorate by code
+	@GetMapping("/{govCode}")
 	public ResponseEntity<Governorate> getGouverneratByCode(@PathVariable String govCode){
 		return new ResponseEntity<Governorate>(gouverneratService.getGovernorateByCode(govCode),HttpStatus.OK);
 	}
-	//update Gouvernerat
-	@PutMapping("/{codeGouv}")
+	//update governorate
+	@PutMapping("/update/{govCode}")
 	public ResponseEntity<Governorate> updateGouvernerat(@PathVariable String govCode,@RequestBody Governorate gouv){
 		return new ResponseEntity<Governorate>(gouverneratService.updateGovernorate(govCode, gouv),HttpStatus.OK);
 	}
 	
-	//getActivate Gouvernerat
+	//getActivate governorate
 	@GetMapping("/Activated")
 	public ResponseEntity<List<Governorate>> getActivatedGouvernerat(){
 		return new ResponseEntity<List<Governorate>>(gouverneratService.getActivatedGovernorate(),HttpStatus.OK);

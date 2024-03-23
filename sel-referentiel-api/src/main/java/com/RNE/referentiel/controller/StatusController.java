@@ -20,35 +20,35 @@ import com.RNE.referentiel.serviceInterface.StatusService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/referentiel/statuts")
+@RequestMapping("/api/referentiel/status")
 @AllArgsConstructor
 public class StatusController {
   
-	private StatusService statutService;
+	private StatusService statusService;
 	
 	@PostMapping
 	public ResponseEntity<Status> saveStatut(@RequestBody Status statut){
-		return new ResponseEntity<Status>(statutService.saveStatut(statut),HttpStatus.CREATED);
+		return new ResponseEntity<Status>(statusService.saveStatut(statut),HttpStatus.CREATED);
 	}
 	@GetMapping
 	public ResponseEntity<List<Status>> getAllStatut(){
-		return new ResponseEntity<List<Status>>(statutService.getAllStatut(),HttpStatus.OK);
+		return new ResponseEntity<List<Status>>(statusService.getAllStatut(),HttpStatus.OK);
 	}
 	
-	@GetMapping("{codeStatut}")
+	@GetMapping("/{statusCode}")
 	public ResponseEntity<Status> getStatutByCode(@PathVariable String statusCode){
-		return new ResponseEntity<Status>(statutService.getStatutByCode(statusCode), HttpStatus.OK);
+		return new ResponseEntity<Status>(statusService.getStatutByCode(statusCode), HttpStatus.OK);
 		
 	}
 	
-	@PutMapping("update/{codeStatut}")
+	@PutMapping("/update/{statusCode}")
 	public ResponseEntity<Status> updateStatut(@PathVariable String statusCode ,@RequestBody Status statut){
-		return new ResponseEntity<Status>(statutService.updateStatut(statusCode, statut),HttpStatus.OK);
+		return new ResponseEntity<Status>(statusService.updateStatut(statusCode, statut),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("delete/{codeStatut}")
+	@DeleteMapping("/delete/{statusCode}")
 	public ResponseEntity<String> deleteCodePostal(@PathVariable String statusCode){
-		statutService.deleteStatut(statusCode);
+		statusService.deleteStatut(statusCode);
 		return new  ResponseEntity<String>("Status successfully deleted!", HttpStatus.OK);
 	}
 }

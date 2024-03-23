@@ -19,41 +19,41 @@ import com.RNE.referentiel.serviceInterface.CityService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/referentiel/villes")
+@RequestMapping("/api/referentiel/cities")
 @AllArgsConstructor
 public class CityController {
  
 	private CityService cityService;
 	
-	//save ville controller
+	//save city controller
 	@PostMapping
 	public ResponseEntity<City> saveCity(@RequestBody City city){
 		return new ResponseEntity<City>(cityService.saveCity(city),HttpStatus.CREATED);
 	}
-	// get villes controller
+	// get city controller
 	@GetMapping
 	public ResponseEntity<List<City>> getAllCities(){
 		return new ResponseEntity<List<City>>(cityService.getAllCity(),HttpStatus.OK);
 	}
 	
-	//get villes by code controller
-	@GetMapping("/{codeCity}")
+	//get city by code controller
+	@GetMapping("/{cityCode}")
 	public ResponseEntity<City>getCityByCode(@PathVariable String cityCode){
 		return new ResponseEntity<City>(cityService.getCityByCode(cityCode),HttpStatus.OK);
 	}
 	
-	//update ville controller
-	@PutMapping("/update/{codeCity}")
+	//update city controller
+	@PutMapping("/update/{cityCode}")
 	public ResponseEntity<City>updateCity(@PathVariable String cityCode,@RequestBody City city){
 		return new ResponseEntity<City>(cityService.updateCity(cityCode, city),HttpStatus.OK);
 	}
 	
-	//get Activated ville controller
+	//get Activated city controller
 	@GetMapping("/activated")
 	public ResponseEntity<List<City>> getActivatedCities(){
 		return new ResponseEntity<>(cityService.getActivatedCity(),HttpStatus.OK);
 	}
-	@DeleteMapping("/{codeCity}")
+	@DeleteMapping("/delete/{cityCode}")
 	public ResponseEntity<String> deleteCity(@PathVariable String cityCode){
 	  cityService.deleteCity(cityCode);
 	  return new  ResponseEntity<String>("City successfully deleted!", HttpStatus.OK);

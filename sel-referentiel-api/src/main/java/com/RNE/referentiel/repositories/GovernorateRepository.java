@@ -11,6 +11,6 @@ import com.RNE.referentiel.entities.Governorate;
 @Repository
 public interface GovernorateRepository extends JpaRepository<Governorate,String> {
     
-	@Query("SELECT g FROM Governorate g WHERE g.activation = 'Activer' ")
+	@Query("SELECT g FROM Governorate g WHERE g.activation = 'Activate' ")
 	 List<Governorate>getActivatedGov();
 }

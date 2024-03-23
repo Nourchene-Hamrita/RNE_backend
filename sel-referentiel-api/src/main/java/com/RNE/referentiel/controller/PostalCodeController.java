@@ -19,7 +19,7 @@ import com.RNE.referentiel.serviceInterface.PostalCodeService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/referentiel/codePostal")
+@RequestMapping("/api/referentiel/postalCode")
 @AllArgsConstructor
 public class PostalCodeController {
   
@@ -34,18 +34,18 @@ public class PostalCodeController {
 		return new ResponseEntity<List<PostalCode>>(codePostalService.getAllPostalCode(),HttpStatus.OK);
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<PostalCode> getCodePostalById(@PathVariable Long id){
 		return new ResponseEntity<PostalCode>(codePostalService.getPostalCodeById(id), HttpStatus.OK);
 		
 	}
 	
-	@PutMapping("update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<PostalCode> updateCodePostal(@PathVariable Long id,@RequestBody PostalCode codePostal){
 		return new ResponseEntity<PostalCode>(codePostalService.updatePostalCode(id, codePostal),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteCodePostal(@PathVariable Long id){
 		codePostalService.deletePostalCode(id);
 		return new  ResponseEntity<String>("PostalCode successfully deleted!", HttpStatus.OK);

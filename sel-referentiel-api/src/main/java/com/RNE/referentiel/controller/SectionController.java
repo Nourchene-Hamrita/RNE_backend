@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/v1/referentiel/sections")
+@RequestMapping("/api/referentiel/sections")
 @AllArgsConstructor
 public class SectionController {
   
@@ -45,7 +45,7 @@ public class SectionController {
 		return new ResponseEntity<Section>(sectionService.getSectionByCode(codeSection),HttpStatus.OK);
 	}
 	//update section
-	@PutMapping("/{codeSection}")
+	@PutMapping("/update/{codeSection}")
 	public ResponseEntity<Section> updateSection(@PathVariable String codeSection,@RequestBody Section section){
 		return new ResponseEntity<Section>(sectionService.updateSection(codeSection, section),HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class SectionController {
 	public ResponseEntity<List<Section>> getActivatedSection(){
 		return new ResponseEntity<List<Section>>(sectionService.getActivatedSection(),HttpStatus.OK);
 	}
-	@DeleteMapping("/{codeSection}")
+	@DeleteMapping("/delete/{codeSection}")
 	public ResponseEntity<String> deleteGouvernerat(@PathVariable String codeSection){
 	  sectionService.deleteSection(codeSection);
 	  return new  ResponseEntity<String>("Section successfully deleted!", HttpStatus.OK);

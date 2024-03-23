@@ -6,15 +6,15 @@ import com.RNE.referentiel.entities.City;
 
 public interface CityService {
    
-	public City saveCity(City ville);
+	public City saveCity(City city);
 	
 	public City getCityByCode(String cityCode);
 	
 	public List<City>getAllCity();
 	
-	public City updateCity(String codeVille,City ville);
+	public City updateCity(String cityCode,City city);
 	
 	public List<City> getActivatedCity();
 	
-	public void deleteCity(String codeVille); 
+	public void deleteCity(String cityCode); 
 }

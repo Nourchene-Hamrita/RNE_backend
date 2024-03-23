@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/referentiel/propositions")
+@RequestMapping("/api/referentiel/propositions")
 public class ProposalController {
 	
 	private ProposalService propositionService;
@@ -36,18 +36,18 @@ public class ProposalController {
 			return new ResponseEntity<List<Proposal>>(propositionService.getAllProposition(),HttpStatus.OK);
 		}
 		
-		@GetMapping("{proposalCode}")
+		@GetMapping("/{proposalCode}")
 		public ResponseEntity<Proposal> getCodePostalById(@PathVariable String proposalCode){
 			return new ResponseEntity<Proposal>(propositionService.propositionById(proposalCode), HttpStatus.OK);
 			
 		}
 		
-		@PutMapping("update/{proposalCode}")
+		@PutMapping("/update/{proposalCode}")
 		public ResponseEntity<Proposal> updateProposition(@PathVariable String proposalCode,@RequestBody Proposal proposition){
 			return new ResponseEntity<Proposal>(propositionService.updateProposition(proposalCode, proposition),HttpStatus.OK);
 		}
 		
-		@DeleteMapping("delete/{proposalCode}")
+		@DeleteMapping("/delete/{proposalCode}")
 		public ResponseEntity<String> deleteArticle(@PathVariable String proposalCode){
 			propositionService.deleteProposition(proposalCode);
 			return new  ResponseEntity<String>("Proposal successfully deleted!", HttpStatus.OK);

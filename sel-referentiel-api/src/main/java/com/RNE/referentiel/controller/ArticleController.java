@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/v1/referentiel/articles")
+@RequestMapping("/api/referentiel/articles")
 @AllArgsConstructor
 public class ArticleController {
 

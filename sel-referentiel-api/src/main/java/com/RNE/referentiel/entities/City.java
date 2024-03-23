@@ -36,7 +36,7 @@ public class City implements Serializable {
 	   private Activation activation;
 	   
 	   @ManyToOne
-	   private Governorate governerote;
+	   private Governorate governorate;
 	   @OneToMany(mappedBy = "city",cascade = {CascadeType.ALL})
 	   @JsonManagedReference
 	   private List<PostalCode> postalCode;
