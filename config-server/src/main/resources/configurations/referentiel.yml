@@ -7,18 +7,18 @@ eureka:
 
 
 server:
-  port: 8090
+  port: 8081
 spring:
   application:
     name: referentiel
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/rneBD?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
     username: postgres
-    password: Zaineb123
+    password: nour123
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 

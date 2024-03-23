@@ -13,9 +13,9 @@ spring:
           enabled: true
       routes:
         - id: referentiel
-          uri: http://localhost:8090
+          uri: http://localhost:8081
           predicates:
-            - Path=/api/v1/referentiel/**
+            - Path=/api/referentiel/**
            
 management:
   tracing:
