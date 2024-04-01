@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +32,13 @@ public class GovernorateController {
 	 
 	
 	@PostMapping
+	@PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<Governorate>saveGouvernerat(@RequestBody Governorate gouvernerat){
 		return new ResponseEntity<Governorate>(gouverneratService.saveGovernorate(gouvernerat),HttpStatus.CREATED);
 	}
 	
 	@GetMapping
+	@PreAuthorize("hasRole('client_user')")
 	public ResponseEntity<List<Governorate>>getAllGouvernerat(){
 		return new ResponseEntity<List<Governorate>>(gouverneratService.getAllGovernorates(),HttpStatus.OK);
 	}
