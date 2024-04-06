@@ -7,11 +7,11 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/RNE
+          issuer-uri: http://localhost:8182/realms/RNE
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 jwt:
   auth:
     converter:
-      resource-id: rne-rest-api
+      resource-id: Auth
       principle-attribute: preferred_username
