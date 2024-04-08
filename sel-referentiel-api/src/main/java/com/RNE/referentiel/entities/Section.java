@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,28 +24,27 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Section implements Serializable {
-	   
-	   /**
+
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	   @Id
-	   private String sectionCode;
-	   private String sectionTitleFr;
-	   private String sectionTiteAr;
-	   
-	   @Enumerated(EnumType.STRING)
-	   private Activation activation;
-	   @ManyToMany
-	  
-	   private Set<Status> status;
-	   @OneToMany(mappedBy = "section",cascade = CascadeType.ALL)
-	   private List<Article>articles;
-
-	   
-	   
+	private static final long serialVersionUID = -492407437337641766L;
+	/**
+	* 
+	*/
 	
-	   
-	   
-	   
+	@Id
+	private String code;
+	private String titleFr;
+	private String titleAr;
+
+	@Enumerated(EnumType.STRING)
+	private Activation activation;
+	@ManyToMany
+
+	private Set<Status> status;
+	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+
+	private List<Article> articles;
+
 }

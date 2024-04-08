@@ -3,7 +3,6 @@ package com.RNE.referentiel.entities;
 import java.io.Serializable;
 import java.util.List;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -24,28 +23,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class City implements Serializable {
-	   /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	   @Id
-	   private String cityCode;
-	   private String cityNameFr;
-	   private String cityNameAr;
-	   @Enumerated(EnumType.STRING)
-	   private Activation activation;
-	   
-	   @ManyToOne
-	   private Governorate governorate;
-	   @OneToMany(mappedBy = "city",cascade = {CascadeType.ALL})
-	   @JsonManagedReference
-	   private List<PostalCode> postalCode;
-	   
-	   
+	private static final long serialVersionUID = 3048454537732980212L;
+	/**
+	* 
+	*/
 	
-	   
-	   
-	
-	   
-	   
+	@Id
+	private String code;
+	private String nameFr;
+	private String nameAr;
+	@Enumerated(EnumType.STRING)
+	private Activation activation;
+
+	@ManyToOne
+	private Delegation delegation;
+	@OneToMany(mappedBy = "city", cascade = { CascadeType.ALL })
+	@JsonManagedReference
+	private List<PostalCode> postalCode;
+
 }

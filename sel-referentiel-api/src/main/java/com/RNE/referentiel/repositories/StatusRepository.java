@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.RNE.referentiel.entities.Status;
 
-public interface StatusRepository extends JpaRepository<Status,String>{
+public interface StatusRepository extends JpaRepository<Status, String> {
 
 }
