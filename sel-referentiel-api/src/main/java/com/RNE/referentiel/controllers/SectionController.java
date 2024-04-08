@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.SectionDTO;
-import com.RNE.referentiel.services.SectionServiceImpl;
+import com.RNE.referentiel.services.impl.SectionServiceImpl;
 
 import lombok.AllArgsConstructor;
 

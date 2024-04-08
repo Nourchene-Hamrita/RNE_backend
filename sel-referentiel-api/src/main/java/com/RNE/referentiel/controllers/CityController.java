@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.entities.City;
-import com.RNE.referentiel.services.impl.CityService;
+import com.RNE.referentiel.services.CityService;
 
 import lombok.AllArgsConstructor;
 

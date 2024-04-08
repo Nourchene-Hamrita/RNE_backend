@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.PostalCode;
 import com.RNE.referentiel.repositories.PostalCodeRepository;
-import com.RNE.referentiel.services.impl.PostalCodeService;
+import com.RNE.referentiel.services.PostalCodeService;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class PostalcodeImpl implements PostalCodeService {
+public class PostalCodeImpl implements PostalCodeService {
 
 	private PostalCodeRepository codePostalRepo;
 

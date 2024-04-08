@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.ProposalDTO;
-import com.RNE.referentiel.services.impl.ProposalService;
+import com.RNE.referentiel.services.ProposalService;
 
 import lombok.AllArgsConstructor;
 

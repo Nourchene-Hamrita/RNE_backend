@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import com.RNE.referentiel.dto.ProposalDTO;
 import com.RNE.referentiel.entities.Proposal;
 
 import com.RNE.referentiel.repositories.ProposalRepository;
-import com.RNE.referentiel.services.impl.ProposalService;
+import com.RNE.referentiel.services.ProposalService;
 
 import lombok.AllArgsConstructor;
 

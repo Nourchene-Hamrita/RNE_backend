@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.City;
 import com.RNE.referentiel.repositories.CityRepository;
-import com.RNE.referentiel.services.impl.CityService;
+import com.RNE.referentiel.services.CityService;
 
 import lombok.AllArgsConstructor;
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.entities.PostalCode;
-import com.RNE.referentiel.services.impl.PostalCodeService;
+import com.RNE.referentiel.services.PostalCodeService;
 
 import lombok.AllArgsConstructor;
 
