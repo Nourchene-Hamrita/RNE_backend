@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import com.RNE.referentiel.enums.Activation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -32,10 +33,12 @@ public class Section implements Serializable {
 	/**
 	* 
 	*/
-	
+
 	@Id
 	private String code;
+
 	private String titleFr;
+
 	private String titleAr;
 
 	@Enumerated(EnumType.STRING)

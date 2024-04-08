@@ -3,6 +3,7 @@ package com.RNE.referentiel.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.RNE.referentiel.enums.Activation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;

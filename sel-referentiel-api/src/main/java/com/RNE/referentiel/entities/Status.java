@@ -3,6 +3,8 @@ package com.RNE.referentiel.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.RNE.referentiel.enums.Category;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,18 +24,24 @@ public class Status implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	private String code;
+	private static final long serialVersionUID = -4206123940409600831L;
 
-	private String title;
+	/**
+	 * 
+	 */
+	
+	 @Id
+	    private String code;
 
-	private String description;
+	    private String title;
 
-	@Enumerated(EnumType.STRING)
-	private Category category;
+	    private String description;
 
-	@ManyToMany(mappedBy = "status")
-	private Set<Section> sections;
+	    @Enumerated(EnumType.STRING)
+	    
+	    private Category category;
 
-}
+	    @ManyToMany(mappedBy = "status")
+	    private Set<Section> sections;
+
+	}

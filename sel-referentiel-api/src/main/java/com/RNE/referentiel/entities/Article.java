@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.RNE.referentiel.enums.Activation;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,16 +37,21 @@ public class Article implements Serializable {
 
 	@Id
 	private String code;
+
 	private String titleFr;
+
 	private String titleAr;
 
 	@Enumerated(EnumType.STRING)
+
 	private Activation activation;
 
 	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-	 private List<Proposal> proposal = new ArrayList<>();
+
+	private List<Proposal> proposal = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "section_code", referencedColumnName = "code")
+
 	private Section section;
 }

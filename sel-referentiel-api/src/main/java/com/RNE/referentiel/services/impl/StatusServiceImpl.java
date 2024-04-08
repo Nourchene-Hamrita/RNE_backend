@@ -18,69 +18,70 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class StatusServiceImpl implements StatusService {
 
-    private StatusRepository statusRepository;
+	private StatusRepository statusRepository;
 
-    // save status service
-    @Override
-    public StatusDTO saveStatus(StatusDTO statusDTO) {
+	// save status service
+	@Override
+	public StatusDTO saveStatus(StatusDTO statusDTO) {
 
-        Status status = convertDtoToEntity(statusDTO);
-        return convertEntityToDto(statusRepository.save(status));
-    }
+		Status status = StatusDTO.convertDtoToEntity(statusDTO);
+		return StatusDTO.convertEntityToDto(statusRepository.save(status));
+	}
 
-    // get status by code service
-    @Override
-    public StatusDTO getStatusByCode(String code) {
-        Optional<Status> existStatus = statusRepository.findById(code);
-        return existStatus.map(this::convertEntityToDto).orElse(null);
-    }
+	// get status by code service
+	@Override
+	public StatusDTO getStatusByCode(String code) {
+		Optional<Status> existStatus = statusRepository.findById(code);
+		return existStatus.map(this::convertEntityToDto).orElse(null);
+	}
 
-    // get all status services
-    @Override
-    public List<StatusDTO> getAllStatuses() {
+	// get all statuses services
+	@Override
+	public List<StatusDTO> getAllStatuses() {
 
-        return statusRepository.findAll().stream()
-                .map(this::convertEntityToDto)
-                .collect(Collectors.toList());
-    }
+		return statusRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+	}
 
-    // update status service
-    @Override
-    public StatusDTO updateStatus(String code, StatusDTO statusDTO) {
-        Status existStatus = statusRepository.findById(code).orElse(null);
-        if (existStatus == null) {
-            return null;
-        }
+	// update status service
+	@Override
+	public StatusDTO updateStatus(String code, StatusDTO statusDTO) {
+		Status existStatus = statusRepository.findById(code).orElse(null);
+		if (existStatus == null) {
+			return null;
+		}
 
-        existStatus.setTitle(statusDTO.getTitle());
-       
+		existStatus.setTitle(statusDTO.getTitle());
+		existStatus.setDescription(statusDTO.getDescription());
+		existStatus.setCategory(statusDTO.getCategory());
 
-        return convertEntityToDto(statusRepository.save(existStatus));
-    }
+		return convertEntityToDto(statusRepository.save(existStatus));
+	}
 
-    @Override
-    public void deleteStatus(String code) {
-        statusRepository.deleteById(code);
-    }
+	@Override
+	public void deleteStatus(String code) {
+		statusRepository.deleteById(code);
+	}
 
-    public Status convertDtoToEntity(StatusDTO statusDTO) {
+	public Status convertDtoToEntity(StatusDTO statusDTO) {
 
-        Status status = new Status();
-        status.setCode(statusDTO.getCode());
-        status.setTitle(statusDTO.getTitle());
-        
+		Status status = new Status();
+		status.setCode(statusDTO.getCode());
+		status.setTitle(statusDTO.getTitle());
+		status.setDescription(statusDTO.getDescription());
+		status.setCategory(statusDTO.getCategory());
 
-        return status;
-    }
+		return status;
+	}
 
-    public StatusDTO convertEntityToDto(Status status) {
+	public StatusDTO convertEntityToDto(Status status) {
 
-        StatusDTO statusDTO = new StatusDTO();
-        statusDTO.setCode(status.getCode());
-        statusDTO.setTitle(status.getTitle());
-    
+		StatusDTO statusDTO = new StatusDTO();
+		statusDTO.setCode(status.getCode());
+		statusDTO.setTitle(status.getTitle());
+		statusDTO.setDescription(status.getDescription());
+		statusDTO.setCategory(status.getCategory());
 
-        return statusDTO;
-    }
+		return statusDTO;
+	}
 
 }

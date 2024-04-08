@@ -3,9 +3,9 @@ package com.RNE.referentiel.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.RNE.referentiel.entities.Activation;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
+import com.RNE.referentiel.enums.Activation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.RNE.referentiel.entities;
+package com.RNE.referentiel.enums;
 
 public enum Category {
 	Association, Company

@@ -2,6 +2,8 @@ package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
 
+import com.RNE.referentiel.enums.Activation;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

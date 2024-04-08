@@ -1,10 +1,8 @@
 package com.RNE.referentiel.dto;
 
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import com.RNE.referentiel.entities.Category;
 import com.RNE.referentiel.entities.Status;
+import com.RNE.referentiel.enums.Category;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +12,13 @@ import lombok.Setter;
 public class StatusDTO {
 
     private String code;
+    
     private String title;
+    
     private String description;
+    
+
+    
     private Category category;
 
     public static StatusDTO convertEntityToDto(Status status) {
@@ -24,6 +27,7 @@ public class StatusDTO {
         statusDTO.setCode(status.getCode());
         statusDTO.setTitle(status.getTitle());
         statusDTO.setDescription(status.getDescription());
+       
         statusDTO.setCategory(status.getCategory());
 
         return statusDTO;
