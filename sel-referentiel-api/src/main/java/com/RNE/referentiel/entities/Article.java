@@ -3,9 +3,8 @@ package com.RNE.referentiel.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -45,5 +44,6 @@ public class Article implements Serializable {
 	private List<Proposal> proposal;
 
 	@ManyToOne
+	@JoinColumn(name = "section_code", referencedColumnName = "code")
 	private Section section;
 }
