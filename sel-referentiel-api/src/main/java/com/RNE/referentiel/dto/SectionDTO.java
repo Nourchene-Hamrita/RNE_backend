@@ -14,7 +14,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIgnoreProperties("articles")
 public class SectionDTO {
 
     private String sectionCode;
@@ -34,10 +33,9 @@ public class SectionDTO {
         sectionDTO.setStatus(section.getStatus().stream()
                 .map(StatusDTO::convertEntityToDto)
                 .collect(Collectors.toSet()));
-        sectionDTO.setArticles(
-                section.getArticles().stream()
-                        .map(ArticleDTO::convertEntityToDto)
-                        .collect(Collectors.toList()));
+        sectionDTO.setArticles(section.getArticles().stream()
+                .map(ArticleDTO::convertEntityToDto)
+                .collect(Collectors.toList()));
 
         return sectionDTO;
     }
@@ -58,5 +56,4 @@ public class SectionDTO {
 
         return section;
     }
-
 }

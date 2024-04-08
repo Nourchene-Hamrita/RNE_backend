@@ -42,6 +42,5 @@ public class Article implements Serializable {
 
 	
     @ManyToOne
-    @JoinColumn(name = "section_code")
     private Section section;
 }

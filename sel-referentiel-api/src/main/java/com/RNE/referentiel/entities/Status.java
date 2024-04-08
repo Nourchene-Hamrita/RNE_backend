@@ -32,8 +32,8 @@ public class Status implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Category category;
-	@ManyToMany(mappedBy = "status")
 
+	@ManyToMany(mappedBy = "status")
 	private Set<Section> sections;
 
 }

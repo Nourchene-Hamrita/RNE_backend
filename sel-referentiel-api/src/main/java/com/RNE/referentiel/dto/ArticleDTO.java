@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIgnoreProperties("section")
+
 public class ArticleDTO {
 
     private String articleCode;
@@ -20,7 +20,7 @@ public class ArticleDTO {
     private String articleTitleAr;
     private Activation activation;
     private List<ProposalDTO> proposal;
-    private SectionDTO section;
+   
 
     public static ArticleDTO convertEntityToDto(Article article) {
 
@@ -33,7 +33,7 @@ public class ArticleDTO {
                 article.getProposal().stream()
                         .map(ProposalDTO::convertEntityToDto)
                         .collect(Collectors.toList()));
-        articleDTO.setSection(SectionDTO.convertEntityToDto(article.getSection()));
+        
 
         return articleDTO;
     }
@@ -48,8 +48,7 @@ public class ArticleDTO {
                 articleDTO.getProposal().stream()
                         .map(ProposalDTO::convertDtoToEntity)
                         .collect(Collectors.toList()));
-        article.setSection(SectionDTO.convertDtoToEntity(articleDTO.getSection()));
-
+       
         return article;
     }
 
