@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.StatusDTO;
-import com.RNE.referentiel.services.impl.StatusService;
+import com.RNE.referentiel.services.StatusService;
 
 import lombok.AllArgsConstructor;
 

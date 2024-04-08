@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.Delegation;
 import com.RNE.referentiel.repositories.DelegationRepository;
-import com.RNE.referentiel.services.impl.DelegationService;
+import com.RNE.referentiel.services.DelegationService;
 
 import lombok.AllArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services.impl;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 

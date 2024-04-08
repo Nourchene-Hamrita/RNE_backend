@@ -1,4 +1,4 @@
-package com.RNE.referentiel.services;
+package com.RNE.referentiel.services.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import com.RNE.referentiel.dto.StatusDTO;
 import com.RNE.referentiel.entities.Section;
 
 import com.RNE.referentiel.repositories.SectionRepository;
-import com.RNE.referentiel.services.impl.SectionService;
+import com.RNE.referentiel.services.SectionService;
 
 import lombok.AllArgsConstructor;
 
