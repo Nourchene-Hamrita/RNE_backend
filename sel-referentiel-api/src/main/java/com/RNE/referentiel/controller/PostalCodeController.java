@@ -22,32 +22,33 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/referentiel/postalCode")
 @AllArgsConstructor
 public class PostalCodeController {
-  
+
 	private PostalCodeService codePostalService;
-	
+
 	@PostMapping
-	public ResponseEntity<PostalCode> saveCodePostal(@RequestBody PostalCode codePostal){
-		return new ResponseEntity<PostalCode>(codePostalService.savePostalCode(codePostal),HttpStatus.CREATED);
+	public ResponseEntity<PostalCode> saveCodePostal(@RequestBody PostalCode codePostal) {
+		return new ResponseEntity<PostalCode>(codePostalService.savePostalCode(codePostal), HttpStatus.CREATED);
 	}
+
 	@GetMapping
-	public ResponseEntity<List<PostalCode>> getAllCodesPostal(){
-		return new ResponseEntity<List<PostalCode>>(codePostalService.getAllPostalCode(),HttpStatus.OK);
+	public ResponseEntity<List<PostalCode>> getAllCodesPostal() {
+		return new ResponseEntity<List<PostalCode>>(codePostalService.getAllPostalCode(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<PostalCode> getCodePostalById(@PathVariable Long id){
+	public ResponseEntity<PostalCode> getCodePostalById(@PathVariable Long id) {
 		return new ResponseEntity<PostalCode>(codePostalService.getPostalCodeById(id), HttpStatus.OK);
-		
+
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public ResponseEntity<PostalCode> updateCodePostal(@PathVariable Long id,@RequestBody PostalCode codePostal){
-		return new ResponseEntity<PostalCode>(codePostalService.updatePostalCode(id, codePostal),HttpStatus.OK);
+	public ResponseEntity<PostalCode> updateCodePostal(@PathVariable Long id, @RequestBody PostalCode codePostal) {
+		return new ResponseEntity<PostalCode>(codePostalService.updatePostalCode(id, codePostal), HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteCodePostal(@PathVariable Long id){
+	public ResponseEntity<String> deleteCodePostal(@PathVariable Long id) {
 		codePostalService.deletePostalCode(id);
-		return new  ResponseEntity<String>("PostalCode successfully deleted!", HttpStatus.OK);
+		return new ResponseEntity<String>("PostalCode successfully deleted!", HttpStatus.OK);
 	}
 }

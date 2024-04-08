@@ -2,17 +2,18 @@ package com.RNE.referentiel.serviceInterface;
 
 import java.util.List;
 
-import com.RNE.referentiel.entities.Article;
-
-
+import com.RNE.referentiel.dto.ArticleDTO;
 
 public interface ArticleService {
-	
-	public Article saveArticle(Article article);
-	public Article articleById(String articleCode);
-	public List<Article>getAllArticle();
-	public Article  updateArticle(String articleCode,Article article);
-	
-	public void   deleteArticle(String articleCode);
+
+    public ArticleDTO saveArticle(ArticleDTO articleDTO);
+
+    public ArticleDTO getArticleByCode(String articleCode);
+
+    public List<ArticleDTO> getAllArticles();
+
+    public ArticleDTO updateArticle(String articleCode, ArticleDTO articleDTO);
+
+    public void deleteArticle(String articleCode);
 
 }

@@ -16,26 +16,16 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthConverter jwtAuthConverter;
+	private final JwtAuthConverter jwtAuthConverter;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf()
-                    .disable()
-                .authorizeHttpRequests()
-                    .anyRequest()
-                        .authenticated();
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeHttpRequests().anyRequest().authenticated();
 
-        http
-                .oauth2ResourceServer()
-                    .jwt()
-                        .jwtAuthenticationConverter(jwtAuthConverter);
+		http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthConverter);
 
-        http
-                .sessionManagement()
-                    .sessionCreationPolicy(STATELESS);
+		http.sessionManagement().sessionCreationPolicy(STATELESS);
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

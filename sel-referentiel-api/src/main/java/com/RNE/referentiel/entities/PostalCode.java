@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,20 +20,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PostalCode implements Serializable {
-	 /**
-	 * 
-	 */
+	/**
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-       private Long id;
-       private String postalCode;
-       
-       @ManyToOne
-       @JsonBackReference
-       private City city;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String postalCode;
 
+	@ManyToOne
+	@JsonBackReference
+	private City city;
 
-       
-       
 }

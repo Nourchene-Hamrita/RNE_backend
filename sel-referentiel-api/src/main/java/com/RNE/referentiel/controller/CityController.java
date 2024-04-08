@@ -22,40 +22,42 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/referentiel/cities")
 @AllArgsConstructor
 public class CityController {
- 
+
 	private CityService cityService;
-	
-	//save city controller
+
+	// save city controller
 	@PostMapping
-	public ResponseEntity<City> saveCity(@RequestBody City city){
-		return new ResponseEntity<City>(cityService.saveCity(city),HttpStatus.CREATED);
+	public ResponseEntity<City> saveCity(@RequestBody City city) {
+		return new ResponseEntity<City>(cityService.saveCity(city), HttpStatus.CREATED);
 	}
+
 	// get city controller
 	@GetMapping
-	public ResponseEntity<List<City>> getAllCities(){
-		return new ResponseEntity<List<City>>(cityService.getAllCity(),HttpStatus.OK);
+	public ResponseEntity<List<City>> getAllCities() {
+		return new ResponseEntity<List<City>>(cityService.getAllCity(), HttpStatus.OK);
 	}
-	
-	//get city by code controller
+
+	// get city by code controller
 	@GetMapping("/{cityCode}")
-	public ResponseEntity<City>getCityByCode(@PathVariable String cityCode){
-		return new ResponseEntity<City>(cityService.getCityByCode(cityCode),HttpStatus.OK);
+	public ResponseEntity<City> getCityByCode(@PathVariable String cityCode) {
+		return new ResponseEntity<City>(cityService.getCityByCode(cityCode), HttpStatus.OK);
 	}
-	
-	//update city controller
+
+	// update city controller
 	@PutMapping("/update/{cityCode}")
-	public ResponseEntity<City>updateCity(@PathVariable String cityCode,@RequestBody City city){
-		return new ResponseEntity<City>(cityService.updateCity(cityCode, city),HttpStatus.OK);
+	public ResponseEntity<City> updateCity(@PathVariable String cityCode, @RequestBody City city) {
+		return new ResponseEntity<City>(cityService.updateCity(cityCode, city), HttpStatus.OK);
 	}
-	
-	//get Activated city controller
+
+	// get Activated city controller
 	@GetMapping("/activated")
-	public ResponseEntity<List<City>> getActivatedCities(){
-		return new ResponseEntity<>(cityService.getActivatedCity(),HttpStatus.OK);
+	public ResponseEntity<List<City>> getActivatedCities() {
+		return new ResponseEntity<>(cityService.getActivatedCity(), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/delete/{cityCode}")
-	public ResponseEntity<String> deleteCity(@PathVariable String cityCode){
-	  cityService.deleteCity(cityCode);
-	  return new  ResponseEntity<String>("City successfully deleted!", HttpStatus.OK);
+	public ResponseEntity<String> deleteCity(@PathVariable String cityCode) {
+		cityService.deleteCity(cityCode);
+		return new ResponseEntity<String>("City successfully deleted!", HttpStatus.OK);
 	}
 }

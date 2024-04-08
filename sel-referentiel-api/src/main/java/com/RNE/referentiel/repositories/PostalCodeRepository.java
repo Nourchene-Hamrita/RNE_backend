@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.RNE.referentiel.entities.PostalCode;
 
-public interface PostalCodeRepository extends JpaRepository<PostalCode,Long> {
+public interface PostalCodeRepository extends JpaRepository<PostalCode, Long> {
 
 }

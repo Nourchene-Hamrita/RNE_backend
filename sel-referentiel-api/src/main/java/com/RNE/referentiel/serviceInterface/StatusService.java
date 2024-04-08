@@ -2,19 +2,17 @@ package com.RNE.referentiel.serviceInterface;
 
 import java.util.List;
 
-import com.RNE.referentiel.entities.Status;
-
+import com.RNE.referentiel.dto.StatusDTO;
 
 public interface StatusService {
-   
-	public Status saveStatut(Status status);
-	
-	public Status getStatutByCode(String statusCode);
-	
-	public List<Status>getAllStatut();
-	
-	public Status updateStatut(String statusCode,Status statut);
-	
-	
-	public void deleteStatut(String statusCode); 
+
+    public StatusDTO saveStatus(StatusDTO statusDTO);
+
+    public StatusDTO getStatusByCode(String statusCode);
+
+    public List<StatusDTO> getAllStatuses();
+
+    public StatusDTO updateStatus(String statusCode, StatusDTO statusDTO);
+
+    public void deleteStatus(String statusCode);
 }

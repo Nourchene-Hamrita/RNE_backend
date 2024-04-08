@@ -22,12 +22,12 @@ public class Proposal implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	  @Id
-	   private String proposalCode;
-	   private String texteFr;
-	   private String texteAr;
-	   @Enumerated(EnumType.STRING)
-	   private Activation activation;
-	   @ManyToOne
-	   private Article article;
-} 
+	@Id
+	private String proposalCode;
+	private String textFr;
+	private String textAr;
+	@Enumerated(EnumType.STRING)
+	private Activation activation;
+	@ManyToOne
+	private Article article;
+}

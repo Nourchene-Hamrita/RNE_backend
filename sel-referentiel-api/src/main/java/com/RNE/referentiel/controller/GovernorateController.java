@@ -1,6 +1,5 @@
 package com.RNE.referentiel.controller;
 
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -21,47 +20,47 @@ import com.RNE.referentiel.serviceInterface.GovernorateService;
 
 import lombok.AllArgsConstructor;
 
-
 @RestController
 @RequestMapping("/api/referentiel/governorates")
 @AllArgsConstructor
 public class GovernorateController {
-  
-	
+
 	private final GovernorateService gouverneratService;
-	 
-	
+
 	@PostMapping
 	@PreAuthorize("hasRole('client_admin')")
-	public ResponseEntity<Governorate>saveGouvernerat(@RequestBody Governorate gouvernerat){
-		return new ResponseEntity<Governorate>(gouverneratService.saveGovernorate(gouvernerat),HttpStatus.CREATED);
+	public ResponseEntity<Governorate> saveGouvernerat(@RequestBody Governorate gouvernerat) {
+		return new ResponseEntity<Governorate>(gouverneratService.saveGovernorate(gouvernerat), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping
 	@PreAuthorize("hasRole('client_user')")
-	public ResponseEntity<List<Governorate>>getAllGouvernerat(){
-		return new ResponseEntity<List<Governorate>>(gouverneratService.getAllGovernorates(),HttpStatus.OK);
+	public ResponseEntity<List<Governorate>> getAllGouvernerat() {
+		return new ResponseEntity<List<Governorate>>(gouverneratService.getAllGovernorates(), HttpStatus.OK);
 	}
-	//get governorate by code
+
+	// get governorate by code
 	@GetMapping("/{govCode}")
-	public ResponseEntity<Governorate> getGouverneratByCode(@PathVariable String govCode){
-		return new ResponseEntity<Governorate>(gouverneratService.getGovernorateByCode(govCode),HttpStatus.OK);
+	public ResponseEntity<Governorate> getGouverneratByCode(@PathVariable String govCode) {
+		return new ResponseEntity<Governorate>(gouverneratService.getGovernorateByCode(govCode), HttpStatus.OK);
 	}
-	//update governorate
+
+	// update governorate
 	@PutMapping("/update/{govCode}")
-	public ResponseEntity<Governorate> updateGouvernerat(@PathVariable String govCode,@RequestBody Governorate gouv){
-		return new ResponseEntity<Governorate>(gouverneratService.updateGovernorate(govCode, gouv),HttpStatus.OK);
+	public ResponseEntity<Governorate> updateGouvernerat(@PathVariable String govCode, @RequestBody Governorate gouv) {
+		return new ResponseEntity<Governorate>(gouverneratService.updateGovernorate(govCode, gouv), HttpStatus.OK);
 	}
-	
-	//getActivate governorate
+
+	// getActivate governorate
 	@GetMapping("/Activated")
-	public ResponseEntity<List<Governorate>> getActivatedGouvernerat(){
-		return new ResponseEntity<List<Governorate>>(gouverneratService.getActivatedGovernorate(),HttpStatus.OK);
+	public ResponseEntity<List<Governorate>> getActivatedGouvernerat() {
+		return new ResponseEntity<List<Governorate>>(gouverneratService.getActivatedGovernorate(), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/{govCode}")
-	public ResponseEntity<String> deleteGouvernerat(@PathVariable String govCode){
-	  gouverneratService.deleteGovernorate(govCode);
-	  return new  ResponseEntity<String>("Governorat successfully deleted!", HttpStatus.OK);
+	public ResponseEntity<String> deleteGouvernerat(@PathVariable String govCode) {
+		gouverneratService.deleteGovernorate(govCode);
+		return new ResponseEntity<String>("Governorat successfully deleted!", HttpStatus.OK);
 	}
-	
+
 }

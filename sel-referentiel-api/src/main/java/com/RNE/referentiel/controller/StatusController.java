@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RNE.referentiel.entities.Status;
+import com.RNE.referentiel.dto.StatusDTO;
 import com.RNE.referentiel.serviceInterface.StatusService;
-
 
 import lombok.AllArgsConstructor;
 
@@ -23,32 +22,33 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/referentiel/status")
 @AllArgsConstructor
 public class StatusController {
-  
-	private StatusService statusService;
-	
-	@PostMapping
-	public ResponseEntity<Status> saveStatut(@RequestBody Status statut){
-		return new ResponseEntity<Status>(statusService.saveStatut(statut),HttpStatus.CREATED);
-	}
-	@GetMapping
-	public ResponseEntity<List<Status>> getAllStatut(){
-		return new ResponseEntity<List<Status>>(statusService.getAllStatut(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/{statusCode}")
-	public ResponseEntity<Status> getStatutByCode(@PathVariable String statusCode){
-		return new ResponseEntity<Status>(statusService.getStatutByCode(statusCode), HttpStatus.OK);
-		
-	}
-	
-	@PutMapping("/update/{statusCode}")
-	public ResponseEntity<Status> updateStatut(@PathVariable String statusCode ,@RequestBody Status statut){
-		return new ResponseEntity<Status>(statusService.updateStatut(statusCode, statut),HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/delete/{statusCode}")
-	public ResponseEntity<String> deleteCodePostal(@PathVariable String statusCode){
-		statusService.deleteStatut(statusCode);
-		return new  ResponseEntity<String>("Status successfully deleted!", HttpStatus.OK);
-	}
+
+    private StatusService statusService;
+
+    @PostMapping
+    public ResponseEntity<StatusDTO> saveStatus(@RequestBody StatusDTO statusDTO) {
+        return new ResponseEntity<StatusDTO>(statusService.saveStatus(statusDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StatusDTO>> getAllStatuses() {
+        return new ResponseEntity<List<StatusDTO>>(statusService.getAllStatuses(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{statusCode}")
+    public ResponseEntity<StatusDTO> getStatusByCode(@PathVariable String statusCode) {
+        return new ResponseEntity<StatusDTO>(statusService.getStatusByCode(statusCode), HttpStatus.OK);
+
+    }
+
+    @PutMapping("/update/{statusCode}")
+    public ResponseEntity<StatusDTO> updateStatus(@PathVariable String statusCode, @RequestBody StatusDTO statusDTO) {
+        return new ResponseEntity<StatusDTO>(statusService.updateStatus(statusCode, statusDTO), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{statusCode}")
+    public ResponseEntity<String> deleteStatusCode(@PathVariable String statusCode) {
+        statusService.deleteStatus(statusCode);
+        return new ResponseEntity<String>("Status successfully deleted!", HttpStatus.OK);
+    }
 }
