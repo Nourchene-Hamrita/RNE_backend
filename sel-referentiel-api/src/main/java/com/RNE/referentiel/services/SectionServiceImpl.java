@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import com.RNE.referentiel.dto.StatusDTO;
 import com.RNE.referentiel.entities.Section;
 
 import com.RNE.referentiel.repositories.SectionRepository;
-import com.RNE.referentiel.serviceInterface.SectionService;
+import com.RNE.referentiel.services.impl.SectionService;
 
 import lombok.AllArgsConstructor;
 
@@ -27,9 +27,8 @@ public class SectionServiceImpl implements SectionService {
     public SectionDTO saveSection(SectionDTO sectionDTO) {
 
         Section section = new Section();
-        section.setSectionCode(sectionDTO.getSectionCode());
-        section.setSectionTitleFr(sectionDTO.getSectionTitleFr());
-        section.setSectionTiteAr(sectionDTO.getSectionTiteAr());
+        section.setCode(sectionDTO.getCode());
+        section.setTitleAr(sectionDTO.getTitleAr());
         section.setActivation(sectionDTO.getActivation());
         section.setStatus(sectionDTO.getStatus().stream()
                 .map(StatusDTO::convertDtoToEntity)
@@ -54,22 +53,22 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public SectionDTO getSectionByCode(String sectionCode) {
-        Optional<Section> section = sectionRepo.findById(sectionCode);
+    public SectionDTO getSectionByCode(String code) {
+        Optional<Section> section = sectionRepo.findById(code);
         return section.map(SectionDTO::convertEntityToDto).orElse(null);
     }
 
     //update section service
     @Override
-    public SectionDTO updateSection(String sectionCode, SectionDTO sectionDTO) {
+    public SectionDTO updateSection(String code, SectionDTO sectionDTO) {
 
-        Section existSection = sectionRepo.findById(sectionCode).orElse(null);
+        Section existSection = sectionRepo.findById(code).orElse(null);
         if (existSection == null) {
             return null;
         }
 
-        existSection.setSectionTitleFr(sectionDTO.getSectionTitleFr());
-        existSection.setSectionTiteAr(sectionDTO.getSectionTiteAr());
+        existSection.setTitleFr(sectionDTO.getTitleFr());
+        existSection.setTitleAr(sectionDTO.getTitleAr());
         existSection.setActivation(sectionDTO.getActivation());
         existSection.setStatus(sectionDTO.getStatus().stream()
                 .map(StatusDTO::convertDtoToEntity)
@@ -93,8 +92,8 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public void deleteSection(String sectionCode) {
-        sectionRepo.deleteById(sectionCode);
+    public void deleteSection(String code) {
+        sectionRepo.deleteById(code);
     }
 
 }

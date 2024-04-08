@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.RNE.referentiel.entities.Governorate;
+import com.RNE.referentiel.entities.Delegation;
 import com.RNE.referentiel.entities.Section;
 
 public interface SectionRepository extends JpaRepository<Section, String> {

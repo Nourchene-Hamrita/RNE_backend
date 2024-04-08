@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,7 @@ import com.RNE.referentiel.dto.StatusDTO;
 import com.RNE.referentiel.entities.Status;
 
 import com.RNE.referentiel.repositories.StatusRepository;
-
-import com.RNE.referentiel.serviceInterface.StatusService;
+import com.RNE.referentiel.services.impl.StatusService;
 
 import lombok.AllArgsConstructor;
 
@@ -31,8 +30,8 @@ public class StatusServiceImpl implements StatusService {
 
     // get status by code service
     @Override
-    public StatusDTO getStatusByCode(String statusCode) {
-        Optional<Status> existStatus = statusRepository.findById(statusCode);
+    public StatusDTO getStatusByCode(String code) {
+        Optional<Status> existStatus = statusRepository.findById(code);
         return existStatus.map(this::convertEntityToDto).orElse(null);
     }
 
@@ -47,28 +46,28 @@ public class StatusServiceImpl implements StatusService {
 
     // update status service
     @Override
-    public StatusDTO updateStatus(String statusCode, StatusDTO statusDTO) {
-        Status existStatus = statusRepository.findById(statusCode).orElse(null);
+    public StatusDTO updateStatus(String code, StatusDTO statusDTO) {
+        Status existStatus = statusRepository.findById(code).orElse(null);
         if (existStatus == null) {
             return null;
         }
 
-        existStatus.setStatusTitle(statusDTO.getStatusTitle());
+        existStatus.setTitle(statusDTO.getTitle());
        
 
         return convertEntityToDto(statusRepository.save(existStatus));
     }
 
     @Override
-    public void deleteStatus(String statusCode) {
-        statusRepository.deleteById(statusCode);
+    public void deleteStatus(String code) {
+        statusRepository.deleteById(code);
     }
 
     public Status convertDtoToEntity(StatusDTO statusDTO) {
 
         Status status = new Status();
-        status.setStatusCode(statusDTO.getStatusCode());
-        status.setStatusTitle(statusDTO.getStatusTitle());
+        status.setCode(statusDTO.getCode());
+        status.setTitle(statusDTO.getTitle());
         
 
         return status;
@@ -77,8 +76,8 @@ public class StatusServiceImpl implements StatusService {
     public StatusDTO convertEntityToDto(Status status) {
 
         StatusDTO statusDTO = new StatusDTO();
-        statusDTO.setStatusCode(status.getStatusCode());
-        statusDTO.setStatusTitle(status.getStatusTitle());
+        statusDTO.setCode(status.getCode());
+        statusDTO.setTitle(status.getTitle());
     
 
         return statusDTO;

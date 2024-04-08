@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.City;
 import com.RNE.referentiel.repositories.CityRepository;
-import com.RNE.referentiel.serviceInterface.CityService;
+import com.RNE.referentiel.services.impl.CityService;
 
 import lombok.AllArgsConstructor;
 
@@ -26,8 +26,8 @@ public class CityServiceImpl implements CityService {
 
 	// get city by code service
 	@Override
-	public City getCityByCode(String cityCode) {
-		Optional<City> existCity = cityRepository.findById(cityCode);
+	public City getCityByCode(String code) {
+		Optional<City> existCity = cityRepository.findById(code);
 		return existCity.get();
 	}
 
@@ -40,12 +40,12 @@ public class CityServiceImpl implements CityService {
 
 	// update city service
 	@Override
-	public City updateCity(String cityCode, City city) {
-		City existCity = cityRepository.findById(cityCode).orElse(null);
-		existCity.setCityNameFr(city.getCityNameFr());
-		existCity.setCityNameAr(city.getCityNameAr());
+	public City updateCity(String code, City city) {
+		City existCity = cityRepository.findById(code).orElse(null);
+		existCity.setNameFr(city.getNameFr());
+		existCity.setNameAr(city.getNameAr());
 		existCity.setActivation(city.getActivation());
-		existCity.setGovernorate(city.getGovernorate());
+		existCity.setDelegation(city.getDelegation());
 		return cityRepository.save(existCity);
 	}
 
@@ -56,8 +56,8 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public void deleteCity(String cityCode) {
-		cityRepository.deleteById(cityCode);
+	public void deleteCity(String code) {
+		cityRepository.deleteById(code);
 	}
 
 }

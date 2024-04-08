@@ -21,9 +21,13 @@ import lombok.Setter;
 @Setter
 public class PostalCode implements Serializable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6932573829664333233L;
+	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

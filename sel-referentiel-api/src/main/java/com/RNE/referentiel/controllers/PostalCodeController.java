@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.entities.PostalCode;
-import com.RNE.referentiel.serviceInterface.PostalCodeService;
+import com.RNE.referentiel.services.impl.PostalCodeService;
 
 import lombok.AllArgsConstructor;
 

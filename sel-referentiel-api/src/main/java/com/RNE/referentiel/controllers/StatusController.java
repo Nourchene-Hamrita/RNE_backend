@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.StatusDTO;
-import com.RNE.referentiel.serviceInterface.StatusService;
+import com.RNE.referentiel.services.impl.StatusService;
 
 import lombok.AllArgsConstructor;
 
@@ -35,20 +35,20 @@ public class StatusController {
         return new ResponseEntity<List<StatusDTO>>(statusService.getAllStatuses(), HttpStatus.OK);
     }
 
-    @GetMapping("/{statusCode}")
-    public ResponseEntity<StatusDTO> getStatusByCode(@PathVariable String statusCode) {
-        return new ResponseEntity<StatusDTO>(statusService.getStatusByCode(statusCode), HttpStatus.OK);
+    @GetMapping("/{code}")
+    public ResponseEntity<StatusDTO> getStatusByCode(@PathVariable String code) {
+        return new ResponseEntity<StatusDTO>(statusService.getStatusByCode(code), HttpStatus.OK);
 
     }
 
-    @PutMapping("/update/{statusCode}")
-    public ResponseEntity<StatusDTO> updateStatus(@PathVariable String statusCode, @RequestBody StatusDTO statusDTO) {
-        return new ResponseEntity<StatusDTO>(statusService.updateStatus(statusCode, statusDTO), HttpStatus.OK);
+    @PutMapping("/update/{code}")
+    public ResponseEntity<StatusDTO> updateStatus(@PathVariable String code, @RequestBody StatusDTO statusDTO) {
+        return new ResponseEntity<StatusDTO>(statusService.updateStatus(code, statusDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{statusCode}")
-    public ResponseEntity<String> deleteStatusCode(@PathVariable String statusCode) {
-        statusService.deleteStatus(statusCode);
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<String> deleteStatusCode(@PathVariable String code) {
+        statusService.deleteStatus(code);
         return new ResponseEntity<String>("Status successfully deleted!", HttpStatus.OK);
     }
 }

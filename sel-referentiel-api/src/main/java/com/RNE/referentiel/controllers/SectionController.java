@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.SectionDTO;
-import com.RNE.referentiel.service.SectionServiceImpl;
+import com.RNE.referentiel.services.SectionServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -38,16 +38,16 @@ public class SectionController {
     }
 
     // get section by code
-    @GetMapping("/{codeSection}")
-    public ResponseEntity<SectionDTO> getSectionByCode(@PathVariable String codeSection) {
-        SectionDTO sectionDTO = sectionService.getSectionByCode(codeSection);
+    @GetMapping("/{code}")
+    public ResponseEntity<SectionDTO> getSectionByCode(@PathVariable String code) {
+        SectionDTO sectionDTO = sectionService.getSectionByCode(code);
         return new ResponseEntity<SectionDTO>(sectionDTO, HttpStatus.OK);
     }
 
     // update section
-    @PutMapping("/update/{codeSection}")
-    public ResponseEntity<SectionDTO> updateSection(@PathVariable String codeSection, @RequestBody SectionDTO sectionDTO) {
-        SectionDTO updatedSectionDTO = sectionService.updateSection(codeSection, sectionDTO);
+    @PutMapping("/update/{code}")
+    public ResponseEntity<SectionDTO> updateSection(@PathVariable String code, @RequestBody SectionDTO sectionDTO) {
+        SectionDTO updatedSectionDTO = sectionService.updateSection(code, sectionDTO);
         return new ResponseEntity<SectionDTO>(updatedSectionDTO, HttpStatus.OK);
     }
 
@@ -58,9 +58,9 @@ public class SectionController {
         return new ResponseEntity<List<SectionDTO>>(sectionDTOs, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{codeSection}")
-    public ResponseEntity<String> deleteSection(@PathVariable String codeSection) {
-        sectionService.deleteSection(codeSection);
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<String> deleteSection(@PathVariable String code) {
+        sectionService.deleteSection(code);
         return new ResponseEntity<String>("Section successfully deleted!", HttpStatus.OK);
     }
 

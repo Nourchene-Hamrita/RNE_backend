@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.ProposalDTO;
-import com.RNE.referentiel.serviceInterface.ProposalService;
+import com.RNE.referentiel.services.impl.ProposalService;
 
 import lombok.AllArgsConstructor;
 
@@ -37,22 +37,22 @@ public class ProposalController {
         return new ResponseEntity<List<ProposalDTO>>(proposalService.getAllProposals(), HttpStatus.OK);
     }
 
-    @GetMapping("/{proposalCode}")
-    public ResponseEntity<ProposalDTO> getProposalByCode(@PathVariable String proposalCode) {
-        return new ResponseEntity<ProposalDTO>(proposalService.getProposalByCode(proposalCode), HttpStatus.OK);
+    @GetMapping("/{code}")
+    public ResponseEntity<ProposalDTO> getProposalByCode(@PathVariable String code) {
+        return new ResponseEntity<ProposalDTO>(proposalService.getProposalByCode(code), HttpStatus.OK);
 
     }
 
-    @PutMapping("/update/{proposalCode}")
-    public ResponseEntity<ProposalDTO> updateProposal(@PathVariable String proposalCode,
+    @PutMapping("/update/{code}")
+    public ResponseEntity<ProposalDTO> updateProposal(@PathVariable String code,
             @RequestBody ProposalDTO proposalDTO) {
-        return new ResponseEntity<ProposalDTO>(proposalService.updateProposal(proposalCode, proposalDTO),
+        return new ResponseEntity<ProposalDTO>(proposalService.updateProposal(code, proposalDTO),
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{proposalCode}")
-    public ResponseEntity<String> deleteProposal(@PathVariable String proposalCode) {
-        proposalService.deleteProposal(proposalCode);
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<String> deleteProposal(@PathVariable String code) {
+        proposalService.deleteProposal(code);
         return new ResponseEntity<String>("Proposal successfully deleted!", HttpStatus.OK);
     }
 

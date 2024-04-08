@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.entities.City;
-import com.RNE.referentiel.serviceInterface.CityService;
+import com.RNE.referentiel.services.impl.CityService;
 
 import lombok.AllArgsConstructor;
 
@@ -38,15 +38,15 @@ public class CityController {
 	}
 
 	// get city by code controller
-	@GetMapping("/{cityCode}")
-	public ResponseEntity<City> getCityByCode(@PathVariable String cityCode) {
-		return new ResponseEntity<City>(cityService.getCityByCode(cityCode), HttpStatus.OK);
+	@GetMapping("/{code}")
+	public ResponseEntity<City> getCityByCode(@PathVariable String code) {
+		return new ResponseEntity<City>(cityService.getCityByCode(code), HttpStatus.OK);
 	}
 
 	// update city controller
-	@PutMapping("/update/{cityCode}")
-	public ResponseEntity<City> updateCity(@PathVariable String cityCode, @RequestBody City city) {
-		return new ResponseEntity<City>(cityService.updateCity(cityCode, city), HttpStatus.OK);
+	@PutMapping("/update/{code}")
+	public ResponseEntity<City> updateCity(@PathVariable String code, @RequestBody City city) {
+		return new ResponseEntity<City>(cityService.updateCity(code, city), HttpStatus.OK);
 	}
 
 	// get Activated city controller
@@ -55,9 +55,9 @@ public class CityController {
 		return new ResponseEntity<>(cityService.getActivatedCity(), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/{cityCode}")
-	public ResponseEntity<String> deleteCity(@PathVariable String cityCode) {
-		cityService.deleteCity(cityCode);
+	@DeleteMapping("/delete/{code}")
+	public ResponseEntity<String> deleteCity(@PathVariable String code) {
+		cityService.deleteCity(code);
 		return new ResponseEntity<String>("City successfully deleted!", HttpStatus.OK);
 	}
 }

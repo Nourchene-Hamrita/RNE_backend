@@ -24,18 +24,22 @@ import lombok.Setter;
 @AllArgsConstructor
 public class City implements Serializable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3048454537732980212L;
+	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L;
+	
 	@Id
-	private String cityCode;
-	private String cityNameFr;
-	private String cityNameAr;
+	private String code;
+	private String nameFr;
+	private String nameAr;
 	@Enumerated(EnumType.STRING)
 	private Activation activation;
 
 	@ManyToOne
-	private Governorate governorate;
+	private Delegation delegation;
 	@OneToMany(mappedBy = "city", cascade = { CascadeType.ALL })
 	@JsonManagedReference
 	private List<PostalCode> postalCode;

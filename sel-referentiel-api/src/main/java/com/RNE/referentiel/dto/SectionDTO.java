@@ -16,9 +16,9 @@ import lombok.Setter;
 @Setter
 public class SectionDTO {
 
-    private String sectionCode;
-    private String sectionTitleFr;
-    private String sectionTiteAr;
+    private String code;
+    private String titleFr;
+    private String titleAr;
     private Activation activation;
     private Set<StatusDTO> status;
     private List<ArticleDTO> articles;
@@ -26,9 +26,9 @@ public class SectionDTO {
     public static SectionDTO convertEntityToDto(Section section) {
 
         SectionDTO sectionDTO = new SectionDTO();
-        sectionDTO.setSectionCode(section.getSectionCode());
-        sectionDTO.setSectionTitleFr(section.getSectionTitleFr());
-        sectionDTO.setSectionTiteAr(section.getSectionTiteAr());
+        sectionDTO.setCode(section.getCode());
+        sectionDTO.setTitleFr(section.getTitleFr());
+        sectionDTO.setTitleAr(section.getTitleAr());
         sectionDTO.setActivation(section.getActivation());
         sectionDTO.setStatus(section.getStatus().stream()
                 .map(StatusDTO::convertEntityToDto)
@@ -43,9 +43,9 @@ public class SectionDTO {
     public static Section convertDtoToEntity(SectionDTO sectionDTO) {
 
         Section section = new Section();
-        section.setSectionCode(sectionDTO.getSectionCode());
-        section.setSectionTitleFr(sectionDTO.getSectionTitleFr());
-        section.setSectionTiteAr(sectionDTO.getSectionTiteAr());
+        section.setCode(sectionDTO.getCode());
+        section.setTitleFr(sectionDTO.getTitleFr());
+        section.setTitleAr(sectionDTO.getTitleAr());
         section.setActivation(sectionDTO.getActivation());
         section.setStatus(sectionDTO.getStatus().stream()
                 .map(StatusDTO::convertDtoToEntity)

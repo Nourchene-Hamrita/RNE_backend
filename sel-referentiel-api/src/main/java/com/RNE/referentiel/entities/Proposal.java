@@ -21,9 +21,13 @@ public class Proposal implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7731704580879660247L;
+	/**
+	 * 
+	 */
+
 	@Id
-	private String proposalCode;
+	private String code;
 	private String textFr;
 	private String textAr;
 	@Enumerated(EnumType.STRING)

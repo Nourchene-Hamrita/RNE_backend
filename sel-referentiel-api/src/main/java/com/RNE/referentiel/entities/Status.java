@@ -24,9 +24,9 @@ public class Status implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String statusCode;
+	private String code;
 
-	private String statusTitle;
+	private String title;
 
 	private String description;
 

@@ -1,6 +1,6 @@
 package com.RNE.referentiel;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,19 +13,16 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig {
 
-	private final JwtAuthConverter jwtAuthConverter;
+	private JwtAuthConverter jwtAuthConverter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeHttpRequests().anyRequest().authenticated();
 
-		http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthConverter);
-
-		http.sessionManagement().sessionCreationPolicy(STATELESS);
-
-		return http.build();
+		return http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
+				.oauth2ResourceServer(ors -> ors.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))
+				.sessionManagement(sm -> sm.sessionCreationPolicy(STATELESS)).build();
 	}
 }

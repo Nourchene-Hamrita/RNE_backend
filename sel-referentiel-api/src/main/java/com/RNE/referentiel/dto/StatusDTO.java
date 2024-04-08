@@ -13,16 +13,16 @@ import lombok.Setter;
 @Setter
 public class StatusDTO {
 
-    private String statusCode;
-    private String statusTitle;
+    private String code;
+    private String title;
     private String description;
     private Category category;
 
     public static StatusDTO convertEntityToDto(Status status) {
 
         StatusDTO statusDTO = new StatusDTO();
-        statusDTO.setStatusCode(status.getStatusCode());
-        statusDTO.setStatusTitle(status.getStatusTitle());
+        statusDTO.setCode(status.getCode());
+        statusDTO.setTitle(status.getTitle());
         statusDTO.setDescription(status.getDescription());
         statusDTO.setCategory(status.getCategory());
 
@@ -32,8 +32,8 @@ public class StatusDTO {
     public static Status convertDtoToEntity(StatusDTO statusDTO) {
 
         Status status = new Status();
-        status.setStatusCode(statusDTO.getStatusCode());
-        status.setStatusTitle(statusDTO.getStatusTitle());
+        status.setCode(statusDTO.getCode());
+        status.setTitle(statusDTO.getTitle());
         status.setDescription(statusDTO.getDescription());
         status.setCategory(statusDTO.getCategory());
 

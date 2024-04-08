@@ -26,13 +26,17 @@ import lombok.Setter;
 public class Article implements Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6047593005293832737L;
+	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L;
+
 	@Id
-	private String articleCode;
-	private String articleTitleFr;
-	private String articleTitleAr;
+	private String code;
+	private String titleFr;
+	private String titleAr;
 
 	@Enumerated(EnumType.STRING)
 	private Activation activation;
@@ -40,7 +44,6 @@ public class Article implements Serializable {
 	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
 	private List<Proposal> proposal;
 
-	
-    @ManyToOne
-    private Section section;
+	@ManyToOne
+	private Section section;
 }

@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.entities.PostalCode;
 import com.RNE.referentiel.repositories.PostalCodeRepository;
-import com.RNE.referentiel.serviceInterface.PostalCodeService;
+import com.RNE.referentiel.services.impl.PostalCodeService;
 
 import lombok.AllArgsConstructor;
 

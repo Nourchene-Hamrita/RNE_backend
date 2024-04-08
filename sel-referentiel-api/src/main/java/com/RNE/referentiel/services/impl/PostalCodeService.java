@@ -1,4 +1,4 @@
-package com.RNE.referentiel.serviceInterface;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 

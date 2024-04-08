@@ -1,4 +1,4 @@
-package com.RNE.referentiel.serviceInterface;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ public interface CityService {
 
 	public City saveCity(City city);
 
-	public City getCityByCode(String cityCode);
+	public City getCityByCode(String code);
 
 	public List<City> getAllCity();
 
-	public City updateCity(String cityCode, City city);
+	public City updateCity(String code, City city);
 
 	public List<City> getActivatedCity();
 
-	public void deleteCity(String cityCode);
+	public void deleteCity(String code);
 }

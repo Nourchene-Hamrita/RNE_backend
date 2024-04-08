@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,7 @@ import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.entities.Article;
 
 import com.RNE.referentiel.repositories.ArticleRepository;
-
-import com.RNE.referentiel.serviceInterface.ArticleService;
+import com.RNE.referentiel.services.impl.ArticleService;
 
 import lombok.AllArgsConstructor;
 
@@ -31,8 +30,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     // get article by code service
     @Override
-    public ArticleDTO getArticleByCode(String articleCode) {
-        Optional<Article> existArticle = articleRepository.findById(articleCode);
+    public ArticleDTO getArticleByCode(String code) {
+        Optional<Article> existArticle = articleRepository.findById(code);
         return existArticle.map(this::convertEntityToDto).orElse(null);
     }
 
@@ -47,29 +46,30 @@ public class ArticleServiceImpl implements ArticleService {
 
     // update article service
     @Override
-    public ArticleDTO updateArticle(String articleCode, ArticleDTO articleDTO) {
-        Article existArticle = articleRepository.findById(articleCode).orElse(null);
+    public ArticleDTO updateArticle(String code, ArticleDTO articleDTO) {
+        Article existArticle = articleRepository.findById(code).orElse(null);
         if (existArticle == null) {
             return null;
         }
 
-        existArticle.setArticleTitleFr(articleDTO.getArticleTitleFr());
-        existArticle.setArticleTitleAr(articleDTO.getArticleTitleAr());
+        existArticle.setTitleFr(articleDTO.getTitleFr());
+        existArticle.setTitleAr(articleDTO.getTitleAr());
+        
 
         return convertEntityToDto(articleRepository.save(existArticle));
     }
 
     @Override
-    public void deleteArticle(String articleCode) {
-        articleRepository.deleteById(articleCode);
+    public void deleteArticle(String code) {
+        articleRepository.deleteById(code);
     }
 
     public Article convertDtoToEntity(ArticleDTO articleDTO) {
 
         Article article = new Article();
-        article.setArticleCode(articleDTO.getArticleCode());
-        article.setArticleTitleFr(articleDTO.getArticleTitleFr());
-        article.setArticleTitleAr(articleDTO.getArticleTitleAr());
+        article.setCode(articleDTO.getCode());
+        article.setTitleFr(articleDTO.getTitleFr());
+        article.setTitleAr(articleDTO.getTitleAr());
 
         return article;
     }
@@ -77,9 +77,9 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleDTO convertEntityToDto(Article article) {
 
         ArticleDTO articleDTO = new ArticleDTO();
-        articleDTO.setArticleCode(article.getArticleCode());
-        articleDTO.setArticleTitleFr(article.getArticleTitleFr());
-        articleDTO.setArticleTitleAr(article.getArticleTitleAr());
+        articleDTO.setCode(article.getCode());
+        articleDTO.setTitleFr(article.getTitleFr());
+        articleDTO.setTitleAr(article.getTitleAr());
 
         return articleDTO;
     }

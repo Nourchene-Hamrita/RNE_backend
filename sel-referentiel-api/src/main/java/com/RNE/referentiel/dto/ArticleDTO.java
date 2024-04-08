@@ -15,9 +15,9 @@ import lombok.Setter;
 
 public class ArticleDTO {
 
-    private String articleCode;
-    private String articleTitleFr;
-    private String articleTitleAr;
+    private String code;
+    private String titleFr;
+    private String titleAr;
     private Activation activation;
     private List<ProposalDTO> proposal;
    
@@ -25,9 +25,9 @@ public class ArticleDTO {
     public static ArticleDTO convertEntityToDto(Article article) {
 
         ArticleDTO articleDTO = new ArticleDTO();
-        articleDTO.setArticleCode(article.getArticleCode());
-        articleDTO.setArticleTitleFr(article.getArticleTitleFr());
-        articleDTO.setArticleTitleAr(article.getArticleTitleAr());
+        articleDTO.setCode(article.getCode());
+        articleDTO.setTitleFr(article.getTitleFr());
+        articleDTO.setTitleAr(article.getTitleAr());
         articleDTO.setActivation(article.getActivation());
         articleDTO.setProposal(
                 article.getProposal().stream()
@@ -40,9 +40,9 @@ public class ArticleDTO {
     public static Article convertDtoToEntity(ArticleDTO articleDTO) {
 
         Article article = new Article();
-        article.setArticleCode(articleDTO.getArticleCode());
-        article.setArticleTitleFr(articleDTO.getArticleTitleFr());
-        article.setArticleTitleAr(articleDTO.getArticleTitleAr());
+        article.setCode(articleDTO.getCode());
+        article.setTitleFr(articleDTO.getTitleFr());
+        article.setTitleAr(articleDTO.getTitleAr());
         article.setActivation(articleDTO.getActivation());
         article.setProposal(
                 articleDTO.getProposal().stream()

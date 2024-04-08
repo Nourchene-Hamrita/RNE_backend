@@ -1,4 +1,4 @@
-package com.RNE.referentiel.serviceInterface;
+package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ public interface SectionService {
 
     public List<SectionDTO> getAllSections();
 
-    public SectionDTO getSectionByCode(String sectionCode);
+    public SectionDTO getSectionByCode(String code);
 
-    public SectionDTO updateSection(String sectionCode, SectionDTO sectionDTO);
+    public SectionDTO updateSection(String code, SectionDTO sectionDTO);
 
     public List<SectionDTO> getActivatedSection();
 
-    public void deleteSection(String sectionCode);
+    public void deleteSection(String code);
 }

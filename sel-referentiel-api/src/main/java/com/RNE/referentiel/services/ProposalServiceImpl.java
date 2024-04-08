@@ -1,4 +1,4 @@
-package com.RNE.referentiel.service;
+package com.RNE.referentiel.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import com.RNE.referentiel.dto.ProposalDTO;
 import com.RNE.referentiel.entities.Proposal;
 
 import com.RNE.referentiel.repositories.ProposalRepository;
-import com.RNE.referentiel.serviceInterface.ProposalService;
+import com.RNE.referentiel.services.impl.ProposalService;
 
 import lombok.AllArgsConstructor;
 
@@ -30,8 +30,8 @@ public class ProposalServiceImpl implements ProposalService {
 
     // get proposal by code service
     @Override
-    public ProposalDTO getProposalByCode(String proposalCode) {
-        Optional<Proposal> existProposal = proposalRepository.findById(proposalCode);
+    public ProposalDTO getProposalByCode(String code) {
+        Optional<Proposal> existProposal = proposalRepository.findById(code);
         return existProposal.map(this::convertEntityToDto).orElse(null);
     }
 
@@ -46,8 +46,8 @@ public class ProposalServiceImpl implements ProposalService {
 
     // update proposal service
     @Override
-    public ProposalDTO updateProposal(String proposalCode, ProposalDTO proposalDTO) {
-        Proposal existProposal = proposalRepository.findById(proposalCode).orElse(null);
+    public ProposalDTO updateProposal(String code, ProposalDTO proposalDTO) {
+        Proposal existProposal = proposalRepository.findById(code).orElse(null);
         if (existProposal == null) {
             return null;
         }
@@ -66,7 +66,7 @@ public class ProposalServiceImpl implements ProposalService {
     public Proposal convertDtoToEntity(ProposalDTO proposalDTO) {
 
         Proposal proposal = new Proposal();
-        proposal.setProposalCode(proposalDTO.getProposalCode());
+        proposal.setCode(proposalDTO.getCode());
         proposal.setTextFr(proposalDTO.getTextFr());
         proposal.setTextAr(proposalDTO.getTextAr());
 
@@ -76,7 +76,7 @@ public class ProposalServiceImpl implements ProposalService {
     public ProposalDTO convertEntityToDto(Proposal proposal) {
 
         ProposalDTO proposalDTO = new ProposalDTO();
-        proposalDTO.setProposalCode(proposal.getProposalCode());
+        proposalDTO.setCode(proposal.getCode());
         proposalDTO.setTextFr(proposal.getTextFr());
         proposalDTO.setTextAr(proposal.getTextAr());
 

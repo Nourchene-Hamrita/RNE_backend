@@ -1,4 +1,4 @@
-package com.RNE.referentiel.controller;
+package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.ArticleDTO;
-import com.RNE.referentiel.serviceInterface.ArticleService;
+import com.RNE.referentiel.services.impl.ArticleService;
 
 import lombok.AllArgsConstructor;
 
@@ -37,20 +37,20 @@ public class ArticleController {
         return new ResponseEntity<List<ArticleDTO>>(articleService.getAllArticles(), HttpStatus.OK);
     }
 
-    @GetMapping("{codeArticle}")
-    public ResponseEntity<ArticleDTO> getArticleByCode(@PathVariable String codeArticle) {
-        return new ResponseEntity<ArticleDTO>(articleService.getArticleByCode(codeArticle), HttpStatus.OK);
+    @GetMapping("{code}")
+    public ResponseEntity<ArticleDTO> getArticleByCode(@PathVariable String code) {
+        return new ResponseEntity<ArticleDTO>(articleService.getArticleByCode(code), HttpStatus.OK);
 
     }
 
-    @PutMapping("update/{codeArticle}")
-    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable String codeArticle, @RequestBody ArticleDTO articleDTO) {
-        return new ResponseEntity<ArticleDTO>(articleService.updateArticle(codeArticle, articleDTO), HttpStatus.OK);
+    @PutMapping("update/{code}")
+    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable String code, @RequestBody ArticleDTO articleDTO) {
+        return new ResponseEntity<ArticleDTO>(articleService.updateArticle(code, articleDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/{codeArticle}")
-    public ResponseEntity<String> deleteArticle(@PathVariable String codeArticle) {
-        articleService.deleteArticle(codeArticle);
+    @DeleteMapping("delete/{code}")
+    public ResponseEntity<String> deleteArticle(@PathVariable String code) {
+        articleService.deleteArticle(code);
         return new ResponseEntity<String>("Article successfully deleted!", HttpStatus.OK);
     }
 }
