@@ -1,5 +1,11 @@
 package com.RNE.demande.serviceInterface;
 
-public interface StreetService {
+import java.util.List;
 
+import com.RNE.demande.DTO.StreetDTO;
+
+
+public interface StreetService {
+	
+	public List<StreetDTO>getAllStreets();
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.serviceInterface.ArticleService;
 
@@ -34,15 +35,23 @@ public class ArticleController {
 	        return new ResponseEntity<>(savedArticle, HttpStatus.CREATED);
 	    }
 		@GetMapping
-		public ResponseEntity<List<Article>> getAllArticle(){
-			return new ResponseEntity<List<Article>>(articleService.getAllArticle(),HttpStatus.OK);
+		public ResponseEntity<List<ArticleDTO>> getAllArticle(){
+			List<ArticleDTO> articleList = articleService.getAllArticle();
+	          return  new ResponseEntity<>(articleList, HttpStatus.OK);
+		}
+		 
+		@GetMapping("{codeArticle}")
+		public ResponseEntity<ArticleDTO> getCodePostalById(@PathVariable String articleCode) {
+		    ArticleDTO articleDTO = articleService.articleById(articleCode);
+		    
+		    if (articleDTO != null) {
+		        return new ResponseEntity<>(articleDTO, HttpStatus.OK);
+		    } else {
+		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		    }
 		}
 		
-		@GetMapping("{codeArticle}")
-		public ResponseEntity<Article> getCodePostalById(@PathVariable String codeArticle){
-			return new ResponseEntity<Article>(articleService.articleById(codeArticle), HttpStatus.OK);
-			
-		}
+		
 		
 		@PutMapping("update/{codeArticle}")
 		public ResponseEntity<Article> updateArticle(@PathVariable String codeArticle,@RequestBody Article article){
