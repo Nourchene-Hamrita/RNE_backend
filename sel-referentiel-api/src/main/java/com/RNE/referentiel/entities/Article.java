@@ -1,6 +1,7 @@
 package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -41,7 +42,7 @@ public class Article implements Serializable {
 	private Activation activation;
 
 	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-	private List<Proposal> proposal;
+	 private List<Proposal> proposal = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "section_code", referencedColumnName = "code")

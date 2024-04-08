@@ -24,8 +24,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleDTO saveArticle(ArticleDTO articleDTO) {
 
-        Article article = convertDtoToEntity(articleDTO);
-        return convertEntityToDto(articleRepository.save(article));
+        Article article =ArticleDTO.convertDtoToEntity(articleDTO) ;
+        return ArticleDTO.convertEntityToDto(articleRepository.save(article));
     }
 
     // get article by code service
@@ -54,7 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         existArticle.setTitleFr(articleDTO.getTitleFr());
         existArticle.setTitleAr(articleDTO.getTitleAr());
-        
+        existArticle.setActivation(articleDTO.getActivation());
 
         return convertEntityToDto(articleRepository.save(existArticle));
     }
@@ -70,6 +70,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCode(articleDTO.getCode());
         article.setTitleFr(articleDTO.getTitleFr());
         article.setTitleAr(articleDTO.getTitleAr());
+        article.setActivation(articleDTO.getActivation());
 
         return article;
     }
@@ -80,6 +81,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleDTO.setCode(article.getCode());
         articleDTO.setTitleFr(article.getTitleFr());
         articleDTO.setTitleAr(article.getTitleAr());
+        articleDTO.setActivation(article.getActivation());
 
         return articleDTO;
     }

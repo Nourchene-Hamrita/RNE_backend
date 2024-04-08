@@ -13,52 +13,51 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class ArticleDTO {
 
-	private String code;
-	private String titleFr;
-	private String titleAr;
-	private Activation activation;
-	private String codeSection;
-	private List<ProposalDTO> proposal;
+    private String code;
+    private String titleFr;
+    private String titleAr;
+    private Activation activation;
+    private String codeSection;
+    private List<ProposalDTO> proposal;
 
-	public static ArticleDTO convertEntityToDto(Article article) {
+    public static ArticleDTO convertEntityToDto(Article article) {
 
-		ArticleDTO articleDTO = new ArticleDTO();
+        ArticleDTO articleDTO = new ArticleDTO();
 
-		articleDTO.setCode(article.getCode());
-		articleDTO.setTitleFr(article.getTitleFr());
-		articleDTO.setTitleAr(article.getTitleAr());
-		articleDTO.setCodeSection(article.getSection().getCode());
-		articleDTO.setActivation(article.getActivation());
-		articleDTO.setProposal(
-				article.getProposal().stream().map(ProposalDTO::convertEntityToDto).collect(Collectors.toList()));
+        articleDTO.setCode(article.getCode());
+        articleDTO.setTitleFr(article.getTitleFr());
+        articleDTO.setTitleAr(article.getTitleAr());
+        articleDTO.setActivation(article.getActivation());
+        articleDTO.setCodeSection(article.getSection().getCode());
+        articleDTO.setProposal(
+                article.getProposal().stream().map(ProposalDTO::convertEntityToDto).collect(Collectors.toList()));
 
-		return articleDTO;
-	}
+        return articleDTO;
+    }
 
-	public static Article convertDtoToEntity(ArticleDTO articleDTO) {
+    public static Article convertDtoToEntity(ArticleDTO articleDTO) {
 
-		Article article = new Article();
-		Section section = new Section(); // Create a new Section instance
+        Article article = new Article();
+        Section section = new Section(); // Create a new Section instance
 
-		article.setCode(articleDTO.getCode());
-		article.setTitleFr(articleDTO.getTitleFr());
-		article.setTitleAr(articleDTO.getTitleAr());
-		article.setActivation(articleDTO.getActivation());
+        article.setCode(articleDTO.getCode());
+        article.setTitleFr(articleDTO.getTitleFr());
+        article.setTitleAr(articleDTO.getTitleAr());
+        article.setActivation(articleDTO.getActivation());
 
-		// Set the codeSection to the Section instance
-		section.setCode(articleDTO.getCodeSection());
-		article.setSection(section); // Set the Section instance to the Article
+        // Set the codeSection to the Section instance
+        section.setCode(articleDTO.getCodeSection());
+        article.setSection(section); // Set the Section instance to the Article
 
-		// Populate Proposal objects
-		if (articleDTO.getProposal() != null) {
-			article.setProposal(articleDTO.getProposal().stream().map(ProposalDTO::convertDtoToEntity)
-					.collect(Collectors.toList()));
-		}
+        // Populate Proposal objects
+        if (articleDTO.getProposal() != null) {
+            article.setProposal(articleDTO.getProposal().stream().map(ProposalDTO::convertDtoToEntity)
+                    .collect(Collectors.toList()));
+        }
 
-		return article;
-	}
+        return article;
+    }
 
 }
