@@ -9,86 +9,74 @@ import org.springframework.stereotype.Service;
 import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.dto.SectionDTO;
 import com.RNE.referentiel.dto.StatusDTO;
-
+import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.entities.Section;
-
 import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.services.SectionService;
-
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class SectionServiceImpl implements SectionService {
 
-	private SectionRepository sectionRepo;
+    private SectionRepository sectionRepo;
+    private SectionMapper sectionMapper;
 
-	// service for creating a new section
-	@Override
-	public SectionDTO saveSection(SectionDTO sectionDTO) {
-		Section section = new Section();
-		section.setCode(sectionDTO.getCode());
-		section.setTitleFr(sectionDTO.getTitleFr());
-		section.setTitleAr(sectionDTO.getTitleAr());
-		section.setActivation(sectionDTO.getActivation());
+    // service for creating a new section
+    @Override
+    public SectionDTO saveSection(SectionDTO sectionDTO) {
+        Section section = sectionMapper.toEntity(sectionDTO);
+        section = sectionRepo.save(section);
 
-		// Ensure articles list is not null
-		List<ArticleDTO> articles = sectionDTO.getArticles();
-		if (articles != null) {
-			section.setArticles(articles.stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
-		}
+        return SectionDTO.convertEntityToDto(section, sectionMapper);
+    }
 
-		section = sectionRepo.save(section);
+    // get list of section
+    @Override
+    public List<SectionDTO> getAllSections() {
 
-		return SectionDTO.convertEntityToDto(section);
-	}
+        List<Section> sections = sectionRepo.findAll();
+        return sections.stream().map(section -> SectionDTO.convertEntityToDto(section, sectionMapper)).collect(Collectors.toList());
+    }
 
-	// get list of section
-	@Override
-	public List<SectionDTO> getAllSections() {
+    @Override
+    public SectionDTO getSectionByCode(String code) {
+        Optional<Section> section = sectionRepo.findById(code);
+        return section.map(s -> SectionDTO.convertEntityToDto(s, sectionMapper)).orElse(null);
+    }
 
-		List<Section> sections = sectionRepo.findAll();
-		return sections.stream().map(SectionDTO::convertEntityToDto).collect(Collectors.toList());
-	}
+    // update section service
+    @Override
+    public SectionDTO updateSection(String code, SectionDTO sectionDTO) {
 
-	@Override
-	public SectionDTO getSectionByCode(String code) {
-		Optional<Section> section = sectionRepo.findById(code);
-		return section.map(SectionDTO::convertEntityToDto).orElse(null);
-	}
+        Section existSection = sectionRepo.findById(code).orElse(null);
+        if (existSection == null) {
+            return null;
+        }
 
-	// update section service
-	@Override
-	public SectionDTO updateSection(String code, SectionDTO sectionDTO) {
+        existSection.setTitleFr(sectionDTO.getTitleFr());
+        existSection.setTitleAr(sectionDTO.getTitleAr());
+        existSection.setActivation(sectionDTO.getActivation());
+        existSection.setStatus(
+                sectionDTO.getStatus().stream().map(StatusDTO::convertDtoToEntity).collect(Collectors.toSet()));
+        existSection.setArticles(
+                sectionDTO.getArticles().stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
 
-		Section existSection = sectionRepo.findById(code).orElse(null);
-		if (existSection == null) {
-			return null;
-		}
+        sectionRepo.save(existSection);
 
-		existSection.setTitleFr(sectionDTO.getTitleFr());
-		existSection.setTitleAr(sectionDTO.getTitleAr());
-		existSection.setActivation(sectionDTO.getActivation());
-		existSection.setStatus(
-				sectionDTO.getStatus().stream().map(StatusDTO::convertDtoToEntity).collect(Collectors.toSet()));
-		existSection.setArticles(
-				sectionDTO.getArticles().stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
+        return SectionDTO.convertEntityToDto(existSection, sectionMapper);
+    }
 
-		sectionRepo.save(existSection);
+    @Override
+    public List<SectionDTO> getActivatedSection() {
 
-		return SectionDTO.convertEntityToDto(existSection);
-	}
+        List<Section> sections = sectionRepo.getActivatedSection();
+        return sections.stream().map(section -> SectionDTO.convertEntityToDto(section, sectionMapper)).collect(Collectors.toList());
+    }
 
-	@Override
-	public List<SectionDTO> getActivatedSection() {
-
-		List<Section> sections = sectionRepo.getActivatedSection();
-		return sections.stream().map(SectionDTO::convertEntityToDto).collect(Collectors.toList());
-	}
-
-	@Override
-	public void deleteSection(String code) {
-		sectionRepo.deleteById(code);
-	}
+    @Override
+    public void deleteSection(String code) {
+        sectionRepo.deleteById(code);
+    }
 
 }

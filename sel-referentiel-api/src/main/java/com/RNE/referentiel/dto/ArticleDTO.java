@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.enums.Activation;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import lombok.Getter;
 import lombok.Setter;

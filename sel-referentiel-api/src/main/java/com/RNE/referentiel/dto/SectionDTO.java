@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Status;
@@ -16,75 +17,69 @@ import lombok.Setter;
 @Setter
 public class SectionDTO {
 
-    private String code;
-    
-    private String titleFr;
-    
-    private String titleAr;
-    
-    private Activation activation;
-    
-    private Set<StatusDTO> status;
-    
-    private List<ArticleDTO> articles;
-    
-    public static SectionDTO convertEntityToDto(Section section) {
-        if (section == null) {
-            return null;
-        }
+	private String code;
 
-        SectionDTO sectionDTO = new SectionDTO();
-        sectionDTO.setCode(section.getCode());
-        sectionDTO.setTitleFr(section.getTitleFr());
-        sectionDTO.setTitleAr(section.getTitleAr());
-        sectionDTO.setActivation(section.getActivation());
+	private String titleFr;
 
-        // Populate StatusDTO objects
-        Set<Status> statusEntities = section.getStatus();
-        if (statusEntities != null) {
-            sectionDTO.setStatus(statusEntities.stream()
-                .map(StatusDTO::convertEntityToDto)
-                .collect(Collectors.toSet()));
-        }
+	private String titleAr;
 
-        // Populate ArticleDTO objects
-        List<Article> articleEntities = section.getArticles();
-        if (articleEntities != null) {
-            sectionDTO.setArticles(articleEntities.stream()
-                .map(ArticleDTO::convertEntityToDto)
-                .collect(Collectors.toList()));
-        }
+	private Activation activation;
 
-        return sectionDTO;
-    }
+	private Set<StatusDTO> status;
 
-    public static Section convertDtoToEntity(SectionDTO sectionDTO) {
-        if (sectionDTO == null) {
-            return null;
-        }
+	private List<ArticleDTO> articles;
 
-        Section section = new Section();
-        section.setCode(sectionDTO.getCode());
-        section.setTitleFr(sectionDTO.getTitleFr());
-        section.setTitleAr(sectionDTO.getTitleAr());
-        section.setActivation(sectionDTO.getActivation());
+	public static SectionDTO convertEntityToDto(Section section, SectionMapper sectionMapper) {
+		if (section == null) {
+			return null;
+		}
 
-        // Populate Status objects
-        Set<StatusDTO> statusDTOs = sectionDTO.getStatus();
-        if (statusDTOs != null) {
-            section.setStatus(statusDTOs.stream()
-                .map(StatusDTO::convertDtoToEntity)
-                .collect(Collectors.toSet()));
-        }
+		SectionDTO sectionDTO = new SectionDTO();
+		sectionDTO.setCode(section.getCode());
+		sectionDTO.setTitleFr(section.getTitleFr());
+		sectionDTO.setTitleAr(section.getTitleAr());
+		sectionDTO.setActivation(section.getActivation());
 
-        // Populate Article objects
-        List<ArticleDTO> articleDTOs = sectionDTO.getArticles();
-        if (articleDTOs != null) {
-            section.setArticles(articleDTOs.stream()
-                .map(ArticleDTO::convertDtoToEntity)
-                .collect(Collectors.toList()));
-        }
+		// Populate StatusDTO objects
+		Set<Status> statusEntities = section.getStatus();
+		if (statusEntities != null) {
+			sectionDTO
+					.setStatus(statusEntities.stream().map(StatusDTO::convertEntityToDto).collect(Collectors.toSet()));
+		}
 
-        return section;
-    }
+		// Populate ArticleDTO objects
+		List<Article> articleEntities = section.getArticles();
+		if (articleEntities != null) {
+			sectionDTO.setArticles(
+					articleEntities.stream().map(ArticleDTO::convertEntityToDto).collect(Collectors.toList()));
+		}
+
+		return sectionDTO;
+	}
+
+	public static Section convertDtoToEntity(SectionDTO sectionDTO, SectionMapper sectionMapper) {
+		if (sectionDTO == null) {
+			return null;
+		}
+
+		Section section = new Section();
+		section.setCode(sectionDTO.getCode());
+		section.setTitleFr(sectionDTO.getTitleFr());
+		section.setTitleAr(sectionDTO.getTitleAr());
+		section.setActivation(sectionDTO.getActivation());
+
+		// Populate Status objects
+		Set<StatusDTO> statusDTOs = sectionDTO.getStatus();
+		if (statusDTOs != null) {
+			section.setStatus(statusDTOs.stream().map(StatusDTO::convertDtoToEntity).collect(Collectors.toSet()));
+		}
+
+		// Populate Article objects
+		List<ArticleDTO> articleDTOs = sectionDTO.getArticles();
+		if (articleDTOs != null) {
+			section.setArticles(articleDTOs.stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
+		}
+
+		return section;
+	}
 }
