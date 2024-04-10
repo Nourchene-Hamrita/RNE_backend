@@ -1,16 +1,16 @@
-package com.RNE.referentiel.dto.mappers.impl;
+package com.RNE.referentiel.dto.mappers;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.dto.SectionDTO;
 import com.RNE.referentiel.dto.StatusDTO;
-import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Status;
@@ -19,7 +19,10 @@ import com.RNE.referentiel.entities.Status;
 public class SectionMapperImpl implements SectionMapper {
 
     private static final SectionMapper INSTANCE = Mappers.getMapper(SectionMapper.class);
-
+    @Autowired
+    private StatusMapper statusMapper;
+    @Autowired
+    private ArticleMapper articleMapper;
     @Override
     public SectionDTO toDto(Section section) {
         if (section == null) {
@@ -36,7 +39,7 @@ public class SectionMapperImpl implements SectionMapper {
         Set<Status> statusEntities = section.getStatus();
         if (statusEntities != null) {
             sectionDTO.setStatus(statusEntities.stream()
-                .map(StatusDTO::convertEntityToDto)
+                .map(statusMapper::toDto)
                 .collect(Collectors.toSet()));
         }
 
@@ -44,7 +47,7 @@ public class SectionMapperImpl implements SectionMapper {
         List<Article> articleEntities = section.getArticles();
         if (articleEntities != null) {
             sectionDTO.setArticles(articleEntities.stream()
-                .map(ArticleDTO::convertEntityToDto)
+                .map(articleMapper::toDto)
                 .collect(Collectors.toList()));
         }
 
@@ -67,7 +70,7 @@ public class SectionMapperImpl implements SectionMapper {
         Set<StatusDTO> statusDTOs = sectionDTO.getStatus();
         if (statusDTOs != null) {
             section.setStatus(statusDTOs.stream()
-                .map(StatusDTO::convertDtoToEntity)
+                .map(statusMapper::toEntity)
                 .collect(Collectors.toSet()));
         }
 
@@ -75,7 +78,7 @@ public class SectionMapperImpl implements SectionMapper {
         List<ArticleDTO> articleDTOs = sectionDTO.getArticles();
         if (articleDTOs != null) {
             section.setArticles(articleDTOs.stream()
-                .map(ArticleDTO::convertDtoToEntity)
+                .map(articleMapper::toEntity)
                 .collect(Collectors.toList()));
         }
 

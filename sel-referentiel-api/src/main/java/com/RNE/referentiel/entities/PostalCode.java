@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,12 +26,14 @@ public class PostalCode implements Serializable {
 	 */
 	private static final long serialVersionUID = -6932573829664333233L;
 	/**
-	* 
-	*/
+	 * 
+	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "postal_code", nullable = false)
 	private String postalCode;
 
 	@ManyToOne

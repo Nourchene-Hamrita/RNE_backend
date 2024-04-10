@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.StatusDTO;
+import com.RNE.referentiel.dto.mappers.StatusMapper;
 import com.RNE.referentiel.entities.Status;
-
 import com.RNE.referentiel.repositories.StatusRepository;
 import com.RNE.referentiel.services.StatusService;
 
@@ -19,27 +19,28 @@ import lombok.AllArgsConstructor;
 public class StatusServiceImpl implements StatusService {
 
 	private StatusRepository statusRepository;
+	private StatusMapper statusMapper;
 
 	// save status service
 	@Override
 	public StatusDTO saveStatus(StatusDTO statusDTO) {
 
-		Status status = StatusDTO.convertDtoToEntity(statusDTO);
-		return StatusDTO.convertEntityToDto(statusRepository.save(status));
+		Status status = statusMapper.toEntity(statusDTO);
+		return statusMapper.toDto(statusRepository.save(status));
 	}
 
 	// get status by code service
 	@Override
 	public StatusDTO getStatusByCode(String code) {
 		Optional<Status> existStatus = statusRepository.findById(code);
-		return existStatus.map(this::convertEntityToDto).orElse(null);
+		return existStatus.map(statusMapper::toDto).orElse(null);
 	}
 
 	// get all statuses services
 	@Override
-	public List<StatusDTO> getAllStatuses() {
+	public List<StatusDTO> getAllStatus() {
 
-		return statusRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+		return statusRepository.findAll().stream().map(statusMapper::toDto).collect(Collectors.toList());
 	}
 
 	// update status service
@@ -54,34 +55,11 @@ public class StatusServiceImpl implements StatusService {
 		existStatus.setDescription(statusDTO.getDescription());
 		existStatus.setCategory(statusDTO.getCategory());
 
-		return convertEntityToDto(statusRepository.save(existStatus));
+		return statusMapper.toDto(statusRepository.save(existStatus));
 	}
 
 	@Override
 	public void deleteStatus(String code) {
 		statusRepository.deleteById(code);
 	}
-
-	public Status convertDtoToEntity(StatusDTO statusDTO) {
-
-		Status status = new Status();
-		status.setCode(statusDTO.getCode());
-		status.setTitle(statusDTO.getTitle());
-		status.setDescription(statusDTO.getDescription());
-		status.setCategory(statusDTO.getCategory());
-
-		return status;
-	}
-
-	public StatusDTO convertEntityToDto(Status status) {
-
-		StatusDTO statusDTO = new StatusDTO();
-		statusDTO.setCode(status.getCode());
-		statusDTO.setTitle(status.getTitle());
-		statusDTO.setDescription(status.getDescription());
-		statusDTO.setCategory(status.getCategory());
-
-		return statusDTO;
-	}
-
 }

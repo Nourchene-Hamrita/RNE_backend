@@ -32,7 +32,7 @@ public class StatusController {
 
     @GetMapping
     public ResponseEntity<List<StatusDTO>> getAllStatuses() {
-        return new ResponseEntity<List<StatusDTO>>(statusService.getAllStatuses(), HttpStatus.OK);
+        return new ResponseEntity<List<StatusDTO>>(statusService.getAllStatus(), HttpStatus.OK);
     }
 
     @GetMapping("/{code}")
