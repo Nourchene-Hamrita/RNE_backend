@@ -1,5 +1,7 @@
 package com.RNE.referentiel.dto;
 
+import java.util.List;
+
 import com.RNE.referentiel.enums.Category;
 
 import lombok.Getter;
@@ -15,5 +17,7 @@ public class StatusDTO {
 	private String description;
 
 	private Category category;
+	
+	private List<String> sectionCodes;
 
 }

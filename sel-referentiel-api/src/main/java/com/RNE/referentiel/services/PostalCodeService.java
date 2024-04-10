@@ -2,17 +2,17 @@ package com.RNE.referentiel.services;
 
 import java.util.List;
 
-import com.RNE.referentiel.entities.PostalCode;
+import com.RNE.referentiel.dto.PostalCodeDTO;
 
 public interface PostalCodeService {
 
-	public PostalCode savePostalCode(PostalCode codePostal);
+	public PostalCodeDTO savePostalCode(PostalCodeDTO codePostalDTO);
 
-	public PostalCode getPostalCodeById(Long id);
+	public PostalCodeDTO getPostalCodeById(Long id);
 
-	public List<PostalCode> getAllPostalCode();
+	public List<PostalCodeDTO> getAllPostalCode();
 
-	public PostalCode updatePostalCode(Long id, PostalCode codePostal);
+	public PostalCodeDTO updatePostalCode(Long id, PostalCodeDTO codePostalDTO);
 
 	public void deletePostalCode(Long id);
 }

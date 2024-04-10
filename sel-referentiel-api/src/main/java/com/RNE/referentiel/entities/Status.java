@@ -1,11 +1,13 @@
 package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import com.RNE.referentiel.enums.Category;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -46,7 +48,8 @@ public class Status implements Serializable {
 	@Column(name = "category", nullable = false)
 	private Category category;
 
-	@ManyToMany(mappedBy = "status")
-	private Set<Section> sections;
+	@ManyToMany
+	@JoinTable(name = "sections_status", joinColumns = @JoinColumn(name = "status_code"), inverseJoinColumns = @JoinColumn(name = "section_code"))
+	private List<Section> sections;
 
 }

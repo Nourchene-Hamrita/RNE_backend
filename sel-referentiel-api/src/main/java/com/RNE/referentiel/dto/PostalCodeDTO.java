@@ -1,7 +1,5 @@
 package com.RNE.referentiel.dto;
 
-import com.RNE.referentiel.enums.Activation;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityDTO {
+public class PostalCodeDTO {
 
-	private String code;
+    private Long id;
 
-	private String nameFr;
+    private String postalCode;
 
-	private String nameAr;
-
-	private Activation activation;
-
-	private String delegationCode;
+    private CityDTO city;
 
 }

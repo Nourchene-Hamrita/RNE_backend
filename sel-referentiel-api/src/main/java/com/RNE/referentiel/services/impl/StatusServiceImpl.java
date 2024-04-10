@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.StatusDTO;
 import com.RNE.referentiel.dto.mappers.StatusMapper;
+import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Status;
+
+import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.repositories.StatusRepository;
 import com.RNE.referentiel.services.StatusService;
 
@@ -20,12 +23,17 @@ public class StatusServiceImpl implements StatusService {
 
 	private StatusRepository statusRepository;
 	private StatusMapper statusMapper;
+	private SectionRepository sectionRepository;
 
 	// save status service
 	@Override
 	public StatusDTO saveStatus(StatusDTO statusDTO) {
 
 		Status status = statusMapper.toEntity(statusDTO);
+		if (statusDTO.getSectionCodes() != null) {
+			List<Section> sections = sectionRepository.findAllById(statusDTO.getSectionCodes());
+			status.setSections(sections);
+		}
 		return statusMapper.toDto(statusRepository.save(status));
 	}
 
@@ -62,4 +70,5 @@ public class StatusServiceImpl implements StatusService {
 	public void deleteStatus(String code) {
 		statusRepository.deleteById(code);
 	}
+
 }
