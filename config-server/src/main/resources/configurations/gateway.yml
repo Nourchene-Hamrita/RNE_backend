@@ -16,6 +16,10 @@ spring:
             uri: http://localhost:8081
             predicates:
             - Path=/api/referentiel/**
+         -  id: request
+            uri: http://localhost:8083
+            predicates:
+            - Path=/api/request/**    
 
 management:
    tracing:
