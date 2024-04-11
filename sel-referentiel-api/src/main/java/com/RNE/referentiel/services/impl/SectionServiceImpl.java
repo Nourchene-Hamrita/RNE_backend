@@ -6,15 +6,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.dto.SectionDTO;
-import com.RNE.referentiel.dto.StatusDTO;
-
+import com.RNE.referentiel.dto.mappers.ArticleMapper;
+import com.RNE.referentiel.dto.mappers.SectionMapper;
+import com.RNE.referentiel.dto.mappers.StatusMapper;
 import com.RNE.referentiel.entities.Section;
-
 import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.services.SectionService;
-
 import lombok.AllArgsConstructor;
 
 @Service
@@ -22,25 +20,17 @@ import lombok.AllArgsConstructor;
 public class SectionServiceImpl implements SectionService {
 
 	private SectionRepository sectionRepo;
+	private SectionMapper sectionMapper;
+	private StatusMapper statusMapper;
+	private ArticleMapper articleMapper;
 
 	// service for creating a new section
 	@Override
 	public SectionDTO saveSection(SectionDTO sectionDTO) {
-		Section section = new Section();
-		section.setCode(sectionDTO.getCode());
-		section.setTitleFr(sectionDTO.getTitleFr());
-		section.setTitleAr(sectionDTO.getTitleAr());
-		section.setActivation(sectionDTO.getActivation());
-
-		// Ensure articles list is not null
-		List<ArticleDTO> articles = sectionDTO.getArticles();
-		if (articles != null) {
-			section.setArticles(articles.stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
-		}
-
+		Section section = sectionMapper.toEntity(sectionDTO);
 		section = sectionRepo.save(section);
 
-		return SectionDTO.convertEntityToDto(section);
+		return sectionMapper.toDto(section);
 	}
 
 	// get list of section
@@ -48,13 +38,13 @@ public class SectionServiceImpl implements SectionService {
 	public List<SectionDTO> getAllSections() {
 
 		List<Section> sections = sectionRepo.findAll();
-		return sections.stream().map(SectionDTO::convertEntityToDto).collect(Collectors.toList());
+		return sections.stream().map(sectionMapper::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public SectionDTO getSectionByCode(String code) {
 		Optional<Section> section = sectionRepo.findById(code);
-		return section.map(SectionDTO::convertEntityToDto).orElse(null);
+		return section.map(sectionMapper::toDto).orElse(null);
 	}
 
 	// update section service
@@ -69,21 +59,20 @@ public class SectionServiceImpl implements SectionService {
 		existSection.setTitleFr(sectionDTO.getTitleFr());
 		existSection.setTitleAr(sectionDTO.getTitleAr());
 		existSection.setActivation(sectionDTO.getActivation());
-		existSection.setStatus(
-				sectionDTO.getStatus().stream().map(StatusDTO::convertDtoToEntity).collect(Collectors.toSet()));
+		existSection.setStatus(sectionDTO.getStatus().stream().map(statusMapper::toEntity).collect(Collectors.toSet()));
 		existSection.setArticles(
-				sectionDTO.getArticles().stream().map(ArticleDTO::convertDtoToEntity).collect(Collectors.toList()));
+				sectionDTO.getArticles().stream().map(articleMapper::toEntity).collect(Collectors.toList()));
 
 		sectionRepo.save(existSection);
 
-		return SectionDTO.convertEntityToDto(existSection);
+		return sectionMapper.toDto(existSection);
 	}
 
 	@Override
 	public List<SectionDTO> getActivatedSection() {
 
 		List<Section> sections = sectionRepo.getActivatedSection();
-		return sections.stream().map(SectionDTO::convertEntityToDto).collect(Collectors.toList());
+		return sections.stream().map(sectionMapper::toDto).collect(Collectors.toList());
 	}
 
 	@Override

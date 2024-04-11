@@ -2,19 +2,19 @@ package com.RNE.referentiel.services;
 
 import java.util.List;
 
-import com.RNE.referentiel.entities.Delegation;
+import com.RNE.referentiel.dto.DelegationDTO;
 
 public interface DelegationService {
 
-	public Delegation saveDelegation(Delegation del);
+	public DelegationDTO saveDelegation(DelegationDTO delegationDTO);
 
-	public List<Delegation> getAllDelegations();
+	public List<DelegationDTO> getAllDelegations();
 
-	public Delegation getDelegationByCode(String code);
+	public DelegationDTO getDelegationByCode(String code);
 
-	public Delegation updateDelegation(String code, Delegation del);
+	public DelegationDTO updateDelegation(String code, DelegationDTO delegationDTO);
 
-	public List<Delegation> getActivatedDelegation();
+	public List<DelegationDTO> getActivatedDelegations();
 
 	public void deleteDelegation(String code);
 }

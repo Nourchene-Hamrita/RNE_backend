@@ -2,19 +2,19 @@ package com.RNE.referentiel.services;
 
 import java.util.List;
 
-import com.RNE.referentiel.entities.City;
+import com.RNE.referentiel.dto.CityDTO;
 
 public interface CityService {
 
-	public City saveCity(City city);
+	public CityDTO saveCity(CityDTO cityDTO);
 
-	public City getCityByCode(String code);
+	public CityDTO getCityByCode(String code);
 
-	public List<City> getAllCity();
+	public List<CityDTO> getAllCity();
 
-	public City updateCity(String code, City city);
+	public CityDTO updateCity(String code, CityDTO cityDTO);
 
-	public List<City> getActivatedCity();
+	public List<CityDTO> getActivatedCity();
 
 	public void deleteCity(String code);
 }

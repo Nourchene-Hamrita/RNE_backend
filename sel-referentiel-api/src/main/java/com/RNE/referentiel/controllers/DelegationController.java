@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RNE.referentiel.entities.Delegation;
+import com.RNE.referentiel.dto.DelegationDTO;
 import com.RNE.referentiel.services.DelegationService;
 
 import lombok.AllArgsConstructor;
@@ -28,32 +28,34 @@ public class DelegationController {
 
 	@PostMapping
 	@PreAuthorize("hasRole('client_admin')")
-	public ResponseEntity<Delegation> saveDelegation(@RequestBody Delegation del) {
-		return new ResponseEntity<Delegation>(delegationService.saveDelegation(del), HttpStatus.CREATED);
+	public ResponseEntity<DelegationDTO> saveDelegation(@RequestBody DelegationDTO delegationDTO) {
+		return new ResponseEntity<DelegationDTO>(delegationService.saveDelegation(delegationDTO), HttpStatus.CREATED);
 	}
 
 	@GetMapping
 	@PreAuthorize("hasRole('client_user')")
-	public ResponseEntity<List<Delegation>> getAllDelegations() {
-		return new ResponseEntity<List<Delegation>>(delegationService.getAllDelegations(), HttpStatus.OK);
+	public ResponseEntity<List<DelegationDTO>> getAllDelegations() {
+		return new ResponseEntity<List<DelegationDTO>>(delegationService.getAllDelegations(), HttpStatus.OK);
 	}
 
-	// get governorate by code
+	// get delegation by code
 	@GetMapping("/{code}")
-	public ResponseEntity<Delegation> getDelegationByCode(@PathVariable String code) {
-		return new ResponseEntity<Delegation>(delegationService.getDelegationByCode(code), HttpStatus.OK);
+	public ResponseEntity<DelegationDTO> getDelegationByCode(@PathVariable String code) {
+		return new ResponseEntity<DelegationDTO>(delegationService.getDelegationByCode(code), HttpStatus.OK);
 	}
 
-	// update governorate
+	// update delegation
 	@PutMapping("/update/{code}")
-	public ResponseEntity<Delegation> updateDelegation(@PathVariable String code, @RequestBody Delegation del) {
-		return new ResponseEntity<Delegation>(delegationService.updateDelegation(code, del), HttpStatus.OK);
+	public ResponseEntity<DelegationDTO> updateDelegation(@PathVariable String code,
+			@RequestBody DelegationDTO delegationDTO) {
+		return new ResponseEntity<DelegationDTO>(delegationService.updateDelegation(code, delegationDTO),
+				HttpStatus.OK);
 	}
 
-	// getActivate governorate
+	// getActivate delegation
 	@GetMapping("/Activated")
-	public ResponseEntity<List<Delegation>> getActivatedDelegation() {
-		return new ResponseEntity<List<Delegation>>(delegationService.getActivatedDelegation(), HttpStatus.OK);
+	public ResponseEntity<List<DelegationDTO>> getActivatedDelegations() {
+		return new ResponseEntity<List<DelegationDTO>>(delegationService.getActivatedDelegations(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{code}")

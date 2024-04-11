@@ -1,6 +1,7 @@
 package com.RNE.referentiel.dto;
 
-import com.RNE.referentiel.entities.Proposal;
+
+import com.RNE.referentiel.enums.Activation;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,31 +10,15 @@ import lombok.Setter;
 @Setter
 public class ProposalDTO {
 
-	private String code;
-	private String textFr;
-	private String textAr;
-	private ArticleDTO article;
+    private String code;
+    
+    private String textFr;
+    
+    private String textAr;
+  
+    private Activation activation;
+    
+    private String articleCode;
 
-	public static ProposalDTO convertEntityToDto(Proposal proposal) {
-
-		ProposalDTO proposalDTO = new ProposalDTO();
-		proposalDTO.setCode(proposal.getCode());
-		proposalDTO.setTextFr(proposal.getTextFr());
-		proposalDTO.setTextAr(proposal.getTextAr());
-		proposalDTO.setArticle(ArticleDTO.convertEntityToDto(proposal.getArticle()));
-
-		return proposalDTO;
-	}
-
-	public static Proposal convertDtoToEntity(ProposalDTO proposalDTO) {
-
-		Proposal proposal = new Proposal();
-		proposal.setCode(proposalDTO.getCode());
-		proposal.setTextFr(proposalDTO.getTextFr());
-		proposal.setTextAr(proposalDTO.getTextAr());
-		proposal.setArticle(ArticleDTO.convertDtoToEntity(proposalDTO.getArticle()));
-
-		return proposal;
-	}
 
 }
