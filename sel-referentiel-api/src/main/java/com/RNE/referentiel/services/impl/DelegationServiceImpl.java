@@ -2,9 +2,12 @@ package com.RNE.referentiel.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.RNE.referentiel.dto.DelegationDTO;
+import com.RNE.referentiel.dto.mappers.DelegationMapper;
 import com.RNE.referentiel.entities.Delegation;
 import com.RNE.referentiel.repositories.DelegationRepository;
 import com.RNE.referentiel.services.DelegationService;
@@ -15,56 +18,55 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DelegationServiceImpl implements DelegationService {
 
-	private DelegationRepository delegationRepo;
+	private DelegationRepository delegationRepository;
+	private DelegationMapper delegationMapper;
 
-	// service for creating a new Governorate
+	// save delegation service
 	@Override
+	public DelegationDTO saveDelegation(DelegationDTO delegationDTO) {
 
-	public Delegation saveDelegation(Delegation del) {
-
-		return delegationRepo.save(del);
-
+		Delegation delegation = delegationMapper.toEntity(delegationDTO);
+		return delegationMapper.toDto(delegationRepository.save(delegation));
 	}
 
-	// get list of Governorate
+	// get delegation by code service
 	@Override
-	public List<Delegation> getAllDelegations() {
-
-		return delegationRepo.findAll();
+	public DelegationDTO getDelegationByCode(String code) {
+		Optional<Delegation> existDelegation = delegationRepository.findById(code);
+		return existDelegation.map(delegationMapper::toDto).orElse(null);
 	}
 
+	// get all delegations services
 	@Override
-	public Delegation getDelegationByCode(String code) {
-		Optional<Delegation> delegation = delegationRepo.findById(code);
-		return delegation.get();
+	public List<DelegationDTO> getAllDelegations() {
+
+		return delegationRepository.findAll().stream().map(delegationMapper::toDto).collect(Collectors.toList());
 	}
 
+	// update delegation service
 	@Override
-	public Delegation updateDelegation(String code, Delegation del) {
-
-		Optional<Delegation> existing = delegationRepo.findById(code);
-
-		if (existing.isPresent()) {
-			Delegation delegation = existing.get();
-			delegation.setNameFr(del.getNameFr());
-			delegation.setNameAr(del.getNameAr());
-			delegation.setActivation(del.getActivation());
-			return delegationRepo.save(del);
-		} else {
+	public DelegationDTO updateDelegation(String code, DelegationDTO delegationDTO) {
+		Delegation existDelegation = delegationRepository.findById(code).orElse(null);
+		if (existDelegation == null) {
 			return null;
 		}
 
+		existDelegation.setNameFr(delegationDTO.getNameFr());
+		existDelegation.setNameAr(delegationDTO.getNameAr());
+		existDelegation.setActivation(delegationDTO.getActivation());
+
+		return delegationMapper.toDto(delegationRepository.save(existDelegation));
 	}
 
 	@Override
-	public List<Delegation> getActivatedDelegation() {
+	public List<DelegationDTO> getActivatedDelegations() {
 
-		return delegationRepo.getActivatedDelegation();
+		return delegationRepository.getActivatedDelegations().stream().map(delegationMapper::toDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public void deleteDelegation(String code) {
-		delegationRepo.deleteById(code);
+		delegationRepository.deleteById(code);
 	}
-
 }

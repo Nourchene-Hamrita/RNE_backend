@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RNE.referentiel.entities.PostalCode;
+import com.RNE.referentiel.dto.PostalCodeDTO;
 import com.RNE.referentiel.services.PostalCodeService;
 
 import lombok.AllArgsConstructor;
@@ -26,24 +26,25 @@ public class PostalCodeController {
 	private PostalCodeService codePostalService;
 
 	@PostMapping
-	public ResponseEntity<PostalCode> saveCodePostal(@RequestBody PostalCode codePostal) {
-		return new ResponseEntity<PostalCode>(codePostalService.savePostalCode(codePostal), HttpStatus.CREATED);
+	public ResponseEntity<PostalCodeDTO> saveCodePostal(@RequestBody PostalCodeDTO codePostalDTO) {
+		return new ResponseEntity<PostalCodeDTO>(codePostalService.savePostalCode(codePostalDTO), HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<PostalCode>> getAllCodesPostal() {
-		return new ResponseEntity<List<PostalCode>>(codePostalService.getAllPostalCode(), HttpStatus.OK);
+	public ResponseEntity<List<PostalCodeDTO>> getAllCodesPostal() {
+		return new ResponseEntity<List<PostalCodeDTO>>(codePostalService.getAllPostalCode(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<PostalCode> getCodePostalById(@PathVariable Long id) {
-		return new ResponseEntity<PostalCode>(codePostalService.getPostalCodeById(id), HttpStatus.OK);
+	public ResponseEntity<PostalCodeDTO> getCodePostalById(@PathVariable Long id) {
+		return new ResponseEntity<PostalCodeDTO>(codePostalService.getPostalCodeById(id), HttpStatus.OK);
 
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<PostalCode> updateCodePostal(@PathVariable Long id, @RequestBody PostalCode codePostal) {
-		return new ResponseEntity<PostalCode>(codePostalService.updatePostalCode(id, codePostal), HttpStatus.OK);
+	public ResponseEntity<PostalCodeDTO> updateCodePostal(@PathVariable Long id,
+			@RequestBody PostalCodeDTO codePostalDTO) {
+		return new ResponseEntity<PostalCodeDTO>(codePostalService.updatePostalCode(id, codePostalDTO), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")

@@ -12,5 +12,5 @@ import com.RNE.referentiel.entities.Delegation;
 public interface DelegationRepository extends JpaRepository<Delegation, String> {
 
 	@Query("SELECT d FROM Delegation d WHERE d.activation = 'Activate' ")
-	List<Delegation> getActivatedDelegation();
+	List<Delegation> getActivatedDelegations();
 }

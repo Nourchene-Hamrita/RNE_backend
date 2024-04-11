@@ -10,7 +10,7 @@ public interface StatusService {
 
     public StatusDTO getStatusByCode(String code);
 
-    public List<StatusDTO> getAllStatuses();
+    public List<StatusDTO> getAllStatus();
 
     public StatusDTO updateStatus(String code, StatusDTO statusDTO);
 

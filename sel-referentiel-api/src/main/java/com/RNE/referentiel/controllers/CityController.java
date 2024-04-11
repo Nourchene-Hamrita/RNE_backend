@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RNE.referentiel.entities.City;
+import com.RNE.referentiel.dto.CityDTO;
 import com.RNE.referentiel.services.CityService;
 
 import lombok.AllArgsConstructor;
@@ -23,41 +24,42 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CityController {
 
-	private CityService cityService;
+	private final CityService cityService;
 
-	// save city controller
 	@PostMapping
-	public ResponseEntity<City> saveCity(@RequestBody City city) {
-		return new ResponseEntity<City>(cityService.saveCity(city), HttpStatus.CREATED);
+	@PreAuthorize("hasRole('client_admin')")
+	public ResponseEntity<CityDTO> saveCity(@RequestBody CityDTO cityDTO) {
+		return new ResponseEntity<CityDTO>(cityService.saveCity(cityDTO), HttpStatus.CREATED);
 	}
 
-	// get city controller
 	@GetMapping
-	public ResponseEntity<List<City>> getAllCities() {
-		return new ResponseEntity<List<City>>(cityService.getAllCity(), HttpStatus.OK);
+	@PreAuthorize("hasRole('client_user')")
+	public ResponseEntity<List<CityDTO>> getAllCity() {
+		return new ResponseEntity<List<CityDTO>>(cityService.getAllCity(), HttpStatus.OK);
 	}
 
-	// get city by code controller
+	// get city by code
 	@GetMapping("/{code}")
-	public ResponseEntity<City> getCityByCode(@PathVariable String code) {
-		return new ResponseEntity<City>(cityService.getCityByCode(code), HttpStatus.OK);
+	public ResponseEntity<CityDTO> getCityByCode(@PathVariable String code) {
+		return new ResponseEntity<CityDTO>(cityService.getCityByCode(code), HttpStatus.OK);
 	}
 
-	// update city controller
+	// update city
 	@PutMapping("/update/{code}")
-	public ResponseEntity<City> updateCity(@PathVariable String code, @RequestBody City city) {
-		return new ResponseEntity<City>(cityService.updateCity(code, city), HttpStatus.OK);
+	public ResponseEntity<CityDTO> updateCity(@PathVariable String code, @RequestBody CityDTO cityDTO) {
+		return new ResponseEntity<CityDTO>(cityService.updateCity(code, cityDTO), HttpStatus.OK);
 	}
 
-	// get Activated city controller
-	@GetMapping("/activated")
-	public ResponseEntity<List<City>> getActivatedCities() {
-		return new ResponseEntity<>(cityService.getActivatedCity(), HttpStatus.OK);
+	// getActivate city
+	@GetMapping("/Activated")
+	public ResponseEntity<List<CityDTO>> getActivatedCity() {
+		return new ResponseEntity<List<CityDTO>>(cityService.getActivatedCity(), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/{code}")
+	@DeleteMapping("/{code}")
 	public ResponseEntity<String> deleteCity(@PathVariable String code) {
 		cityService.deleteCity(code);
 		return new ResponseEntity<String>("City successfully deleted!", HttpStatus.OK);
 	}
+
 }
