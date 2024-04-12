@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO {
-	private String delCode;
-	private String cityCode;
-	private String postalCodeId;
+public class TypeOrganizationDTO {
+    private Long id;
+    private String associationType;
+    private String legalStatus;
 }

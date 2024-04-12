@@ -4,10 +4,17 @@ import java.util.List;
 
 import com.RNE.request.dto.RequestDTO;
 
+
 public interface RequestService {
-	
-	public RequestDTO saveRequest(RequestDTO requestDTO);
-	public List<RequestDTO> getAllRequest();
-	 public void deleteRequest(Long id);
+
+    RequestDTO saveRequest(RequestDTO requestDTO);
+
+    List<RequestDTO> getAllRequests();
+
+    RequestDTO getRequestById(Long id);
+
+    RequestDTO updateRequest(Long id, RequestDTO requestDTO);
+
+    void deleteRequest(Long id);
 
 }

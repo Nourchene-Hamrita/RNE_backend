@@ -2,14 +2,14 @@ package com.RNE.request.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import com.RNE.request.enums.StatusRequest;
+
+import com.RNE.request.enums.Gender;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,12 +22,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "requests")
+@Table(name = "members")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Request implements Serializable {
+public class Member implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -37,26 +38,33 @@ public class Request implements Serializable {
 	*/
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private Long idCard;
 
-	@Column(name = "deadline")
+	@Column(name = "issue_date")
 	@Temporal(TemporalType.DATE)
-	private Date deadline;
+	private Date issueDate;
 
-	@Column(name = "date_of_sent")
+	@Column(name = "type_id_card")
+	private String typeIdCard;
+
+	@Column(name = "dob")
 	@Temporal(TemporalType.DATE)
-	private Date dateOfSent;
+	private Date dob;
 
-	@Column(name = "type_register")
-	private String typeRegister;
+	@Column(name = "place_of_birth")
+	private String placeOfBirth;
 
+	@Column(name = "full_name")
+	private String fullName;
+	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "status_request", nullable = false)
-	private StatusRequest statusRequest;
+	@Column(name = "gender", nullable = false)
+	private Gender gender;
 
-	@ManyToOne
+	@Column(name = "position")
+	private String position;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "organization_id")
 	private Organization organization;
 

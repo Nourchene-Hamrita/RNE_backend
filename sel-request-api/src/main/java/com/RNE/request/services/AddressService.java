@@ -1,13 +1,17 @@
 package com.RNE.request.services;
 
 import java.util.List;
-
 import com.RNE.request.dto.AddressDTO;
 
-
 public interface AddressService {
-
 	
-	public AddressDTO saveAddress(AddressDTO addressDTO);
-	public List<AddressDTO> getAllAddress();
+    AddressDTO saveAddress(AddressDTO addressDTO);
+    
+    List<AddressDTO> getAllAddresses();
+    
+    AddressDTO getAddressById(Long id);
+    
+    AddressDTO updateAddress(Long id, AddressDTO addressDTO);
+    
+    void deleteAddress(Long id);
 }
