@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.RNE</groupId>
-	<artifactId>sel-referentiel-api</artifactId>
+	<artifactId>sel-request-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sel-referentiel-api</name>
-	<description>sel-referentiel-api-micro-service</description>
+	<name>sel-request-api</name>
+	<description>sel-request-api-micro-service</description>
 <properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
