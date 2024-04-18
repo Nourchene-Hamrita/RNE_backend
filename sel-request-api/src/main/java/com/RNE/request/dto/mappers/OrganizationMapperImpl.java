@@ -13,13 +13,12 @@ public class OrganizationMapperImpl implements OrganizationMapper {
     private static final OrganizationMapper INSTANCE = Mappers.getMapper(OrganizationMapper.class);
 
     @Autowired
-    private TypeOrganizationMapper typeOrganizationMapper; 
+    private TypeOrganizationMapper typeOrganizationMapper;
 
     @Autowired
-    private AddressMapper addressMapper; 
+    private AddressMapper addressMapper;
 
     @Override
-  
     public OrganizationDTO toDto(Organization organization) {
         if (organization == null) {
             return null;
@@ -30,9 +29,10 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         organizationDTO.setNameFr(organization.getNameFr());
         organizationDTO.setNameAr(organization.getNameAr());
         organizationDTO.setEmail(organization.getEmail());
+
         // Populate type and address
         if (organization.getTypeOrganization() != null) {
-            organizationDTO.setType(typeOrganizationMapper.toDto(organization.getTypeOrganization()));
+            organizationDTO.setTypeOrganization(typeOrganizationMapper.toDto(organization.getTypeOrganization()));
         }
         if (organization.getAddress() != null) {
             organizationDTO.setAddress(addressMapper.toDto(organization.getAddress()));
@@ -42,7 +42,6 @@ public class OrganizationMapperImpl implements OrganizationMapper {
     }
 
     @Override
- 
     public Organization toEntity(OrganizationDTO organizationDTO) {
         if (organizationDTO == null) {
             return null;
@@ -54,9 +53,9 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         organization.setNameAr(organizationDTO.getNameAr());
         organization.setEmail(organizationDTO.getEmail());
 
-     // Set type and address
-        if (organizationDTO.getType() != null) {
-            organization.setTypeOrganization(typeOrganizationMapper.toEntity(organizationDTO.getType()));
+        // Set type and address
+        if (organizationDTO.getTypeOrganization() != null) {
+            organization.setTypeOrganization(typeOrganizationMapper.toEntity(organizationDTO.getTypeOrganization()));
         }
         if (organizationDTO.getAddress() != null) {
             organization.setAddress(addressMapper.toEntity(organizationDTO.getAddress()));
@@ -64,6 +63,7 @@ public class OrganizationMapperImpl implements OrganizationMapper {
 
         return organization;
     }
+
     public static OrganizationMapper getInstance() {
         return INSTANCE;
     }

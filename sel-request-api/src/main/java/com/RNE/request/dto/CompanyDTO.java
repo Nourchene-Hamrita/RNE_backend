@@ -9,10 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO {
-	 private Long id;
+public class CompanyDTO extends OrganizationDTO {
 
-	private String delCode;
-	private String cityCode;
-	private String postalCodeId;
+    private String industry;
+    
 }

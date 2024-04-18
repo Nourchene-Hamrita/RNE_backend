@@ -20,7 +20,7 @@ public class OrganizationDTO {
 	
 	private String email;
 	
-	private TypeOrganizationDTO type;
+	private TypeOrganizationDTO typeOrganization;
 	 
     private AddressDTO address; 
     

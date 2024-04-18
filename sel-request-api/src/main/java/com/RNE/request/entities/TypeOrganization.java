@@ -37,7 +37,7 @@ public class TypeOrganization implements Serializable {
     @Column(name = "legal_status")
     private String legalStatus;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "typeOrganization", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Organization> organizations;
 
 }

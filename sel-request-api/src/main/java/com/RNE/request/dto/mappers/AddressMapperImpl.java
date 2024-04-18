@@ -17,6 +17,7 @@ public class AddressMapperImpl implements AddressMapper {
         }
 
         AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setId(address.getId());
         addressDTO.setDelCode(address.getDelCode());
         addressDTO.setCityCode(address.getCityCode());
         addressDTO.setPostalCodeId(address.getPostalCodeId());
@@ -30,6 +31,7 @@ public class AddressMapperImpl implements AddressMapper {
         }
 
         Address address = new Address();
+        address.setId(addressDTO.getId());
         address.setDelCode(addressDTO.getDelCode());
         address.setCityCode(addressDTO.getCityCode());
         address.setPostalCodeId(addressDTO.getPostalCodeId());

@@ -17,7 +17,7 @@ spring:
             predicates:
             - Path=/api/referentiel/**
          -  id: request
-            uri: http://localhost:8083
+            uri: http://localhost:8082
             predicates:
             - Path=/api/request/**    
 
