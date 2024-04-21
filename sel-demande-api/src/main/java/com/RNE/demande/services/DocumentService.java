@@ -4,13 +4,13 @@ import java.util.List;
 import com.RNE.demande.entities.Documents;
 
 public interface DocumentService {
-	
-	  Documents saveDocument(Documents documents);
 
-	    List<Documents> getAllDocuments();
+	public Documents saveDocument(Documents documents);
 
-	    Documents getDocumentsById(Long id);
+	public List<Documents> getAllDocuments();
 
-	    void deleteDocuments(Long id);
+	public Documents getDocumentsById(Long id);
+
+	public void deleteDocuments(Long id);
 
 }

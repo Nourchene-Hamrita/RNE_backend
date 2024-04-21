@@ -8,9 +8,11 @@ import com.RNE.demande.entities.Adress;
 import com.RNE.demande.repositories.AdressRepository;
 import com.RNE.demande.services.AdressService;
 
+import lombok.AllArgsConstructor;
+
 
 @Service
-
+@AllArgsConstructor
 public class AdressServiceImpl implements AdressService {
 
 	private AdressRepository adressRepository;

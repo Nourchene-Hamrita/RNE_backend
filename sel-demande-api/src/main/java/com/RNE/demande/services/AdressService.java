@@ -4,14 +4,14 @@ import java.util.List;
 import com.RNE.demande.entities.Adress;
 
 public interface AdressService {
-	
-    Adress saveAdress(Adress adress);
-    
-    List<Adress> getAllAdresses();
-    
-    Adress getAdressById(Long id);
-    
-    Adress updateAdress(Long id, Adress Adress);
-    
-    void deleteAdress(Long id);
+
+	public Adress saveAdress(Adress adress);
+
+	public List<Adress> getAllAdresses();
+
+	public Adress getAdressById(Long id);
+
+	public Adress updateAdress(Long id, Adress Adress);
+
+	public void deleteAdress(Long id);
 }
