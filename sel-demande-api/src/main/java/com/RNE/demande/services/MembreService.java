@@ -1,5 +1,5 @@
 package com.RNE.demande.services;
 
-public interface MembreSpecService {
+public interface MembreService {
 
 }
