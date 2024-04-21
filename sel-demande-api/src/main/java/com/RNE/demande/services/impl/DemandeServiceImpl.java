@@ -38,5 +38,11 @@ public class DemandeServiceImpl implements DemandeService {
 		// TODO Auto-generated method stub
 		demandeRepository.deleteById(id);
 	}
+
+	@Override
+	public Demande updateDemande(Long id, Demande demande) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

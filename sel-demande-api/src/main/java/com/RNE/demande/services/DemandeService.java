@@ -3,17 +3,16 @@ package com.RNE.demande.services;
 import java.util.List;
 import com.RNE.demande.entities.Demande;
 
-
 public interface DemandeService {
 
-    Demande saveDemande(Demande demande);
+	public Demande saveDemande(Demande demande);
 
-    List<Demande> getAllDemandes();
+	public List<Demande> getAllDemandes();
 
-    Demande getDemandeById(Long id);
+	public Demande getDemandeById(Long id);
 
+	public void deleteDemande(Long id);
 
-
-    void deleteDemande(Long id);
+	public Demande updateDemande(Long id, Demande demande);
 
 }
