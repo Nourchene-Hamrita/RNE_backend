@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.RNE.referentiel.dto.VilleDTO;
 import com.RNE.referentiel.entities.Ville;
-import com.RNE.referentiel.entities.Gouvernerat;
+import com.RNE.referentiel.entities.Gouvernorat;
 
 @Component
 public class VilleMapperImpl implements VilleMapper {
@@ -25,9 +25,9 @@ public class VilleMapperImpl implements VilleMapper {
 		villeDTO.setActivation(ville.getActivation());
 
 		// Populate delegationDTO object
-		Gouvernerat gouvernerat = ville.getGouvernerat();
-		if (gouvernerat != null) {
-			villeDTO.setGouverneratCode(gouvernerat.getCode());
+		Gouvernorat gouvernorat = ville.getGouvernorat();
+		if (gouvernorat != null) {
+			villeDTO.setGouverneratCode(gouvernorat.getCode());
 		}
 
 		return villeDTO;
@@ -48,9 +48,9 @@ public class VilleMapperImpl implements VilleMapper {
 		// Populate Delegation object
 		String gouverneratCode = villeDTO.getGouverneratCode();
 		if (gouverneratCode != null) {
-			Gouvernerat gouvernerat = new Gouvernerat();
-			gouvernerat.setCode(gouverneratCode);
-			ville.setGouvernerat(gouvernerat);;
+			Gouvernorat gouvernorat = new Gouvernorat();
+			gouvernorat.setCode(gouverneratCode);
+			ville.setGouvernorat(gouvernorat);
 		}
 
 		return ville;

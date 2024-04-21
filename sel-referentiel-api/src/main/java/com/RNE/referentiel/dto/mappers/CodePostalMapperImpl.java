@@ -29,7 +29,7 @@ public class CodePostalMapperImpl implements CodePostalMapper {
 		Ville ville = codePostal.getVille();
 		if (ville != null) {
 			codePostalDTO.setVille(new VilleDTO(ville.getCode(), ville.getNomFr(), ville.getNomAr(), ville.getActivation(),
-					ville.getGouvernerat().getCode()));
+					ville.getGouvernorat().getCode()));
 		}
 
 		return codePostalDTO;

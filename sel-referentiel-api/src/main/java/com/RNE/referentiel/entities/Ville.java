@@ -14,7 +14,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,7 +48,7 @@ public class Ville implements Serializable {
 	private Activation activation;
 
 	@ManyToOne
-	private Gouvernerat gouvernerat;
+	private Gouvernorat gouvernorat;
 
 	@OneToMany(mappedBy = "ville", cascade = { CascadeType.ALL })
 	@JsonManagedReference

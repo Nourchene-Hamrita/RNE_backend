@@ -11,7 +11,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gouvernerat implements Serializable {
+public class Gouvernorat implements Serializable {
 
 	/**
 	 * 
@@ -46,7 +45,7 @@ public class Gouvernerat implements Serializable {
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
 
-	@OneToMany(mappedBy = "gouvernerat", cascade = {CascadeType.REMOVE})
+	@OneToMany(mappedBy = "gouvernorat", cascade = {CascadeType.REMOVE})
 	private List<Ville> villes;
 
 }

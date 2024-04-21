@@ -2,8 +2,6 @@ package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-
 import com.RNE.referentiel.enums.Categorie;
 
 import jakarta.persistence.Column;
