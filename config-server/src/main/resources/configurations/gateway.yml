@@ -19,7 +19,7 @@ spring:
          -  id: request
             uri: http://localhost:8082
             predicates:
-            - Path=/api/request/**    
+            - Path=/api/demande/**    
 
 management:
    tracing:
