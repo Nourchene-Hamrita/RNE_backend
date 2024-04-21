@@ -1,25 +1,24 @@
 package com.RNE.request.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "addresses")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address implements Serializable {
+public class TypeOrganization implements Serializable {
 
     /**
 	 * 
@@ -29,17 +28,16 @@ public class Address implements Serializable {
 	* 
 	*/
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
-    @Column(name = "del_code")
-    private String delCode;
+    @Column(name = "association_type")
+    private String associationType;
 
-    @Column(name = "city_code")
-    private String cityCode;
+    @Column(name = "legal_status")
+    private String legalStatus;
 
-    @Column(name = "postalCode_id")
-    private String postalCodeId;
+    @OneToMany(mappedBy = "typeOrganization", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Organization> organizations;
 
 }

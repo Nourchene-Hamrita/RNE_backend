@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO {
-	 private Long id;
+public class AssociationDTO extends OrganizationDTO {
 
-	private String delCode;
-	private String cityCode;
-	private String postalCodeId;
+    private String subject;
+    
+    private String objective;
 }
+
