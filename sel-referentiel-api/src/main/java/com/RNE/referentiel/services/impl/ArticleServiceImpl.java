@@ -54,8 +54,8 @@ public class ArticleServiceImpl implements ArticleService {
             return null;
         }
 
-        existArticle.setTitleFr(articleDTO.getTitleFr());
-        existArticle.setTitleAr(articleDTO.getTitleAr());
+        existArticle.setTitreFr(articleDTO.getTitreFr());
+        existArticle.setTitreAr(articleDTO.getTitreAr());
         existArticle.setActivation(articleDTO.getActivation());
 
         return articleMapper.toDto(articleRepository.save(existArticle));

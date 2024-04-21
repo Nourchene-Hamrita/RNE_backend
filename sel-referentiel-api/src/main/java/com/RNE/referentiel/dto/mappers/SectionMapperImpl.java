@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 
 import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.dto.SectionDTO;
-import com.RNE.referentiel.dto.StatusDTO;
+import com.RNE.referentiel.dto.StatutDTO;
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
-import com.RNE.referentiel.entities.Status;
+import com.RNE.referentiel.entities.Statut;
 
 @Component
 public class SectionMapperImpl implements SectionMapper {
 
     private static final SectionMapper INSTANCE = Mappers.getMapper(SectionMapper.class);
     @Autowired
-    private StatusMapper statusMapper;
+    private StatutMapper statutMapper;
     @Autowired
     private ArticleMapper articleMapper;
     @Override
@@ -31,16 +31,16 @@ public class SectionMapperImpl implements SectionMapper {
 
         SectionDTO sectionDTO = new SectionDTO();
         sectionDTO.setCode(section.getCode());
-        sectionDTO.setTitleFr(section.getTitleFr());
-        sectionDTO.setTitleAr(section.getTitleAr());
+        sectionDTO.setTitreFr(section.getTitreFr());
+        sectionDTO.setTitreAr(section.getTitreAr());
         sectionDTO.setActivation(section.getActivation());
 
         // Populate StatusDTO objects
-        Set<Status> statusEntities = section.getStatus();
+        Set<Statut> statusEntities = section.getStatut();
         if (statusEntities != null) {
-            sectionDTO.setStatus(statusEntities.stream()
-                .map(statusMapper::toDto)
-                .collect(Collectors.toSet()));
+            sectionDTO.setStatut(statusEntities.stream()
+                .map(statutMapper::toDto)
+                .collect(Collectors.toSet()));;
         }
 
         // Populate ArticleDTO objects
@@ -62,15 +62,15 @@ public class SectionMapperImpl implements SectionMapper {
 
         Section section = new Section();
         section.setCode(sectionDTO.getCode());
-        section.setTitleFr(sectionDTO.getTitleFr());
-        section.setTitleAr(sectionDTO.getTitleAr());
+        section.setTitreFr(sectionDTO.getTitreAr());
+        section.setTitreAr(sectionDTO.getTitreAr());
         section.setActivation(sectionDTO.getActivation());
 
         // Populate Status objects
-        Set<StatusDTO> statusDTOs = sectionDTO.getStatus();
-        if (statusDTOs != null) {
-            section.setStatus(statusDTOs.stream()
-                .map(statusMapper::toEntity)
+        Set<StatutDTO> statutDTOs = sectionDTO.getStatut();
+        if (statutDTOs != null) {
+            section.setStatut(statutDTOs.stream()
+                .map(statutMapper::toEntity)
                 .collect(Collectors.toSet()));
         }
 
