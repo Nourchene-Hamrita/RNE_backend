@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.RNE.demande.entities.Documents;
-import com.RNE.demande.repositories.DocumentRepository;
+import com.RNE.demande.repositories.DocumentsRepository;
 import com.RNE.demande.services.DocumentService;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class DocumentServiceImpl implements DocumentService{
+public class DocumentsServiceImpl implements DocumentService{
 
-	private DocumentRepository documentRepository;
+	private DocumentsRepository documentsRepository;
 	
 	@Override
 	public Documents saveDocument(Documents documents) {

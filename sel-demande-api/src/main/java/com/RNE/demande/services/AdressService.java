@@ -1,17 +1,17 @@
 package com.RNE.demande.services;
 
 import java.util.List;
-import com.RNE.demande.entities.Adress;
+import com.RNE.demande.entities.Adresse;
 
 public interface AdressService {
 
-	public Adress saveAdress(Adress adress);
+	public Adresse saveAdress(Adresse adresse);
 
-	public List<Adress> getAllAdresses();
+	public List<Adresse> getAllAdresses();
 
-	public Adress getAdressById(Long id);
+	public Adresse getAdressById(Long id);
 
-	public Adress updateAdress(Long id, Adress Adress);
+	public Adresse updateAdress(Long id, Adresse Adresse);
 
 	public void deleteAdress(Long id);
 }

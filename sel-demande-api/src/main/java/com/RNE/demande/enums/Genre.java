@@ -1,6 +1,6 @@
 package com.RNE.demande.enums;
 
-public enum Gender {
-	male,female
+public enum Genre {
+	male,femelle
 
 }

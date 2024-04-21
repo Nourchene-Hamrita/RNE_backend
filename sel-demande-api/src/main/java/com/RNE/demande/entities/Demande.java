@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import com.RNE.demande.enums.StatusRequest;
+import com.RNE.demande.enums.StatutDemande;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -57,7 +57,7 @@ public class Demande implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "statut_Demande", nullable = false)
-	private StatusRequest statutDemande;
+	private StatutDemande statutDemande;
 	
 	@ManyToOne
 	private Societe societe;

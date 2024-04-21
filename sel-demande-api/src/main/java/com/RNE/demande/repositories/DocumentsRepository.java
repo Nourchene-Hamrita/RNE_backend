@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.RNE.demande.entities.Documents;
 
-public interface DocumentRepository extends JpaRepository<Documents, Long>{
+public interface DocumentsRepository extends JpaRepository<Documents, Long>{
 
 }

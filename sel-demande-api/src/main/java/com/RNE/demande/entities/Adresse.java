@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Adress implements Serializable {
+public class Adresse implements Serializable {
 
     /**
 	 * 

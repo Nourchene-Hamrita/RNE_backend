@@ -57,7 +57,7 @@ public class Personne implements Serializable {
     private String nationalité;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Gender")
+	@Column(name = "Genre")
     private String gender;
 	
 	@ManyToMany( cascade = CascadeType.ALL)
@@ -67,6 +67,6 @@ public class Personne implements Serializable {
 	private Set<MembreSpec> membreSpecs;
 	
 	@OneToOne
-	private Adress adress;
+	private Adresse adresse;
 	
 }

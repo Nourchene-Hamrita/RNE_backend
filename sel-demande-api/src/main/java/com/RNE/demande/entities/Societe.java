@@ -49,7 +49,7 @@ public class Societe implements Serializable  {
 	private String Email;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "formeJuridique")
+	@Column(name = "FormeJuridique")
 	private String formeJuridique;
 	
 	@Column(name = "N° de réservation")
@@ -87,5 +87,5 @@ public class Societe implements Serializable  {
 	
 	
 	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
-	private Set<Adress> addresses;
+	private Set<Adresse> addresses;
 }

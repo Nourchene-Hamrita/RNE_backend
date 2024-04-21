@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.RNE.demande.entities.Adress;
-import com.RNE.demande.repositories.AdressRepository;
+import com.RNE.demande.entities.Adresse;
+import com.RNE.demande.repositories.AdresseRepository;
 import com.RNE.demande.services.AdressService;
 
 import lombok.AllArgsConstructor;
@@ -13,30 +13,30 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AdressServiceImpl implements AdressService {
+public class AdresseServiceImpl implements AdressService {
 
-	private AdressRepository adressRepository;
+	private AdresseRepository adresseRepository;
 
 	@Override
-	public Adress saveAdress(Adress adress) {
+	public Adresse saveAdress(Adresse adresse) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Adress> getAllAdresses() {
+	public List<Adresse> getAllAdresses() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Adress getAdressById(Long id) {
+	public Adresse getAdressById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Adress updateAdress(Long id, Adress Adress) {
+	public Adresse updateAdress(Long id, Adresse Adresse) {
 		// TODO Auto-generated method stub
 		return null;
 	}
