@@ -41,23 +41,23 @@ public class Personne implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Delivrence")
-	private Date dateDelivrence;
+	private Date date_Delivrance;
 
 	@Column(name = "type_ID_Carte")
-	private String typeIDCarte;
+	private String type_ID_Carte;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateNaiss")
-	private Date dateNaiss;
+	@Column(name = "date_Naiss")
+	private Date date_Naiss;
 
 	@Column(name = "lieu_Naiss")
-	private String lieuNaiss;
+	private String lieu_Naiss;
 
 	@Column(name = "nom_Prenom")
-	private String nomPrenom;
+	private String nom_prenom;
 
-	@Column(name = "nationalité")
-	private String nationalité;
+	@Column(name = "nationalite")
+	private String nationalite;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "genre")

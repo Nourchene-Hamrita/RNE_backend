@@ -1,5 +1,5 @@
 package com.RNE.demande.enums;
 
 public enum FormeJuridique {
-	Sociéte_a_Responsabilité_Limitée,Sociéte_Unipersonnele_a_Responsabilité_Limitée,Sociéte_Anonyme,Société_Civile
+	Societe_a_Responsabilite_Limitee,Societe_Unipersonnele_a_Responsabilite_Limitee,Societe_Anonyme,Societe_Civile
 }

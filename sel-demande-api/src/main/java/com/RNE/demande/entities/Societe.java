@@ -42,34 +42,34 @@ public class Societe implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DénominationSocialeFr")
-	private String DénominationSocialeFr;
+	@Column(name = "denomination_Sociale_Fr")
+	private String denomination_Sociale_Fr;
 
-	@Column(name = "DénominationSocialeAr")
-	private String DénominationSocialeAr;
+	@Column(name = "denomination_Sociale_Ar")
+	private String denomination_Sociale_Ar;
 
-	@Column(name = "Email")
-	private String Email;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "FormeJuridique")
-	private FormeJuridique formeJuridique;
-
-	@Column(name = "N° de réservation")
-	private String NumRéservation;
-
-	@Column(name = "CNomCommercial")
-	private Boolean CNomCommercial;
-
-	@Column(name = "CEnseigne")
-	private Boolean CEnseigne;
-
-	@Column(name = "NbEmployés")
-	private int NbEmployes;
+	@Column(name = "email")
+	private String email;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "OrigineFondCommercial")
-	private OrigineFondCommercial origineFondCommercial;
+	@Column(name = "forme_Juridique")
+	private FormeJuridique forme_Juridique;
+
+	@Column(name = "n_reservation")
+	private String num_Reservation;
+
+	@Column(name = "cNom_Commercial")
+	private Boolean cNom_Commercial;
+
+	@Column(name = "cEnseigne")
+	private Boolean cEnseigne;
+
+	@Column(name = "nbEmployes")
+	private int nbEmployes;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "origine_Fond_Commercial")
+	private OrigineFondCommercial origine_Fond_Commercial;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Activite> activities;
