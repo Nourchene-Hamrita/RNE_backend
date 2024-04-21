@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "requests")
+@Table(name = "demandes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -62,7 +62,7 @@ public class Demande implements Serializable {
 	@ManyToOne
 	private Societe societe;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demandes")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
 	private Set<Documents> documents;
 
 	

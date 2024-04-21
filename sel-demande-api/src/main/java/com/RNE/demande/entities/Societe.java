@@ -2,6 +2,8 @@ package com.RNE.demande.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.RNE.demande.enums.FormeJuridique;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "company")
+@Table(name = "Societes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -50,7 +52,7 @@ public class Societe implements Serializable  {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "FormeJuridique")
-	private String formeJuridique;
+	private  FormeJuridique formeJuridique;
 	
 	@Column(name = "N° de réservation")
 	private String NumRéservation;
@@ -67,25 +69,25 @@ public class Societe implements Serializable  {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "OrigineFondCommercial")
-	private String OrigineFondCommercial;
+	private  com.RNE.demande.enums.OrigineFondCommercial OrigineFondCommercial;
 	
 	
-	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Activite> activities;
 	
 	@OneToOne
 	private Capital capital;
 	
-	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Demande> demandes;
 	
-	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<MembreSpec> membreSpecs;
 	
-	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Action> actions;
 	
 	
-	@OneToMany(mappedBy = "societes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Adresse> addresses;
 }

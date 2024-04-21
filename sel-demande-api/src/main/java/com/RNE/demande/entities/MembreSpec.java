@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import com.RNE.demande.enums.Pouvoirs;
+import com.RNE.demande.enums.Qualite;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -21,6 +25,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
+@Table(name = "MembreSpecs")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -41,12 +46,12 @@ public class MembreSpec implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "qualite")
-	private String qualité;
+	private  Qualite qualite;
 	
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "pouvoirs")
-	private String pouvoirs;
+	private  Pouvoirs pouvoirs;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Nomination")

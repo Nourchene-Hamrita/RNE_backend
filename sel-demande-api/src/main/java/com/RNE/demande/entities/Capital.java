@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
+@Table(name = "Capitals")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -59,7 +61,7 @@ public class Capital implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dureeSociete;
 	
-	@OneToOne(mappedBy = "capitals")
+	@OneToOne(mappedBy = "capital")
 	private Societe societe;
 	
 	

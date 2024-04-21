@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "Adresses")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -54,7 +54,7 @@ public class Adresse implements Serializable {
     @ManyToOne
     private Societe societe;
     
-    @OneToOne(mappedBy = "adresses")
+    @OneToOne(mappedBy = "adresse")
     private Personne personne;
 
 }
