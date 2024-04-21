@@ -15,4 +15,3 @@ jwt:
       converter:
          resource-id: rne-rest-api
          principle-attribute: preferred_username
-

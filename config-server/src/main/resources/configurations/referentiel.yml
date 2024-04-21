@@ -15,7 +15,8 @@ spring:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
       username: postgres
-      password: nour123
+      password: youssef31
+
    jpa:
       hibernate:
          ddl-auto: update
