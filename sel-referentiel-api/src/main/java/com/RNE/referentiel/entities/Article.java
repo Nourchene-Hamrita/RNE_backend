@@ -15,14 +15,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "articles")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,18 +39,18 @@ public class Article implements Serializable {
 	@Column(name = "code", nullable = false)
 	private String code;
 
-	@Column(name = "title_fr", nullable = false)
-	private String titleFr;
+	@Column(name = "titre_fr", nullable = false)
+	private String titreFr;
 
-	@Column(name = "title_ar", nullable = false)
-	private String titleAr;
+	@Column(name = "titre_ar", nullable = false)
+	private String titreAr;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
 
 	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-	private List<Proposal> proposal = new ArrayList<>();
+	private List<Proposition> proposition = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "section_code", referencedColumnName = "code")

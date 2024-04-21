@@ -16,6 +16,7 @@ spring:
     url: jdbc:postgresql://localhost:5433/rneBD?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
     username: postgres
     password: Zaineb123
+
   jpa:
     hibernate:
       ddl-auto: update

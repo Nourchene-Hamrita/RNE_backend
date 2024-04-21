@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.RNE.referentiel.dto.ArticleDTO;
-import com.RNE.referentiel.dto.ProposalDTO;
+import com.RNE.referentiel.dto.PropositionDTO;
 import com.RNE.referentiel.entities.Article;
-import com.RNE.referentiel.entities.Proposal;
+import com.RNE.referentiel.entities.Proposition;
 import com.RNE.referentiel.entities.Section;
 
 import lombok.NoArgsConstructor;
@@ -21,10 +21,10 @@ public class ArticleMapperImpl implements ArticleMapper {
 
 	private static final ArticleMapper INSTANCE = Mappers.getMapper(ArticleMapper.class);
 	@Autowired
-	private ProposalMapper proposalMapper;
+	private PropositionMapper propositionMapper;
 	
-	public ArticleMapperImpl(ProposalMapper proposalMapper) {
-        this.proposalMapper = proposalMapper;
+	public ArticleMapperImpl(PropositionMapper propositionMapper) {
+        this.propositionMapper = propositionMapper;
     }
 
 	@Override
@@ -35,8 +35,8 @@ public class ArticleMapperImpl implements ArticleMapper {
 
 		ArticleDTO articleDTO = new ArticleDTO();
 		articleDTO.setCode(article.getCode());
-		articleDTO.setTitleFr(article.getTitleFr());
-		articleDTO.setTitleAr(article.getTitleAr());
+		articleDTO.setTitreFr(article.getTitreFr());
+		articleDTO.setTitreAr(article.getTitreAr());
 		articleDTO.setActivation(article.getActivation());
 
 		// Populate SectionDTO object
@@ -46,9 +46,9 @@ public class ArticleMapperImpl implements ArticleMapper {
 		}
 
 		// Populate ProposalDTO objects
-		List<Proposal> proposals = article.getProposal();
-		if (proposals != null) {
-			articleDTO.setProposal(proposals.stream().map(proposalMapper::toDto).collect(Collectors.toList()));
+		List<Proposition> propositions = article.getProposition();
+		if (propositions != null) {
+			articleDTO.setProposition(propositions.stream().map(propositionMapper::toDto).collect(Collectors.toList()));
 		}
 
 		return articleDTO;
@@ -62,8 +62,8 @@ public class ArticleMapperImpl implements ArticleMapper {
 
 		Article article = new Article();
 		article.setCode(articleDTO.getCode());
-		article.setTitleFr(articleDTO.getTitleFr());
-		article.setTitleAr(articleDTO.getTitleAr());
+		article.setTitreFr(articleDTO.getTitreFr());
+		article.setTitreAr(articleDTO.getTitreAr());
 		article.setActivation(articleDTO.getActivation());
 
 		// Populate Section object
@@ -75,9 +75,9 @@ public class ArticleMapperImpl implements ArticleMapper {
 		}
 
 		// Populate Proposal objects
-		List<ProposalDTO> proposalDTOs = articleDTO.getProposal();
-		if (proposalDTOs != null) {
-			article.setProposal(proposalDTOs.stream().map(proposalMapper::toEntity).collect(Collectors.toList()));
+		List<PropositionDTO> propositionDTOs = articleDTO.getProposition();
+		if (propositionDTOs != null) {
+			article.setProposition(propositionDTOs.stream().map(propositionMapper::toEntity).collect(Collectors.toList()));
 
 		}
 

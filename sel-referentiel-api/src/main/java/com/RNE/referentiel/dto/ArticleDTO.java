@@ -13,15 +13,15 @@ public class ArticleDTO {
 
     private String code;
     
-    private String titleFr;
+    private String titreFr;
     
-    private String titleAr;
+    private String titreAr;
     
     private Activation activation;
     
     private String codeSection;
     
-    private List<ProposalDTO> proposal;
+    private List<PropositionDTO> proposition;
 
   
 }
