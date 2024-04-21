@@ -87,5 +87,5 @@ public class Societe implements Serializable {
 	private List<MembreSpec> membreSpec;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
-	private Set<Adresse> addresses;
+	private Set<Adresse> adresses;
 }
