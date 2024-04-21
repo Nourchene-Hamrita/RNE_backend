@@ -25,12 +25,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name = "MembreSpecs")
+@Table(name = "membres")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MembreSpec implements Serializable {
+public class Membre implements Serializable {
 
 	/**
 	 * 
@@ -68,6 +68,6 @@ public class MembreSpec implements Serializable {
 	private Societe societe;
 	
 	
-   @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membreSpecs")
+   @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
    private Set<Personne> personnes;
 }

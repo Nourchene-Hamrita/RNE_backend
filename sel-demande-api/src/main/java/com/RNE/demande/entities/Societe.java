@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import com.RNE.demande.enums.FormeJuridique;
+import com.RNE.demande.enums.OrigineFondCommercial;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Societes")
+@Table(name = "societes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -69,7 +70,7 @@ public class Societe implements Serializable  {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "OrigineFondCommercial")
-	private  com.RNE.demande.enums.OrigineFondCommercial OrigineFondCommercial;
+	private  OrigineFondCommercial origineFondCommercial;
 	
 	
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
@@ -82,7 +83,7 @@ public class Societe implements Serializable  {
 	private Set<Demande> demandes;
 	
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
-	private Set<MembreSpec> membreSpecs;
+	private Set<Membre> membres;
 	
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Action> actions;

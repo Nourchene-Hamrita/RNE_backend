@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Personnes")
+@Table(name = "personnes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -69,7 +69,7 @@ public class Personne implements Serializable {
 	private Set<Action> actions;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<MembreSpec> membreSpecs;
+	private Set<Membre> membres;
 	
 	@OneToOne
 	private Adresse adresse;
