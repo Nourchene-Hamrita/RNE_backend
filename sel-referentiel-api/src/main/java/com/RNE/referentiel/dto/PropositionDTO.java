@@ -1,7 +1,5 @@
 package com.RNE.referentiel.dto;
 
-import java.util.List;
-import java.util.Set;
 
 import com.RNE.referentiel.enums.Activation;
 
@@ -10,17 +8,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SectionDTO {
+public class PropositionDTO {
 
     private String code;
-
-    private String titreFr;
-
-    private String titreAr;
-
+    
+    private String texteFr;
+    
+    private String texteAr;
+  
     private Activation activation;
+    
+    private String articleCode;
 
-    private Set<StatutDTO> statut;
 
-    private List<ArticleDTO> articles;
 }

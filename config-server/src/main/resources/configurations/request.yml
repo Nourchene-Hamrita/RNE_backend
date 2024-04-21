@@ -13,9 +13,11 @@ spring:
     name: request
   datasource:
     driver-class-name: org.postgresql.Driver
+
     url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=request
     username: postgres
-    password: nour123
+    password: youssef31
+
   jpa:
     hibernate:
       ddl-auto: update

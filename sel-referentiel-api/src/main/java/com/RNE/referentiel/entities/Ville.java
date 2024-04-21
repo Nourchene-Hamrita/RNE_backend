@@ -2,17 +2,19 @@ package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import com.RNE.referentiel.enums.Activation;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,39 +25,34 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Section implements Serializable {
-
+public class Ville implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -492407437337641766L;
+	private static final long serialVersionUID = 3048454537732980212L;
 	/**
-	* 
-	*/
+	 * 
+	 */
 
 	@Id
 	@Column(name = "code", nullable = false)
 	private String code;
 
-	@Column(name = "titre_fr", nullable = false)
+	@Column(name = "nom_fr", nullable = false)
+	private String nomFr;
 
-	private String titreFr;
-
-	@Column(name = "titre_ar", nullable = false)
-
-	private String titreAr;
+	@Column(name = "name_ar", nullable = false)
+	private String nomAr;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "activation", nullable = false)
-
 	private Activation activation;
 
-	@ManyToMany(mappedBy = "sections")
+	@ManyToOne
+	private Gouvernerat gouvernerat;
 
-	private Set<Statut> statut;
-
-	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-
-	private List<Article> articles;
+	@OneToMany(mappedBy = "ville", cascade = { CascadeType.ALL })
+	@JsonManagedReference
+	private List<CodePostal> codePostal;
 
 }

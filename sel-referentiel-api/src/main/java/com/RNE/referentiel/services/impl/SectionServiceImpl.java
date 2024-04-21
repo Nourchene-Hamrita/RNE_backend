@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.RNE.referentiel.dto.SectionDTO;
 import com.RNE.referentiel.dto.mappers.ArticleMapper;
 import com.RNE.referentiel.dto.mappers.SectionMapper;
-import com.RNE.referentiel.dto.mappers.StatusMapper;
+import com.RNE.referentiel.dto.mappers.StatutMapper;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.services.SectionService;
@@ -21,7 +21,7 @@ public class SectionServiceImpl implements SectionService {
 
 	private SectionRepository sectionRepo;
 	private SectionMapper sectionMapper;
-	private StatusMapper statusMapper;
+	private StatutMapper statutMapper;
 	private ArticleMapper articleMapper;
 
 	// service for creating a new section
@@ -56,10 +56,10 @@ public class SectionServiceImpl implements SectionService {
 			return null;
 		}
 
-		existSection.setTitleFr(sectionDTO.getTitleFr());
-		existSection.setTitleAr(sectionDTO.getTitleAr());
+		existSection.setTitreFr(sectionDTO.getTitreAr());
+		existSection.setTitreAr(sectionDTO.getTitreAr());
 		existSection.setActivation(sectionDTO.getActivation());
-		existSection.setStatus(sectionDTO.getStatus().stream().map(statusMapper::toEntity).collect(Collectors.toSet()));
+		existSection.setStatut(sectionDTO.getStatut().stream().map(statutMapper::toEntity).collect(Collectors.toSet()));
 		existSection.setArticles(
 				sectionDTO.getArticles().stream().map(articleMapper::toEntity).collect(Collectors.toList()));
 
