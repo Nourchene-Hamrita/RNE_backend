@@ -10,7 +10,7 @@ import com.RNE.demande.services.AdressService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/request/addresses")
+@RequestMapping("/api/demande/addresses")
 @AllArgsConstructor
 @CrossOrigin("http://localhost:4200")
 public class AdresseController {
@@ -18,7 +18,7 @@ public class AdresseController {
     private AdressService adressService;
 
     @PostMapping
-    public ResponseEntity<Adresse> saveAddress(@RequestBody Adresse adresse) {
+    public ResponseEntity<Adresse> saveAddresse(@RequestBody Adresse adresse) {
         return new ResponseEntity<>(adressService.saveAdress(adresse), HttpStatus.CREATED);
     }
 
@@ -33,12 +33,12 @@ public class AdresseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Adresse> updateAddress(@PathVariable Long id, @RequestBody Adresse adresse) {
+    public ResponseEntity<Adresse> updateAddresse(@PathVariable Long id, @RequestBody Adresse adresse) {
         return new ResponseEntity<>(adressService.updateAdress(id, adresse), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAddress(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAddresse(@PathVariable Long id) {
         adressService.deleteAdress(id);
         return new ResponseEntity<>("Adresse deleted successfully", HttpStatus.OK);
     }

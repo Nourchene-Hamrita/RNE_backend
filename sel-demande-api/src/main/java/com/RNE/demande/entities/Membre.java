@@ -3,6 +3,9 @@ package com.RNE.demande.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.RNE.demande.enums.Pouvoirs;
+import com.RNE.demande.enums.Qualite;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +26,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MembreSpec implements Serializable {
+public class Membre implements Serializable {
 
 	/**
 	 * 
@@ -39,12 +42,12 @@ public class MembreSpec implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "qualite")
-	private String qualité;
+	private  Qualite qualite;
 	
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "pouvoirs")
-	private String pouvoirs;
+	private  Pouvoirs pouvoirs;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Nomination")
@@ -60,7 +63,7 @@ public class MembreSpec implements Serializable {
 	@ManyToOne
 	private Societe societe;
 	
-	
    @ManyToMany
+
    private Set<Personne> personnes;
 }

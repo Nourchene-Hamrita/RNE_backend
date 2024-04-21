@@ -2,6 +2,9 @@ package com.RNE.demande.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.RNE.demande.enums.ActiviteLocal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name = "Demande")
+@Table(name = "activites")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -52,7 +55,7 @@ public class Activite implements Serializable{
 		
 		@Enumerated(EnumType.STRING)
 		@Column(name = "acitivite_Local")
-		private String acitiviteLocal;
+		private  ActiviteLocal  activiteLocal;
 		
 		
 		@Temporal(TemporalType.DATE)

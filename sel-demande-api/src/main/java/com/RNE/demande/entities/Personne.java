@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import com.RNE.demande.enums.Genre;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
@@ -31,7 +34,7 @@ public class Personne implements Serializable {
 	/**
 	* 
 	*/
-	
+	@Id
 	@Column(name = "ID_Carte")
     private Long IDCarte;
 	
@@ -57,14 +60,15 @@ public class Personne implements Serializable {
     private String nationalité;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Genre")
-    private String gender;
+	@Column(name = "genre")
+    private  Genre genre;
 	
 	@ManyToMany( cascade = CascadeType.ALL)
 	private Set<Action> actions;
 	
 	@ManyToMany(mappedBy = "personnes",cascade = CascadeType.ALL)
-	private Set<MembreSpec> membreSpecs;
+	private Set<Membre> membres;
+
 	
 	@OneToOne
 	private Adresse adresse;
