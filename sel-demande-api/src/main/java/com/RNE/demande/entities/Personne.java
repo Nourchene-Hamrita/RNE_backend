@@ -2,6 +2,7 @@ package com.RNE.demande.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import com.RNE.demande.enums.Genre;
@@ -36,41 +37,40 @@ public class Personne implements Serializable {
 	*/
 	@Id
 	@Column(name = "ID_Carte")
-    private Long IDCarte;
-	
-	
+	private Long IDCarte;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Delivrence")
-    private Date dateDelivrence;
-	
+	private Date dateDelivrence;
+
 	@Column(name = "type_ID_Carte")
-    private String typeIDCarte;
-	
+	private String typeIDCarte;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dateNaiss")
-    private Date dateNaiss;
-	
+	private Date dateNaiss;
+
 	@Column(name = "lieu_Naiss")
-    private String lieuNaiss;
-	
+	private String lieuNaiss;
+
 	@Column(name = "nom_Prenom")
-    private String nomPrenom;
-	
+	private String nomPrenom;
+
 	@Column(name = "nationalité")
-    private String nationalité;
-	
+	private String nationalité;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "genre")
-    private  Genre genre;
-	
-	@ManyToMany( cascade = CascadeType.ALL)
-	private Set<Action> actions;
-	
-	@ManyToMany(mappedBy = "personnes",cascade = CascadeType.ALL)
-	private Set<Membre> membres;
+	private Genre genre;
 
-	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<Action> actions;
+
+	@ManyToMany(mappedBy = "personnes")
+
+	private List<MembreSpec> membreSec;
+
 	@OneToOne
 	private Adresse adresse;
-	
+
 }
