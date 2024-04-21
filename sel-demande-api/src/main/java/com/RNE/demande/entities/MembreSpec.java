@@ -3,8 +3,6 @@ package com.RNE.demande.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -63,6 +61,6 @@ public class MembreSpec implements Serializable {
 	private Societe societe;
 	
 	
-   @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membreSpecs")
+   @ManyToMany
    private Set<Personne> personnes;
 }

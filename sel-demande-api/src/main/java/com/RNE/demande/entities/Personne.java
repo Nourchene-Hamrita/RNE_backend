@@ -63,7 +63,7 @@ public class Personne implements Serializable {
 	@ManyToMany( cascade = CascadeType.ALL)
 	private Set<Action> actions;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "personnes",cascade = CascadeType.ALL)
 	private Set<MembreSpec> membreSpecs;
 	
 	@OneToOne

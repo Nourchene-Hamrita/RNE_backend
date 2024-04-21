@@ -13,9 +13,9 @@ spring:
     name: demande
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/rneBD?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
+    url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
     username: postgres
-    password: Zaineb123
+    password: youssef31
 
   jpa:
     hibernate:
