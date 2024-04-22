@@ -3,8 +3,6 @@ package com.RNE.demande.entities;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
-
-import com.RNE.demande.enums.FormeJuridique;
 import com.RNE.demande.enums.OrigineFondCommercial;
 
 import jakarta.persistence.CascadeType;
@@ -15,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -51,9 +50,6 @@ public class Societe implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "forme_Juridique")
-	private FormeJuridique forme_Juridique;
 
 	@Column(name = "n_reservation")
 	private String num_Reservation;
@@ -88,4 +84,7 @@ public class Societe implements Serializable {
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Adresse> adresses;
+	
+	@ManyToOne
+	private FormeJuridique formeJuridique;
 }

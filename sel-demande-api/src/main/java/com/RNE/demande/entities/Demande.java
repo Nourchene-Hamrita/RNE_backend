@@ -54,7 +54,7 @@ public class Demande implements Serializable {
 	private String typeRegistre;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "statut_Demande", nullable = false)
+	@Column(name = "statut_Demande")
 	private StatutDemande statutDemande;
 	
 	@ManyToOne

@@ -47,17 +47,19 @@ public class Capital implements Serializable {
 	@Column(name = "nbr_Parts")
 	private int nbrParts;
 	
-	@Column(name = "valeur_Parts")
-	private int valeurParts;
+	@Column(name = "valeur_Parts_Nature")
+	private int valeurPartsNat;
+	
+	@Column(name = "valeur_Parts_Numeraire")
+	private int valeurPartsNum;	
 
 	
 	@Column(name = "Date_Cloture")
 	@Temporal(TemporalType.DATE)
 	private Date dateCloture;
 	
-	@Column(name = "Duree_Societe")
-	@Temporal(TemporalType.DATE)
-	private Date dureeSociete;
+	
+	private int dureeSociete;
 	
 	@OneToOne(mappedBy = "capital")
 	private Societe societe;
