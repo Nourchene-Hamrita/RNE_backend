@@ -62,6 +62,8 @@ public class Demande implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
 	private Set<Documents> documents;
+	
+	private String codeStatut;
 
 	
 
