@@ -61,7 +61,7 @@ public class Capital implements Serializable {
 	
 	private int dureeSociete;
 	
-	@OneToOne(mappedBy = "capital")
+	@OneToOne
 	private Societe societe;
 	
 	
