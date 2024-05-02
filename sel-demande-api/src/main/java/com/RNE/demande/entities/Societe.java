@@ -87,4 +87,6 @@ public class Societe implements Serializable {
 	
 	@ManyToOne
 	private FormeJuridique formeJuridique;
+	
+	private String numBenificiaire;
 }

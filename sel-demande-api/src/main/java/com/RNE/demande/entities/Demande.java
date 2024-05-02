@@ -64,6 +64,8 @@ public class Demande implements Serializable {
 	private Set<Documents> documents;
 	
 	private String codeStatut;
+	
+	private String TypePaiment;
 
 	
 
