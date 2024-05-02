@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -53,7 +54,11 @@ public class MembreSpec implements Serializable {
 
 	@ManyToOne
 	private Societe societe;
+	
 
 	@ManyToMany
 	private List<Personne> personnes;
+	
+	@OneToOne
+	private IdentifiantUnique identifiantUnique;
 }

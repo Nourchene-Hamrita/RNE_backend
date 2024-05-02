@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.RNE.demande.enums.Genre;
+import com.RNE.demande.enums.TypeIdCarte;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,8 +44,9 @@ public class Personne implements Serializable {
 	@Column(name = "date_Delivrence")
 	private Date date_Delivrance;
 
-	@Column(name = "type_ID_Carte")
-	private String type_ID_Carte;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "typeIdCarte")
+	private TypeIdCarte typeIdCarte ;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Naiss")
@@ -65,10 +67,12 @@ public class Personne implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Action> actions;
-
+	
+	
 	@ManyToMany(mappedBy = "personnes")
 
 	private List<MembreSpec> membreSec;
+	
 
 	@OneToOne
 	private Adresse adresse;

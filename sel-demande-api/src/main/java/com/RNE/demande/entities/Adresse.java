@@ -54,5 +54,7 @@ public class Adresse implements Serializable {
     
     @OneToOne(mappedBy = "adresse")
     private Personne personne;
+    
+    
 
 }

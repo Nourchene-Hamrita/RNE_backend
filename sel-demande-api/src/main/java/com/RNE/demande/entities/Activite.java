@@ -52,17 +52,13 @@ public class Activite implements Serializable{
 		
 		
 		@Enumerated(EnumType.STRING)
-		@Column(name = "acitivite_Local")
+		@Column(name = "activite_Local")
 		private  ActiviteLocal  activiteLocal;
-		
 		
 		@Temporal(TemporalType.DATE)
 		@Column(name = "date_Debut_Activite")
 		private Date dateDebutActivite;
 		
 		@ManyToOne
-		private Societe societe;
-		
-		
-		
+		private Societe societe;	
 }
