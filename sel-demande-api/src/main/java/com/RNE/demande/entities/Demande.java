@@ -65,6 +65,10 @@ public class Demande implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
 	@JsonIgnore
 	private Set<Documents> documents;
+	
+	private String codeStatut;
+	
+	private String TypePaiment;
 
 	
 

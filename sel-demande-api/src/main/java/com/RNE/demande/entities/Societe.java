@@ -70,21 +70,23 @@ public class Societe implements Serializable {
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private Set<Activite> activities;
 
-	@OneToOne
+	@OneToOne(mappedBy = "societe")
 	private Capital capital;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
-	private Set<Demande> demandes;
+	private List<Demande> demandes;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
-	private Set<Action> actions;
+	private List<Action> actions;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	private List<MembreSpec> membreSpec;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
-	private Set<Adresse> adresses;
+	private List<Adresse> adresses;
 	
 	@ManyToOne
 	private FormeJuridique formeJuridique;
+	
+	private String numBenificiaire;
 }

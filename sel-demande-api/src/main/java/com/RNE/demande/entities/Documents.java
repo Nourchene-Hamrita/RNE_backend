@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -44,6 +45,9 @@ public class Documents implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Depot")
     private Date dateDepot;
+	
+	@Lob
+	private byte[] contenu;
 	
 	@ManyToOne
 	private Demande demande;
