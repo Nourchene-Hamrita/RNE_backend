@@ -31,7 +31,7 @@ public class DemandeController {
 		return new ResponseEntity<Demande>(demandeService.saveDemande(demande), HttpStatus.CREATED);
 	}
 
-	@GetMapping
+	@GetMapping("/get")
 	public ResponseEntity<List<Demande>> getAllRequests() {
 		return new ResponseEntity<List<Demande>>(demandeService.getAllDemandes(), HttpStatus.OK);
 	}
@@ -46,7 +46,7 @@ public class DemandeController {
 		return new ResponseEntity<Demande>(demandeService.updateDemande(id, demande), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteRequest(@PathVariable Long id) {
 		demandeService.deleteDemande(id);
 		return new ResponseEntity<String>("Demande deleted successfully", HttpStatus.OK);
