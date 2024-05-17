@@ -16,6 +16,10 @@ spring:
       url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=referentiel
       username: postgres
       password: youssef31
+      #url: jdbc:postgresql://postgresql-youssef31.alwaysdata.net:5432/youssef31_rnedb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=referentiel
+      #username: youssef31
+      #password: Youssef*31
+    
 
    jpa:
     hibernate:
