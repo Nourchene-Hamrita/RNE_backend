@@ -12,6 +12,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
@@ -35,29 +37,38 @@ public class Personne implements Serializable {
 	/**
 	* 
 	*/
+	
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
 	@Column(name = "ID_Carte")
 	private Long IDCarte;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_Delivrence")
-	private Date date_Delivrance;
-
-	@Column(name = "type_ID_Carte")
-	private String type_ID_Carte;
+	@Column(name = "date_delivrance")
+	private Date date_delivrance;
+	
+	@Column(name = "nom_Prenom_fr")
+	private String nom_prenom_fr;
+	
+	@Column(name = "nom_Prenom_ar")
+	private String nom_prenom_ar;
+	/*@Column(name = "type_ID_Carte")
+	private String type_ID_Carte;*/
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_Naiss")
-	private Date date_Naiss;
+	@Column(name = "date_naiss")
+	private Date date_naiss;
 
-	@Column(name = "lieu_Naiss")
-	private String lieu_Naiss;
+	@Column(name = "lieu_naiss_fr")
+	private String lieu_naiss_fr;
+	
+	@Column(name = "lieu_naiss_ar")
+	private String lieu_naiss_ar;
 
-	@Column(name = "nom_Prenom")
-	private String nom_prenom;
-
-	@Column(name = "nationalite")
-	private String nationalite;
+	/*@Column(name = "nationalite")
+	private String nationalite;*/
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "genre")
@@ -68,7 +79,7 @@ public class Personne implements Serializable {
 
 	@ManyToMany(mappedBy = "personnes")
 
-	private List<MembreSpec> membreSec;
+	private List<MembreSpec> membreSpec;
 
 	@OneToOne
 	private Adresse adresse;

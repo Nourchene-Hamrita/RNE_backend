@@ -16,12 +16,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Documents implements Serializable{
+public class Documents implements Serializable {
 
 	/**
 	 * 
@@ -32,18 +33,18 @@ public class Documents implements Serializable{
 	*/
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(name = "nom")
-    private String nom;
-	
+	private String nom;
+
 	@Column(name = "type")
-    private String type;
-	
-	
+	private String type;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Depot")
+
     private Date dateDepot;
 	
 	
@@ -52,8 +53,8 @@ public class Documents implements Serializable{
 	
 	
 	
+
 	@ManyToOne
 	private Demande demande;
-	
-	
+
 }

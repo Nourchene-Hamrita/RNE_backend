@@ -2,8 +2,13 @@ package com.RNE.demande.entities;
 
 import java.io.Serializable;
 
+
+import com.RNE.demande.enums.AdresseType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,8 +44,8 @@ public class Adresse implements Serializable {
     @Column(name = "code_Ville")
     private String codeVille;
 
-    @Column(name = "code_Postal_Id")
-    private String codePostalId;
+    @Column(name = "code_Postal")
+    private String codePostal;
     
     @Column(name = "rue_Fr")
     private String rueFr;
@@ -54,5 +59,9 @@ public class Adresse implements Serializable {
     
     @OneToOne(mappedBy = "adresse")
     private Personne personne;
+    
+	@Enumerated(EnumType.STRING)
+	@Column(name = "adresse_type")
+	private AdresseType adresseType;
 
 }
