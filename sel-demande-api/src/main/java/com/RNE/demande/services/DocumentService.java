@@ -1,11 +1,15 @@
 package com.RNE.demande.services;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.RNE.demande.entities.Documents;
 
 public interface DocumentService {
 
-	public Documents saveDocument(Documents documents);
+	public Documents saveDocument(MultipartFile documentFile) throws IOException;
 
 	public List<Documents> getAllDocuments();
 

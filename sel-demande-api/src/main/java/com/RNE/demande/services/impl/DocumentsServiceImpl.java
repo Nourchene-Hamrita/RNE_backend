@@ -1,8 +1,10 @@
 package com.RNE.demande.services.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.RNE.demande.entities.Documents;
 import com.RNE.demande.repositories.DocumentsRepository;
@@ -17,9 +19,14 @@ public class DocumentsServiceImpl implements DocumentService{
 	private DocumentsRepository documentsRepository;
 	
 	@Override
-	public Documents saveDocument(Documents documents) {
-		// TODO Auto-generated method stub
-		return null;
+	public Documents saveDocument(MultipartFile documentFile) throws IOException {
+		Documents fichierDoc=new Documents();
+		fichierDoc.setNom(documentFile.getOriginalFilename());
+		fichierDoc.setType(documentFile.getContentType());
+		
+		
+		return documentsRepository.save(fichierDoc);
+		
 	}
 
 	@Override

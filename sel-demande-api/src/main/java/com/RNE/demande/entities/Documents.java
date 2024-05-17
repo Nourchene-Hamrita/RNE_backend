@@ -46,8 +46,11 @@ public class Documents implements Serializable{
 	@Column(name = "date_Depot")
     private Date dateDepot;
 	
-	@Lob
-	private byte[] contenu;
+	
+	 @Column(length = 10485760)
+	private String contenu;
+	
+	
 	
 	@ManyToOne
 	private Demande demande;
