@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 import com.RNE.demande.enums.StatutDemande;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -56,10 +57,10 @@ public class Demande implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "statut_Demande")
 	private StatutDemande statutDemande;
-	
+	@JsonIgnore
 	@ManyToOne
 	private Societe societe;
-	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
 	private Set<Documents> documents;
 	
