@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/demande/demandes")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @AllArgsConstructor
 public class DemandeController {
 
