@@ -36,18 +36,18 @@ public class Activite implements Serializable{
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 		
-		@Column(name = "nature_ActiviteP_Fr")
+		@Column(name = "nature_activitep_fr")
 		private String natureActivitePFr;
 		
-		@Column(name = "nature_Activite_PAr")
+		@Column(name = "nature_activitep_ar")
 		private String natureActivitePAr;
 		
 		
-		@Column(name = "nature_Activite_SFr")
+		@Column(name = "nature_activites_fr")
 		private String natureActiviteSFr;
 		
 		
-		@Column(name = "nature_Activite_SAr")
+		@Column(name = "nature_activites_ar")
 		private String natureActiviteSAr;
 		
 		
