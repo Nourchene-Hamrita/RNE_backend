@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/demande/demandes")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class DemandeController {
 
 	private DemandeService demandeService;
@@ -45,7 +45,7 @@ public class DemandeController {
 	public ResponseEntity<Demande> updateRequest(@PathVariable Long id, @RequestBody Demande demande) {
 		return new ResponseEntity<Demande>(demandeService.updateDemande(id, demande), HttpStatus.OK);
 	}
-
+	
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteRequest(@PathVariable Long id) {
 		demandeService.deleteDemande(id);

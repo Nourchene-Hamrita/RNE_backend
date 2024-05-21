@@ -57,11 +57,12 @@ public class Demande implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "statut_Demande")
 	private StatutDemande statutDemande;
-	@JsonIgnore
+	
 	@ManyToOne
 	private Societe societe;
-	@JsonIgnore
+	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
+	
 	@JsonIgnore
 	private Set<Documents> documents;
 	
