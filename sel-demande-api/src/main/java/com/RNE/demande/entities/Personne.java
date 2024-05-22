@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.RNE.demande.enums.Genre;
-import com.RNE.demande.enums.TypeIdCarte;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

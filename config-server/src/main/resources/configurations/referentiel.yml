@@ -17,6 +17,7 @@ spring:
       username: postgres
       password: Zaineb123
 
+
    jpa:
     hibernate:
       ddl-auto: update

@@ -18,10 +18,11 @@ import com.RNE.demande.services.DemandeService;
 
 import lombok.AllArgsConstructor;
 
+
 @RestController
 @RequestMapping("/api/demande/demandes")
+//@CrossOrigin("*")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
 public class DemandeController {
 
 	private DemandeService demandeService;
