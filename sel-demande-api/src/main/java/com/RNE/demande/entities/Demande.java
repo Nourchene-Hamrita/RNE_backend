@@ -59,10 +59,10 @@ public class Demande implements Serializable {
 	private StatutDemande statutDemande;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Societe societe;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
+	
 	@JsonIgnore
 	private Set<Documents> documents;
 	

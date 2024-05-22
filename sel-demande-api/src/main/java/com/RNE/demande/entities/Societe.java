@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import com.RNE.demande.enums.OrigineFondCommercial;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -68,24 +69,31 @@ public class Societe implements Serializable {
 	private OrigineFondCommercial origine_Fond_Commercial;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Activite> activities;
 
 	@OneToOne(mappedBy = "societe")
+	@JsonIgnore
 	private Capital capital;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Demande> demandes;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Action> actions;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<MembreSpec> membreSpec;
 
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Adresse> adresses;
 	
 	@ManyToOne
+	@JsonIgnore
 	private FormeJuridique formeJuridique;
 	
 	private String numBenificiaire;
