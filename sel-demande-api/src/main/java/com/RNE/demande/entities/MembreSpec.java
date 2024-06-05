@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.RNE.demande.enums.Genre;
 import com.RNE.demande.enums.Pouvoirs;
 import com.RNE.demande.enums.Qualite;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -50,10 +52,24 @@ public class MembreSpec implements Serializable {
 	private Date dateFinNomination;
 
 	private Long dureeNomination;
+	
+	private Boolean isDeposant;
+	
+	@Enumerated(EnumType.STRING)
+	private Genre genre; 
+	
+	private String email;
+	
+	private int numero;
+	
+	private String adresse;
 
 	@ManyToOne
 	private Societe societe;
+	
 
 	@ManyToMany
 	private List<Personne> personnes;
+	
+	
 }

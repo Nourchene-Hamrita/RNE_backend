@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.RNE.demande.enums.Genre;
 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,38 +38,37 @@ public class Personne implements Serializable {
 	/**
 	* 
 	*/
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "ID_Carte")
+	@Column(name = "ID_carte")
 	private Long IDCarte;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_delivrance")
-	private Date date_delivrance;
-	
-	@Column(name = "nom_Prenom_fr")
-	private String nom_prenom_fr;
-	
-	@Column(name = "nom_Prenom_ar")
-	private String nom_prenom_ar;
-	/*@Column(name = "type_ID_Carte")
-	private String type_ID_Carte;*/
+	private Date date_Delivrance;
+
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_naiss")
-	private Date date_naiss;
+	private Date date_Naiss;
 
+	@Column(name = "lieu_naiss_ar")
+	private String lieu_naiss_ar;
+	
+	
 	@Column(name = "lieu_naiss_fr")
 	private String lieu_naiss_fr;
 	
-	@Column(name = "lieu_naiss_ar")
-	private String lieu_naiss_ar;
+	
+	@Column(name = "nom_prenom_ar")
+	private String nom_prenom_ar;
+	
+	@Column(name = "nom_prenom_fr")
+	private String nom_prenom_fr;
 
-	/*@Column(name = "nationalite")
-	private String nationalite;*/
+	
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "genre")
@@ -76,10 +76,12 @@ public class Personne implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Action> actions;
-
+	
+	
 	@ManyToMany(mappedBy = "personnes")
 
 	private List<MembreSpec> membreSpec;
+	
 
 	@OneToOne
 	private Adresse adresse;

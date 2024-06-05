@@ -36,33 +36,29 @@ public class Activite implements Serializable{
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 		
-		@Column(name = "nature_ActiviteP_Fr")
+		@Column(name = "nature_activiteP_fr")
 		private String natureActivitePFr;
 		
-		@Column(name = "nature_activiteP_Ar")
+		@Column(name = "nature_activiteP_ar")
 		private String natureActivitePAr;
 		
 		
-		@Column(name = "nature_activiteS_Fr")
+		@Column(name = "nature_activiteS_fr")
 		private String natureActiviteSFr;
 		
 		
-		@Column(name = "nature_activiteS_Ar")
+		@Column(name = "nature_activiteS_ar")
 		private String natureActiviteSAr;
 		
-		
+
 		@Enumerated(EnumType.STRING)
 		@Column(name = "activite_local")
 		private  ActiviteLocal  activiteLocal;
-		
 		
 		@Temporal(TemporalType.DATE)
 		@Column(name = "date_debut_activite")
 		private Date dateDebutActivite;
 		
 		@ManyToOne
-		private Societe societe;
-		
-		
-		
+		private Societe societe;	
 }

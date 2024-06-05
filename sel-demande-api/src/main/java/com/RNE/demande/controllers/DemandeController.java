@@ -47,7 +47,9 @@ public class DemandeController {
 		return new ResponseEntity<Demande>(demandeService.updateDemande(id, demande), HttpStatus.OK);
 	}
 
+
 	@DeleteMapping("delete/{id}")
+
 	public ResponseEntity<String> deleteRequest(@PathVariable Long id) {
 		demandeService.deleteDemande(id);
 		return new ResponseEntity<String>("Demande deleted successfully", HttpStatus.OK);

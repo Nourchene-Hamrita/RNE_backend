@@ -41,22 +41,25 @@ public class Societe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "denomination_Sociale_Fr")
+	
+	@Column(name = "UID")
+	private String UID;
+	
+	@Column(name = "denomination_sociale_fr")
 	private String denomination_Sociale_Fr;
 
-	@Column(name = "denomination_Sociale_Ar")
+	@Column(name = "denomination_sociale_ar")
 	private String denomination_Sociale_Ar;
 
 	@Column(name = "email")
 	private String email;
 
 
-	@Column(name = "n_reservation")
-	private String num_Reservation;
+	@Column(name = "num_reservation")
+	private String num_reservation;
 
 	@Column(name = "cNom_Commercial")
-	private Boolean cNom_Commercial;
+	private Boolean cNom_commercial;
 
 	@Column(name = "cEnseigne")
 	private Boolean cEnseigne;

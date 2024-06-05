@@ -25,4 +25,5 @@ public class FormeJuridique {
   
   @OneToMany(mappedBy = "formeJuridique")
   List<Societe>societes;
+  
 }

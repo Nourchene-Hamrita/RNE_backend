@@ -47,15 +47,15 @@ public class Demande implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date deadline;
 
-	@Column(name = "date_Envoi")
+	@Column(name = "date_envoi")
 	@Temporal(TemporalType.DATE)
 	private Date dateEnvoi;
 
-	@Column(name = "type_Registre")
+	@Column(name = "type_registre")
 	private String typeRegistre;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "statut_Demande")
+	@Column(name = "statut_demande")
 	private StatutDemande statutDemande;
 	
 	@ManyToOne
