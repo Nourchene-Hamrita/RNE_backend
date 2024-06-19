@@ -13,9 +13,9 @@ spring:
       name: referentiel
    datasource:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5433/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=referentiel
-      username: postgres
-      password: Zaineb123
+      url: jdbc:postgresql://postgresql-zaineb.alwaysdata.net:5432/zaineb_rnebd?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=referentiel
+      username: zaineb
+      password: Zaineb.123
 
 
    jpa:

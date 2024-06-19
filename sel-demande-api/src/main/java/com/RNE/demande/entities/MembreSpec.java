@@ -60,11 +60,9 @@ public class MembreSpec implements Serializable {
 	
 	private String adressElec;
 	
-	
+	private int numTlf;
 	
 	private String adress;
-	
-	private String nom_prenom ;
 
 	@ManyToOne
 	private Societe societe;
