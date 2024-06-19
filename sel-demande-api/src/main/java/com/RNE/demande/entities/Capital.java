@@ -32,7 +32,7 @@ public class Capital implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "nb_Associes")
+	@Column(name = "nb_associes")
 	private int nbAssocies;
 	
 	@Column(name = "capital_TDN")
@@ -44,17 +44,17 @@ public class Capital implements Serializable {
 	@Column(name = "action")
 	private Float action;
 	
-	@Column(name = "nbr_Parts")
+	@Column(name = "nbr_parts")
 	private int nbrParts;
 	
-	@Column(name = "valeur_Parts_Nature")
+	@Column(name = "valeur_parts_nature")
 	private int valeurPartsNat;
 	
-	@Column(name = "valeur_Parts_Numeraire")
+	@Column(name = "valeur_parts_numeraire")
 	private int valeurPartsNum;	
 
 	
-	@Column(name = "Date_Cloture")
+	@Column(name = "date_cloture")
 	@Temporal(TemporalType.DATE)
 	private Date dateCloture;
 	

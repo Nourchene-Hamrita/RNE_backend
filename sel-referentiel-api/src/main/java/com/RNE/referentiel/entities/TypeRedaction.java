@@ -23,6 +23,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TypeRedaction  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 905365824535683083L;
+
 	@Id
   private String id;
   

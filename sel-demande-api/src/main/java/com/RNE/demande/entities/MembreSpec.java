@@ -58,11 +58,11 @@ public class MembreSpec implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Genre genre; 
 	
-	private String adressElec;
+	private String email;
 	
-	private int numTlf;
+	private int numero;
 	
-	private String adress;
+	private String adresse;
 
 	@ManyToOne
 	private Societe societe;

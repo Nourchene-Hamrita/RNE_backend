@@ -42,16 +42,16 @@ public class Personne implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "ID_Carte")
+	@Column(name = "ID_carte")
 	private Long IDCarte;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_Delivrance")
+	@Column(name = "date_delivrance")
 	private Date date_Delivrance;
 
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_Naiss")
+	@Column(name = "date_naiss")
 	private Date date_Naiss;
 
 	@Column(name = "lieu_naiss_ar")

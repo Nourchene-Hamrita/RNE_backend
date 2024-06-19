@@ -52,7 +52,7 @@ public class Article implements Serializable {
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
 	
-	@Column(name = "text_comlementaire")
+	@Column(name = "text_complementaire")
 	private String textComplementaire;
 	
 	@Column(name = "autre_proposition")

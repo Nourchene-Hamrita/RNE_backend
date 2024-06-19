@@ -47,7 +47,7 @@ public class Statut implements Serializable {
 
 	@ManyToMany
 	private List<Section> sections;
-	@Column(name="forme_Juridique_Id")
+	@Column(name="forme_juridique_Id")
 	private Long formeJuridiqueId;
 
 }

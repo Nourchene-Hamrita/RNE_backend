@@ -34,20 +34,20 @@ public class Action implements Serializable {
     private Long id;
 	
 	
-	@Column(name = "action_En_Nature")
+	@Column(name = "action_en_nature")
 	private int actionEnNature;
 	
-	@Column(name = "action_En_Numeraire")
+	@Column(name = "action_en_numeraire")
 	private int actionEnNumeraire;
 	
 
-	@Column(name = "valeur_Nominale_Part")
+	@Column(name = "valeur_nominale_part")
 	private float valeurNominalePart ;
 
 	@Column(name = "nbr_Parts")
 	private int nbrParts ;
 	
-	@Column(name = "total_des_Actions")
+	@Column(name = "total_des_actions")
 	private float totaldesActions ;
 	
 	@Column(name = "rapport")

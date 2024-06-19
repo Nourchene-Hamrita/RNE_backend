@@ -41,7 +41,8 @@ public class Adresse implements Serializable{
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @Column(name = "gov_Code")
+
+	    @Column(name = "gov_code")
 	    private String govCode;
 
 	    @Column(name = "code_Ville")
@@ -50,7 +51,8 @@ public class Adresse implements Serializable{
 	    @Column(name = "code_Postal")
 	    private String codePostal;
 	    
-	    @Column(name = "rue_Fr")
+
+	    @Column(name = "rue_fr")
 	    private String rueFr;
 	    
 	    
