@@ -26,52 +26,54 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Adresse implements Serializable {
 
-    private static final long serialVersionUID = -6047593005293832737L;
+	private static final long serialVersionUID = -6047593005293832737L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "gov_code")
-    private String govCode;
+	@Column(name = "gov_code")
+	private String govCode;
 
-    @Column(name = "code_Ville")
-    private String codeVille;
 
-    @Column(name = "code_Postal")
-    private String codePostal;
+	@Column(name = "code_Ville")
+	private String codeVille;
 
-    @Column(name = "rue_fr")
-    private String rueFr;
+	@Column(name = "code_Postal")
+	private String codePostal;
 
-    @Column(name = "rue_Ar")
-    private String rueAr;
 
-    @ManyToOne
-    private Societe societe;
+	@Column(name = "rue_fr")
+	private String rueFr;
 
-    @OneToOne(mappedBy = "adresse")
-    private Personne personne;
+	@Column(name = "rue_Ar")
+	private String rueAr;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "adresse_type")
-    private AdresseType adresseType;
+	@ManyToOne
+	private Societe societe;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+	@OneToOne(mappedBy = "adresse")
+	private Personne personne;
 
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "adresse_type")
+	private AdresseType adresseType;
 
-    @PrePersist
-    protected void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
+
+	@PrePersist
+	protected void onCreate() {
+		LocalDateTime now = LocalDateTime.now();
+		createdAt = now;
+		updatedAt = now;
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = LocalDateTime.now();
+	}
 }

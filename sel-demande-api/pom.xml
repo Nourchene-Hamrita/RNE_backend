@@ -70,6 +70,7 @@
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
