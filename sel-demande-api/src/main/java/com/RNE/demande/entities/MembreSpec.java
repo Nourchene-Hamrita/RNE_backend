@@ -86,7 +86,9 @@ public class MembreSpec implements Serializable {
 	@PreUpdate
 	protected void onUpdate() {
 		updatedAt = LocalDateTime.now();
-	}}
+	}
+	
+}
 
 
 
