@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS demande.forme_juridique
 );
 CREATE TABLE IF NOT EXISTS demande.societe
 (
-    id bigint NOT NULL DEFAULT nextval('demande.societe_id_seq'::regclass),
+    id bigint NOT NULL DEFAULT nextval('demande.societe_id_seq1'::regclass),
     uid character varying(255) COLLATE pg_catalog."default",
     c_enseigne boolean,
     c_nom_commercial boolean,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS demande.societe
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT societe_origine_fond_commercial_check CHECK (origine_fond_commercial::text = 'creation'::text)
-);
+)
 
 
 CREATE TABLE IF NOT EXISTS demande.activite
