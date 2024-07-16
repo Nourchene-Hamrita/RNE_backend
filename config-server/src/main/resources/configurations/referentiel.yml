@@ -15,12 +15,12 @@ spring:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5433/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=referentiel
       username: postgres
-      password: Zaineb123
+      password: nour123
 
 
    jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         default_schema: referentiel
