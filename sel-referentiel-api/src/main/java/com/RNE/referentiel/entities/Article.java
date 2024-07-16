@@ -1,9 +1,9 @@
 package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import com.RNE.referentiel.enums.Activation;
 
@@ -16,6 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,14 +49,14 @@ public class Article implements Serializable {
 
 	@Column(name = "titre_ar", nullable = false)
 	private String titreAr;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
-	
+
 	@Column(name = "text_complementaire")
 	private String textComplementaire;
-	
+
 	@Column(name = "autre_proposition")
 	private String autreProposition;
 
@@ -64,7 +66,24 @@ public class Article implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "section_code", referencedColumnName = "code")
 	private Section section;
-	
+
 	@ManyToOne
 	private TypeRedaction typeRedaction;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
+
+	@PrePersist
+	protected void onCreate() {
+		LocalDateTime now = LocalDateTime.now();
+		createdAt = now;
+		updatedAt = now;
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = LocalDateTime.now();
+	}
 }

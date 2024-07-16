@@ -10,28 +10,32 @@ CREATE SEQUENCE IF NOT EXISTS demande.documents_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.membre_spec_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.personne_id_seq;
 
-CREATE TABLE IF NOT EXISTS demande."Certificat"
+CREATE TABLE IF NOT EXISTS demande.certificat
 (
-    "numCertificat" integer,
+    "isValid" boolean,
+    denomination_sociale_fr character varying COLLATE pg_catalog."default",
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
-    denomination_sociale_fr character varying COLLATE pg_catalog."default"
-);
+    "numCertificat" character varying COLLATE pg_catalog."default"
+)
+
 
 CREATE TABLE IF NOT EXISTS demande.benifvalidation
 (
-    numbenif integer,
     nom character varying COLLATE pg_catalog."default",
-    prenom character varying COLLATE pg_catalog."default"
-);
+    prenom character varying COLLATE pg_catalog."default",
+    numbenif character varying COLLATE pg_catalog."default"
+)
+
 
 CREATE TABLE IF NOT EXISTS demande.identifiant_unique
 (
-    id integer,
+    id character varying COLLATE pg_catalog."default",
     denomination_sociale_fr character varying COLLATE pg_catalog."default",
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
-    "formeJuridiqueName" character varying COLLATE pg_catalog."default",
-    visible boolean
-);
+    "isValid" boolean,
+    "formeJuridiqueName" character varying COLLATE pg_catalog."default"
+)
+
 CREATE TABLE IF NOT EXISTS demande.forme_juridique
 (
     id bigint NOT NULL DEFAULT nextval('demande.forme_juridique_id_seq'),
@@ -83,9 +87,11 @@ CREATE TABLE IF NOT EXISTS demande.action
     id bigint NOT NULL DEFAULT nextval('demande.action_id_seq'::regclass),
     action_en_nature integer,
     action_en_numeraire integer,
+    created_at timestamp(6) without time zone NOT NULL,
     nbr_parts integer,
     rapport real,
     total_des_actions real,
+    updated_at timestamp(6) without time zone NOT NULL,
     valeur_nominale_part real,
     societe_id bigint,
     CONSTRAINT action_pkey PRIMARY KEY (id),
@@ -100,9 +106,11 @@ CREATE TABLE IF NOT EXISTS demande.adresse
     adresse_type character varying(255) COLLATE pg_catalog."default",
     code_postal character varying(255) COLLATE pg_catalog."default",
     code_ville character varying(255) COLLATE pg_catalog."default",
+    created_at timestamp(6) without time zone NOT NULL,
     gov_code character varying(255) COLLATE pg_catalog."default",
     rue_ar character varying(255) COLLATE pg_catalog."default",
     rue_fr character varying(255) COLLATE pg_catalog."default",
+    updated_at timestamp(6) without time zone NOT NULL,
     societe_id bigint,
     CONSTRAINT adresse_pkey PRIMARY KEY (id),
     CONSTRAINT fk27yyasygx7ske9n59i388pi3h FOREIGN KEY (societe_id)
@@ -117,10 +125,12 @@ CREATE TABLE IF NOT EXISTS demande.capital
     action real,
     capital_min real,
     capital_tdn real,
+    created_at timestamp(6) without time zone NOT NULL,
     date_cloture date,
     duree_societe integer NOT NULL,
     nb_associes integer,
     nbr_parts integer,
+    updated_at timestamp(6) without time zone NOT NULL,
     valeur_parts_nature integer,
     valeur_parts_numeraire integer,
     societe_id bigint,
@@ -166,6 +176,7 @@ CREATE TABLE IF NOT EXISTS demande.membre_spec
 (
     id bigint NOT NULL DEFAULT nextval('demande.membre_spec_id_seq'::regclass),
     adresse character varying(255) COLLATE pg_catalog."default",
+    created_at timestamp(6) without time zone NOT NULL,
     date_fin_nomination date,
     date_nomination date,
     duree_nomination bigint,
@@ -175,20 +186,22 @@ CREATE TABLE IF NOT EXISTS demande.membre_spec
     numero integer NOT NULL,
     pouvoirs character varying(255) COLLATE pg_catalog."default",
     qualite character varying(255) COLLATE pg_catalog."default",
+    updated_at timestamp(6) without time zone NOT NULL,
     societe_id bigint,
     CONSTRAINT membre_spec_pkey PRIMARY KEY (id),
     CONSTRAINT fkboil7ve6o7x8pyyaqc3u40l6b FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
+    CONSTRAINT membre_spec_qualite_check CHECK (qualite::text = ANY (ARRAY['Gerant'::character varying, 'Co_Gerant1'::character varying, 'Co_Gerant2'::character varying, 'Gerant_Delegue'::character varying, 'President_du_conseil_administration'::character varying, 'Vice_President_du_conseil_administration'::character varying, 'Commissaire'::character varying]::text[])),
     CONSTRAINT membre_spec_genre_check CHECK (genre::text = ANY (ARRAY['male'::character varying, 'femelle'::character varying]::text[])),
-    CONSTRAINT membre_spec_pouvoirs_check CHECK (pouvoirs::text = ANY (ARRAY['RepresentantLegal'::character varying, 'Pouvoir_etendu'::character varying, 'Signature'::character varying, 'Co_Signature'::character varying, 'RepresentantAdministration'::character varying, 'RepresentantTribunaux'::character varying]::text[])),
-    CONSTRAINT membre_spec_qualite_check CHECK (qualite::text = ANY (ARRAY['Gerant'::character varying, 'Co_Gerant1'::character varying, 'Co_Gerant2'::character varying, 'Gerant_Delegue'::character varying, 'President_du_conseil_administration'::character varying, 'Vice_President_du_conseil_administration'::character varying, 'Commissaire'::character varying]::text[]))
+    CONSTRAINT membre_spec_pouvoirs_check CHECK (pouvoirs::text = ANY (ARRAY['RepresentantLegal'::character varying, 'Pouvoir_etendu'::character varying, 'Signature'::character varying, 'Co_Signature'::character varying, 'RepresentantAdministration'::character varying, 'RepresentantTribunaux'::character varying]::text[]))
 );
 CREATE TABLE IF NOT EXISTS demande.personne
 (
     id bigint NOT NULL DEFAULT nextval('demande.personne_id_seq'::regclass),
     id_carte bigint,
+    created_at timestamp(6) without time zone NOT NULL,
     date_delivrance date,
     date_naiss date,
     genre character varying(255) COLLATE pg_catalog."default",
@@ -196,6 +209,7 @@ CREATE TABLE IF NOT EXISTS demande.personne
     lieu_naiss_fr character varying(255) COLLATE pg_catalog."default",
     nom_prenom_ar character varying(255) COLLATE pg_catalog."default",
     nom_prenom_fr character varying(255) COLLATE pg_catalog."default",
+    updated_at timestamp(6) without time zone NOT NULL,
     adresse_id bigint,
     CONSTRAINT personne_pkey PRIMARY KEY (id),
     CONSTRAINT uk_iw4d7fbix8d591gyvja8qcmj6 UNIQUE (adresse_id),
