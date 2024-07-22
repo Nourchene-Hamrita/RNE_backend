@@ -45,14 +45,12 @@ public class Documents implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_Depot")
 
-    private Date dateDepot;
-	
-	
-	 @Column(length = 10485760)
+	private Date dateDepot;
+
+	@Column(length = 10485760)
 	private String contenu;
 	
-	
-	
+	private Boolean isValid;
 
 	@ManyToOne
 	private Demande demande;

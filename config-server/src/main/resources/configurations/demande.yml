@@ -16,7 +16,7 @@ spring:
 
     url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
     username: postgres
-    password: nour123
+    password: youssef31
 
 
   jpa:
