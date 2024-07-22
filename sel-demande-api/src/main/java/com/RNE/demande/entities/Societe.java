@@ -14,7 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -41,10 +41,10 @@ public class Societe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "UID")
 	private String UID;
-	
+
 	@Column(name = "denomination_sociale_fr")
 	private String denomination_Sociale_Fr;
 
@@ -53,7 +53,6 @@ public class Societe implements Serializable {
 
 	@Column(name = "email")
 	private String email;
-
 
 	@Column(name = "num_reservation")
 	private String num_reservation;
@@ -94,10 +93,5 @@ public class Societe implements Serializable {
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Adresse> adresses;
-	
-	@ManyToOne
-	@JsonIgnore
-	private FormeJuridique formeJuridique;
-	
 	private String numBenificiaire;
 }

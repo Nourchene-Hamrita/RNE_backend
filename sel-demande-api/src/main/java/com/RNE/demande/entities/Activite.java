@@ -19,46 +19,44 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Activite implements Serializable{
-	  /**
-		 * 
-		 */
-		private static final long serialVersionUID = -6047593005293832737L;
-		/**
-		* 
-		*/
-		@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-		
-		@Column(name = "nature_activiteP_fr")
-		private String natureActivitePFr;
-		
-		@Column(name = "nature_activiteP_ar")
-		private String natureActivitePAr;
-		
-		
-		@Column(name = "nature_activiteS_fr")
-		private String natureActiviteSFr;
-		
-		
-		@Column(name = "nature_activiteS_ar")
-		private String natureActiviteSAr;
-		
+public class Activite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6047593005293832737L;
+	/**
+	* 
+	*/
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		@Enumerated(EnumType.STRING)
-		@Column(name = "activite_local")
-		private  ActiviteLocal  activiteLocal;
-		
-		@Temporal(TemporalType.DATE)
-		@Column(name = "date_debut_activite")
-		private Date dateDebutActivite;
-		
-		@ManyToOne
-		private Societe societe;	
+	@Column(name = "nature_activiteP_fr")
+	private String natureActivitePFr;
+
+	@Column(name = "nature_activiteP_ar")
+	private String natureActivitePAr;
+
+	@Column(name = "nature_activiteS_fr")
+	private String natureActiviteSFr;
+
+	@Column(name = "nature_activiteS_ar")
+	private String natureActiviteSAr;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "activite_local")
+	private ActiviteLocal activiteLocal;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_debut_activite")
+	private Date dateDebutActivite;
+
+	@ManyToOne
+	private Societe societe;
 }

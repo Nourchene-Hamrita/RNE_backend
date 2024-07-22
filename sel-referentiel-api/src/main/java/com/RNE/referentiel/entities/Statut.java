@@ -10,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,7 +48,9 @@ public class Statut implements Serializable {
 
 	@ManyToMany
 	private List<Section> sections;
-	@Column(name="forme_juridique_Id")
-	private Long formeJuridiqueId;
+	/*@Column(name="forme_juridique_Id")
+	private Long formeJuridiqueId;*/
+	@ManyToOne
+	private FormeJuridique formeJuridique;
 
 }

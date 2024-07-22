@@ -33,65 +33,63 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Personne implements Serializable {
-    private static final long serialVersionUID = -6047593005293832737L;
+	private static final long serialVersionUID = -6047593005293832737L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "ID_carte")
-    private Long IDCarte;
+	@Column(name = "ID_carte")
+	private Long IDCarte;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_delivrance")
-    private Date date_Delivrance;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_delivrance")
+	private Date date_Delivrance;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_naiss")
-    private Date date_Naiss;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_naiss")
+	private Date date_Naiss;
 
-    @Column(name = "lieu_naiss_ar")
-    private String lieu_naiss_ar;
+	@Column(name = "lieu_naiss_ar")
+	private String lieu_naiss_ar;
 
-    @Column(name = "lieu_naiss_fr")
-    private String lieu_naiss_fr;
+	@Column(name = "lieu_naiss_fr")
+	private String lieu_naiss_fr;
 
-    @Column(name = "nom_prenom_ar")
-    private String nom_prenom_ar;
+	@Column(name = "nom_prenom_ar")
+	private String nom_prenom_ar;
 
-    @Column(name = "nom_prenom_fr")
-    private String nom_prenom_fr;
+	@Column(name = "nom_prenom_fr")
+	private String nom_prenom_fr;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "genre")
-    private Genre genre;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "genre")
+	private Genre genre;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Action> actions;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<Action> actions;
 
-    @ManyToMany(mappedBy = "personnes")
-    private List<MembreSpec> membreSpec;
+	@ManyToMany(mappedBy = "personnes")
+	private List<MembreSpec> membreSpec;
 
-    @OneToOne
-    private Adresse adresse;
+	@OneToOne
+	private Adresse adresse;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
+	@PrePersist
+	protected void onCreate() {
+		LocalDateTime now = LocalDateTime.now();
+		createdAt = now;
+		updatedAt = now;
+	}
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = LocalDateTime.now();
+	}
 }
-
-

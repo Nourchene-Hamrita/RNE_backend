@@ -35,13 +35,11 @@ public class Adresse implements Serializable {
 	@Column(name = "gov_code")
 	private String govCode;
 
-
 	@Column(name = "code_Ville")
 	private String codeVille;
 
 	@Column(name = "code_Postal")
 	private String codePostal;
-
 
 	@Column(name = "rue_fr")
 	private String rueFr;
