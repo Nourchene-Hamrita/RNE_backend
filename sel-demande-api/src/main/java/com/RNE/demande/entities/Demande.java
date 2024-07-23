@@ -57,19 +57,17 @@ public class Demande implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "statut_demande")
 	private StatutDemande statutDemande;
-	
+
 	@ManyToOne
 	private Societe societe;
-	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "demande")
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "demande")
+
 	@JsonIgnore
 	private Set<Documents> documents;
-	
-	private String codeStatut;
-	
-	private String TypePaiment;
 
-	
+	private String codeStatut;
+
+	private String TypePaiment;
 
 }

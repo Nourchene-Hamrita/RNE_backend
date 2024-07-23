@@ -1,4 +1,4 @@
-package com.RNE.demande.entities;
+package com.RNE.referentiel.entities;
 
 import java.util.List;
 
@@ -18,12 +18,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FormeJuridique {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String nom;
-  
-  @OneToMany(mappedBy = "formeJuridique")
-  List<Societe>societes;
-  
+	private Long id;
+	private String nom;
+	@OneToMany(mappedBy = "formeJuridique")
+	private List<Statut>status;
 }
