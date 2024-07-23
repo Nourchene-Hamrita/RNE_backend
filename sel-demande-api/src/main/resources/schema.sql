@@ -25,7 +25,9 @@ CREATE TABLE IF NOT EXISTS demande.benifvalidation
     prenom character varying COLLATE pg_catalog."default",
     numbenif character varying COLLATE pg_catalog."default"
 )
-
+INSERT INTO demande.benifvalidation(
+	nom, prenom, numbenif)
+	VALUES (zaineb, Bouallagui, 123);
 
 CREATE TABLE IF NOT EXISTS demande.identifiant_unique
 (
@@ -35,6 +37,9 @@ CREATE TABLE IF NOT EXISTS demande.identifiant_unique
     "isValid" boolean,
     "formeJuridiqueName" character varying COLLATE pg_catalog."default"
 )
+INSERT INTO demande.identifiant_unique(
+	id, denomination_sociale_ar, "formeJuridiqueName", "isValid", denomination_sociale_fr)
+	VALUES (123, testAr,test,true, testFr);
 
 CREATE TABLE IF NOT EXISTS demande.forme_juridique
 (
@@ -42,6 +47,19 @@ CREATE TABLE IF NOT EXISTS demande.forme_juridique
     nom character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT forme_juridique_pkey PRIMARY KEY (id)
 );
+INSERT INTO demande.forme_juridique(
+	id, nom)
+	VALUES (1, 'Sociéte a Responsabilité Limitée');
+	INSERT INTO demande.forme_juridique(
+	id, nom)
+	VALUES (2, 'Sociéte Unipersonnele a Responsabilité Limitée');
+	INSERT INTO demande.forme_juridique(
+	id, nom)
+	VALUES (3, 'Sociéte Anonyme');
+	INSERT INTO demande.forme_juridique(
+	id, nom)
+	VALUES (4, 'Société Civile');
+	
 CREATE TABLE IF NOT EXISTS demande.societe
 (
     id bigint NOT NULL DEFAULT nextval('demande.societe_id_seq1'::regclass),

@@ -51,6 +51,7 @@ public class Documents implements Serializable {
 	 @Column(length = 10485760)
 	private String contenu;
 	
+	 private Boolean isValid;
 	
 	
 
