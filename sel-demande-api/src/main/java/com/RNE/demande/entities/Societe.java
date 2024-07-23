@@ -94,4 +94,6 @@ public class Societe implements Serializable {
 	@JsonIgnore
 	private List<Adresse> adresses;
 	private String numBenificiaire;
+	
+	private long forme_juridique_id;
 }
