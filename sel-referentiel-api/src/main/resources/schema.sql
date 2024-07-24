@@ -1,13 +1,30 @@
 -- Créer la séquence si elle n'existe pas
 CREATE SEQUENCE IF NOT EXISTS referentiel.code_postal_id_seq;
-
+CREATE SEQUENCE IF NOT EXISTS referentiel.forme_juridique_id_seq;
 -- Table referentiel.type_redaction
 CREATE TABLE IF NOT EXISTS referentiel.type_redaction
 (
     id character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT type_redaction_pkey PRIMARY KEY (id)
 );
-
+CREATE TABLE IF NOT EXISTS referentiel.forme_juridique
+(
+    id bigint NOT NULL DEFAULT nextval('referentiel.forme_juridique_id_seq'::regclass),
+    nom character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT forme_juridique_pkey PRIMARY KEY (id)
+)
+INSERT INTO referentiel.forme_juridique(
+	id, nom)
+	VALUES (1, 'Société Civile');
+	INSERT INTO referentiel.forme_juridique(
+	id, nom)
+	VALUES (2, 'Sociéte Anonyme');
+	INSERT INTO referentiel.forme_juridique(
+	id, nom)
+	VALUES (3, 'Sociéte Unipersonnele a Responsabilité Limitée');
+	INSERT INTO referentiel.forme_juridique(
+	id, nom)
+	VALUES (4, 'Sociéte a Responsabilité Limitée');
 -- Table referentiel.gouvernorats
 CREATE TABLE IF NOT EXISTS referentiel.gouvernorats
 (
@@ -18,6 +35,10 @@ CREATE TABLE IF NOT EXISTS referentiel.gouvernorats
     CONSTRAINT gouvernorats_pkey PRIMARY KEY (code),
     CONSTRAINT gouvernorats_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
+INSERT INTO referentiel.gouvernorats (code, activation, nom_ar, nom_fr)
+VALUES 
+('GOV001', 'Active', 'تونس', 'Tunis'),
+('GOV002', 'Active', 'أريانة', 'Ariana'),
 
 -- Table referentiel.sections
 CREATE TABLE IF NOT EXISTS referentiel.sections
@@ -29,7 +50,9 @@ CREATE TABLE IF NOT EXISTS referentiel.sections
     CONSTRAINT sections_pkey PRIMARY KEY (code),
     CONSTRAINT sections_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
-
+INSERT INTO referentiel.sections (code, activation, titre_ar, titre_fr) VALUES 
+('SEC001', 'Active', 'قسم 1', 'Section 1'),
+('SEC002', 'Active', 'قسم 2', 'Section 2');
 -- Table referentiel.villes
 CREATE TABLE IF NOT EXISTS referentiel.villes
 (
@@ -45,6 +68,10 @@ CREATE TABLE IF NOT EXISTS referentiel.villes
         ON DELETE NO ACTION,
     CONSTRAINT villes_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
+INSERT INTO referentiel.villes (code, activation, name_ar, nom_fr, gouvernorat_code)
+VALUES 
+('VILLE001', 'Active', 'مدينة تونس', 'Ville de Tunis', 'GOUV001'),
+('VILLE002', 'Active', 'سكرة', 'Soukra', 'GOUV002');
 
 -- Table referentiel.code_postal
 CREATE TABLE IF NOT EXISTS referentiel.code_postal
@@ -58,6 +85,10 @@ CREATE TABLE IF NOT EXISTS referentiel.code_postal
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+INSERT INTO referentiel.code_postal (id, code_postal, ville_code)
+VALUES 
+(1, '1000', 'VILLE001'),
+(2, '2000', 'VILLE002');
 
 -- Table referentiel.articles
 CREATE TABLE IF NOT EXISTS referentiel.articles
@@ -83,6 +114,11 @@ CREATE TABLE IF NOT EXISTS referentiel.articles
         ON DELETE NO ACTION,
     CONSTRAINT articles_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
+INSERT INTO referentiel.articles (code, activation, autre_proposition, created_at, text_complementaire, titre_ar, titre_fr, updated_at, section_code, type_redaction_id)
+VALUES 
+('ART001', 'Active', CURRENT_TIMESTAMP, 'Titre AR A', 'Titre FR A', CURRENT_TIMESTAMP, 'SEC001', 'TR001'),
+('ART002', 'Active', CURRENT_TIMESTAMP, 'Titre AR B', 'Titre FR B', CURRENT_TIMESTAMP, 'SEC002', 'TR002');
+
 
 -- Table referentiel.propositions
 CREATE TABLE IF NOT EXISTS referentiel.propositions
@@ -111,6 +147,10 @@ CREATE TABLE IF NOT EXISTS referentiel.statuts
     CONSTRAINT statuts_pkey PRIMARY KEY (code),
     CONSTRAINT statuts_categorie_check CHECK (categorie::text = ANY (ARRAY['Association'::character varying, 'Societe'::character varying]::text[]))
 );
+INSERT INTO referentiel.statuts (code, categorie, description, forme_juridique_id, titre)
+VALUES 
+('STAT001', 'Societe', 'Description du statut 1', 1, 'Titre du statut 1'),
+('STAT002', 'Societe', 'Description du statut 2', 2, 'Titre du statut 2'),
 
 -- Table referentiel.statuts_sections
 CREATE TABLE IF NOT EXISTS referentiel.statuts_sections

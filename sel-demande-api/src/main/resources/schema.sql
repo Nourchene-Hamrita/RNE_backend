@@ -1,6 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS demande;
 CREATE SEQUENCE IF NOT EXISTS demande.societe_id_seq;
-CREATE SEQUENCE IF NOT EXISTS demande.forme_juridique_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.activite_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.action_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.adresse_id_seq;
@@ -17,6 +16,10 @@ CREATE TABLE IF NOT EXISTS demande.certificat
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
     "numCertificat" character varying COLLATE pg_catalog."default"
 )
+INSERT INTO demande.certificat (isValid, denomination_sociale_fr, denomination_sociale_ar, numCertificat)
+VALUES 
+    (true, 'Société Française', 'الشركة الفرنسية', 'CERT123'),
+    (false, 'Société Anglaise', 'الشركة الإنجليزية', 'CERT124');
 
 
 CREATE TABLE IF NOT EXISTS demande.benifvalidation
@@ -25,9 +28,11 @@ CREATE TABLE IF NOT EXISTS demande.benifvalidation
     prenom character varying COLLATE pg_catalog."default",
     numbenif character varying COLLATE pg_catalog."default"
 )
-INSERT INTO demande.benifvalidation(
-	nom, prenom, numbenif)
-	VALUES (zaineb, Bouallagui, 123);
+INSERT INTO demande.benifvalidation (nom, prenom, numbenif)
+VALUES 
+    ('Dupont', 'Jean', 'BENIF123'),
+    ('Martin', 'Paul', 'BENIF124');
+
 
 CREATE TABLE IF NOT EXISTS demande.identifiant_unique
 (
@@ -37,28 +42,13 @@ CREATE TABLE IF NOT EXISTS demande.identifiant_unique
     "isValid" boolean,
     "formeJuridiqueName" character varying COLLATE pg_catalog."default"
 )
-INSERT INTO demande.identifiant_unique(
-	id, denomination_sociale_ar, "formeJuridiqueName", "isValid", denomination_sociale_fr)
-	VALUES (123, testAr,test,true, testFr);
+INSERT INTO demande.identifiant_unique (id, denomination_sociale_fr, denomination_sociale_ar, isValid, formeJuridiqueName)
+VALUES 
+    ('ID123', 'Société Alpha', 'شركة ألفا', true, 'SARL'),
+    ('ID124', 'Société Beta', 'شركة بيتا', false, 'SA');
 
-CREATE TABLE IF NOT EXISTS demande.forme_juridique
-(
-    id bigint NOT NULL DEFAULT nextval('demande.forme_juridique_id_seq'),
-    nom character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT forme_juridique_pkey PRIMARY KEY (id)
-);
-INSERT INTO demande.forme_juridique(
-	id, nom)
-	VALUES (1, 'Sociéte a Responsabilité Limitée');
-	INSERT INTO demande.forme_juridique(
-	id, nom)
-	VALUES (2, 'Sociéte Unipersonnele a Responsabilité Limitée');
-	INSERT INTO demande.forme_juridique(
-	id, nom)
-	VALUES (3, 'Sociéte Anonyme');
-	INSERT INTO demande.forme_juridique(
-	id, nom)
-	VALUES (4, 'Société Civile');
+
+
 	
 CREATE TABLE IF NOT EXISTS demande.societe
 (
