@@ -15,24 +15,24 @@ CREATE TABLE IF NOT EXISTS demande.certificat
     denomination_sociale_fr character varying COLLATE pg_catalog."default",
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
     "numCertificat" character varying COLLATE pg_catalog."default"
-)
+);
+
 INSERT INTO demande.certificat (isValid, denomination_sociale_fr, denomination_sociale_ar, numCertificat)
 VALUES 
     (true, 'Société Française', 'الشركة الفرنسية', 'CERT123'),
     (false, 'Société Anglaise', 'الشركة الإنجليزية', 'CERT124');
-
 
 CREATE TABLE IF NOT EXISTS demande.benifvalidation
 (
     nom character varying COLLATE pg_catalog."default",
     prenom character varying COLLATE pg_catalog."default",
     numbenif character varying COLLATE pg_catalog."default"
-)
+);
+
 INSERT INTO demande.benifvalidation (nom, prenom, numbenif)
 VALUES 
     ('Dupont', 'Jean', 'BENIF123'),
     ('Martin', 'Paul', 'BENIF124');
-
 
 CREATE TABLE IF NOT EXISTS demande.identifiant_unique
 (
@@ -41,18 +41,16 @@ CREATE TABLE IF NOT EXISTS demande.identifiant_unique
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
     "isValid" boolean,
     "formeJuridiqueName" character varying COLLATE pg_catalog."default"
-)
+);
+
 INSERT INTO demande.identifiant_unique (id, denomination_sociale_fr, denomination_sociale_ar, isValid, formeJuridiqueName)
 VALUES 
     ('ID123', 'Société Alpha', 'شركة ألفا', true, 'SARL'),
     ('ID124', 'Société Beta', 'شركة بيتا', false, 'SA');
 
-
-
-	
 CREATE TABLE IF NOT EXISTS demande.societe
 (
-    id bigint NOT NULL DEFAULT nextval('demande.societe_id_seq1'::regclass),
+    id bigint NOT NULL DEFAULT nextval('demande.societe_id_seq'::regclass),
     uid character varying(255) COLLATE pg_catalog."default",
     c_enseigne boolean,
     c_nom_commercial boolean,
@@ -60,18 +58,17 @@ CREATE TABLE IF NOT EXISTS demande.societe
     denomination_sociale_fr character varying(255) COLLATE pg_catalog."default",
     email character varying(255) COLLATE pg_catalog."default",
     nb_employes integer,
-    num_benificiaire character varying(255) COLLATE pg_catalog."default",
+    num_beneficiaire character varying(255) COLLATE pg_catalog."default",
     num_reservation character varying(255) COLLATE pg_catalog."default",
     origine_fond_commercial character varying(255) COLLATE pg_catalog."default",
     forme_juridique_id bigint,
     CONSTRAINT societe_pkey PRIMARY KEY (id),
     CONSTRAINT fkjywhfmmgpne2wo1y26mcju3ke FOREIGN KEY (forme_juridique_id)
-        REFERENCES demande.forme_juridique (id) MATCH SIMPLE
+        REFERENCES referentiel.forme_juridique (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
     CONSTRAINT societe_origine_fond_commercial_check CHECK (origine_fond_commercial::text = 'creation'::text)
-)
-
+);
 
 CREATE TABLE IF NOT EXISTS demande.activite
 (
@@ -87,9 +84,10 @@ CREATE TABLE IF NOT EXISTS demande.activite
     CONSTRAINT fka0otytja3q6r82stx320aat2o FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
     CONSTRAINT activite_activite_local_check CHECK (activite_local::text = ANY (ARRAY['Permanente'::character varying, 'Saisonnier'::character varying, 'Ambulant'::character varying, 'Temporaire'::character varying, 'Autre'::character varying]::text[]))
 );
+
 CREATE TABLE IF NOT EXISTS demande.action
 (
     id bigint NOT NULL DEFAULT nextval('demande.action_id_seq'::regclass),
@@ -106,8 +104,9 @@ CREATE TABLE IF NOT EXISTS demande.action
     CONSTRAINT fkpym6srda0iaigrlw42qxk94k7 FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE 
 );
+
 CREATE TABLE IF NOT EXISTS demande.adresse
 (
     id bigint NOT NULL DEFAULT nextval('demande.adresse_id_seq'::regclass),
@@ -124,9 +123,10 @@ CREATE TABLE IF NOT EXISTS demande.adresse
     CONSTRAINT fk27yyasygx7ske9n59i388pi3h FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type::text = ANY (ARRAY['SIEGE'::character varying, 'PERSONNEL'::character varying, 'ACTIVITY'::character varying]::text[]))
+        ON DELETE CASCADE,
+    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type::text = ANY (ARRAY['SIEGE'::character varying, 'PERSONNEL'::character varying, 'ACTIVITY'::character varying,'MEMBER'::character varying]::text[]))
 );
+
 CREATE TABLE IF NOT EXISTS demande.capital
 (
     id bigint NOT NULL DEFAULT nextval('demande.capital_id_seq'::regclass),
@@ -147,8 +147,9 @@ CREATE TABLE IF NOT EXISTS demande.capital
     CONSTRAINT fkqc42yxctiypfv8mqhfh2o5bww FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE 
 );
+
 CREATE TABLE IF NOT EXISTS demande.demande
 (
     id bigint NOT NULL DEFAULT nextval('demande.demande_id_seq'::regclass),
@@ -163,9 +164,10 @@ CREATE TABLE IF NOT EXISTS demande.demande
     CONSTRAINT fk871kx9silss1dw9a60o27gosr FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE, 
     CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying]::text[]))
 );
+
 CREATE TABLE IF NOT EXISTS demande.documents
 (
     id bigint NOT NULL DEFAULT nextval('demande.documents_id_seq'::regclass),
@@ -179,8 +181,9 @@ CREATE TABLE IF NOT EXISTS demande.documents
     CONSTRAINT fks5w89g7s2mopg6ta0r2l0erji FOREIGN KEY (demande_id)
         REFERENCES demande.demande (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
+
 CREATE TABLE IF NOT EXISTS demande.membre_spec
 (
     id bigint NOT NULL DEFAULT nextval('demande.membre_spec_id_seq'::regclass),
@@ -201,11 +204,12 @@ CREATE TABLE IF NOT EXISTS demande.membre_spec
     CONSTRAINT fkboil7ve6o7x8pyyaqc3u40l6b FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
     CONSTRAINT membre_spec_qualite_check CHECK (qualite::text = ANY (ARRAY['Gerant'::character varying, 'Co_Gerant1'::character varying, 'Co_Gerant2'::character varying, 'Gerant_Delegue'::character varying, 'President_du_conseil_administration'::character varying, 'Vice_President_du_conseil_administration'::character varying, 'Commissaire'::character varying]::text[])),
     CONSTRAINT membre_spec_genre_check CHECK (genre::text = ANY (ARRAY['male'::character varying, 'femelle'::character varying]::text[])),
     CONSTRAINT membre_spec_pouvoirs_check CHECK (pouvoirs::text = ANY (ARRAY['RepresentantLegal'::character varying, 'Pouvoir_etendu'::character varying, 'Signature'::character varying, 'Co_Signature'::character varying, 'RepresentantAdministration'::character varying, 'RepresentantTribunaux'::character varying]::text[]))
 );
+
 CREATE TABLE IF NOT EXISTS demande.personne
 (
     id bigint NOT NULL DEFAULT nextval('demande.personne_id_seq'::regclass),
@@ -225,9 +229,10 @@ CREATE TABLE IF NOT EXISTS demande.personne
     CONSTRAINT fk64wypb6go3kiegrp8ntdf7ywp FOREIGN KEY (adresse_id)
         REFERENCES demande.adresse (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE, 
     CONSTRAINT personne_genre_check CHECK (genre::text = ANY (ARRAY['male'::character varying, 'femelle'::character varying]::text[]))
 );
+
 CREATE TABLE IF NOT EXISTS demande.membre_spec_personnes
 (
     membre_spec_id bigint NOT NULL,
@@ -235,12 +240,13 @@ CREATE TABLE IF NOT EXISTS demande.membre_spec_personnes
     CONSTRAINT fkbr8m8rc36fl989uk4iaoqtqpl FOREIGN KEY (personnes_id)
         REFERENCES demande.personne (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE, 
     CONSTRAINT fkfir07jgqf4mynrqdtyay6t2i0 FOREIGN KEY (membre_spec_id)
         REFERENCES demande.membre_spec (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE  
 );
+
 CREATE TABLE IF NOT EXISTS demande.personne_actions
 (
     personnes_id bigint NOT NULL,
@@ -249,9 +255,8 @@ CREATE TABLE IF NOT EXISTS demande.personne_actions
     CONSTRAINT fkfu0u5stmjh6hexivmnc8k0e5e FOREIGN KEY (actions_id)
         REFERENCES demande.action (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE, 
     CONSTRAINT fkolbxt4e1ds42tmh1f16ue2dnu FOREIGN KEY (personnes_id)
         REFERENCES demande.personne (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+        ON DELETE CASCADE  
