@@ -32,19 +32,19 @@ public class Adresse implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "gov_code")
+	@Column(name = "gov_code", nullable = false)
 	private String govCode;
 
-	@Column(name = "code_Ville")
+	@Column(name = "code_Ville", nullable = false)
 	private String codeVille;
 
-	@Column(name = "code_Postal")
+	@Column(name = "code_Postal", nullable = false)
 	private String codePostal;
 
-	@Column(name = "rue_fr")
+	@Column(name = "rue_fr", nullable = false)
 	private String rueFr;
 
-	@Column(name = "rue_Ar")
+	@Column(name = "rue_Ar", nullable = false)
 	private String rueAr;
 
 	@ManyToOne
@@ -54,7 +54,7 @@ public class Adresse implements Serializable {
 	private Personne personne;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "adresse_type")
+	@Column(name = "adresse_type", nullable = false)
 	private AdresseType adresseType;
 
 	@Column(name = "created_at", nullable = false, updatable = false)
