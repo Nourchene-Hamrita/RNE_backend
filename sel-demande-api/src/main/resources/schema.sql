@@ -11,7 +11,7 @@ CREATE SEQUENCE IF NOT EXISTS demande.personne_id_seq;
 
 CREATE TABLE IF NOT EXISTS demande.certificat
 (
-    "isValid" boolean,
+    "isValid"  boolean,
     denomination_sociale_fr character varying COLLATE pg_catalog."default",
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
     "numCertificat" character varying COLLATE pg_catalog."default"
