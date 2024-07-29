@@ -93,7 +93,9 @@ public class Societe implements Serializable {
 	@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Adresse> adresses;
-	private String numBenificiaire;
-	
+
+	@Column(name = "num_beneficiaire")
+	private String numBeneficiaire;
+
 	private long forme_juridique_id;
 }

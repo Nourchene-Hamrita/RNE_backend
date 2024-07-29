@@ -20,12 +20,12 @@ spring:
 
 
    jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
       hibernate:
-        default_schema: referentiel
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+         ddl-auto: update
+      properties:
+         hibernate:
+            default_schema: referentiel
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 management:
    tracing:
