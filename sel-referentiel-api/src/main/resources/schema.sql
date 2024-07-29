@@ -13,18 +13,13 @@ CREATE TABLE IF NOT EXISTS referentiel.forme_juridique
     nom character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT forme_juridique_pkey PRIMARY KEY (id)
 )
-INSERT INTO referentiel.forme_juridique(
-	id, nom)
-	VALUES (1, 'Société Civile');
-	INSERT INTO referentiel.forme_juridique(
-	id, nom)
-	VALUES (2, 'Sociéte Anonyme');
-	INSERT INTO referentiel.forme_juridique(
-	id, nom)
-	VALUES (3, 'Sociéte Unipersonnele a Responsabilité Limitée');
-	INSERT INTO referentiel.forme_juridique(
-	id, nom)
-	VALUES (4, 'Sociéte a Responsabilité Limitée');
+INSERT INTO referentiel.forme_juridique (id, nom)
+VALUES 
+    (1, 'Société Civile'),
+    (2, 'Société Anonyme'),
+    (3, 'Société Unipersonnelle à Responsabilité Limitée'),
+    (4, 'Société à Responsabilité Limitée');
+
 -- Table referentiel.gouvernorats
 CREATE TABLE IF NOT EXISTS referentiel.gouvernorats
 (
