@@ -9,10 +9,20 @@ CREATE SEQUENCE IF NOT EXISTS demande.documents_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.membre_spec_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.personne_id_seq;
 
+
+CREATE TABLE IF NOT EXISTS demande.certificat
+(
+    isValid  boolean,
+    denomination_sociale_fr character varying COLLATE pg_catalog."default",
+    denomination_sociale_ar character varying COLLATE pg_catalog."default",
+    numCertificat character varying COLLATE pg_catalog."default"
+);
+
 INSERT INTO demande.certificat ("numCertificat", "denomination_sociale_ar", "denomination_sociale_fr", "isValid")
 VALUES 
     ('250', 'الشركة الفرنسية', 'Société Française', true),
     ('1000', 'الشركة الإنجليزية', 'Société Anglaise', false);
+
 
 CREATE TABLE IF NOT EXISTS demande.benifvalidation
 (
@@ -31,8 +41,8 @@ CREATE TABLE IF NOT EXISTS demande.identifiant_unique
     id character varying COLLATE pg_catalog."default",
     denomination_sociale_fr character varying COLLATE pg_catalog."default",
     denomination_sociale_ar character varying COLLATE pg_catalog."default",
-    "isValid" boolean,
-    "formeJuridiqueName" character varying COLLATE pg_catalog."default"
+    isValid boolean,
+    formeJuridiqueName character varying COLLATE pg_catalog."default"
 );
 
 INSERT INTO demande.identifiant_unique ("id", "denomination_sociale_fr", "denomination_sociale_ar", "isValid", "formeJuridiqueName")
@@ -252,3 +262,4 @@ CREATE TABLE IF NOT EXISTS demande.personne_actions
         REFERENCES demande.personne (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE  
+)
