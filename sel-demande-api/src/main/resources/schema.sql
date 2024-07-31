@@ -9,6 +9,7 @@ CREATE SEQUENCE IF NOT EXISTS demande.documents_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.membre_spec_id_seq;
 CREATE SEQUENCE IF NOT EXISTS demande.personne_id_seq;
 
+
 CREATE TABLE IF NOT EXISTS demande.certificat
 (
     isValid  boolean,
@@ -17,10 +18,11 @@ CREATE TABLE IF NOT EXISTS demande.certificat
     numCertificat character varying COLLATE pg_catalog."default"
 );
 
-INSERT INTO demande.certificat (isValid, denomination_sociale_fr, denomination_sociale_ar, numCertificat)
+INSERT INTO demande.certificat ("numCertificat", "denomination_sociale_ar", "denomination_sociale_fr", "isValid")
 VALUES 
-    (true, 'Société Française', 'الشركة الفرنسية', 'CERT123'),
-    (false, 'Société Anglaise', 'الشركة الإنجليزية', 'CERT124');
+    ('250', 'الشركة الفرنسية', 'Société Française', true),
+    ('1000', 'الشركة الإنجليزية', 'Société Anglaise', false);
+
 
 CREATE TABLE IF NOT EXISTS demande.benifvalidation
 (
@@ -43,10 +45,10 @@ CREATE TABLE IF NOT EXISTS demande.identifiant_unique
     formeJuridiqueName character varying COLLATE pg_catalog."default"
 );
 
-INSERT INTO demande.identifiant_unique (id, denomination_sociale_fr, denomination_sociale_ar, isValid, formeJuridiqueName)
+INSERT INTO demande.identifiant_unique ("id", "denomination_sociale_fr", "denomination_sociale_ar", "isValid", "formeJuridiqueName")
 VALUES 
-    ('ID123', 'Société Alpha', 'شركة ألفا', true, 'SARL'),
-    ('ID124', 'Société Beta', 'شركة بيتا', false, 'SA');
+    ('120', 'Société Alpha', 'شركة ألفا', true, 'SARL'),
+    ('124', 'Société Beta', 'شركة بيتا', false, 'SA');
 
 CREATE TABLE IF NOT EXISTS demande.societe
 (
@@ -75,7 +77,7 @@ CREATE TABLE IF NOT EXISTS demande.activite
     id bigint NOT NULL DEFAULT nextval('demande.activite_id_seq'::regclass),
     activite_local character varying(255) COLLATE pg_catalog."default",
     date_debut_activite date,
-    nature_activitep_ar character varying(255) COLLATE pg_catalog."default",
+    nature_activitep_ar character varying(255) COLLATE dpg_catalog."default",
     nature_activitep_fr character varying(255) COLLATE pg_catalog."default",
     nature_activites_ar character varying(255) COLLATE pg_catalog."default",
     nature_activites_fr character varying(255) COLLATE pg_catalog."default",
@@ -107,24 +109,23 @@ CREATE TABLE IF NOT EXISTS demande.action
         ON DELETE CASCADE 
 );
 
-CREATE TABLE IF NOT EXISTS demande.adresse
-(
-    id bigint NOT NULL DEFAULT nextval('demande.adresse_id_seq'::regclass),
-    adresse_type character varying(255) COLLATE pg_catalog."default",
-    code_postal character varying(255) COLLATE pg_catalog."default",
-    code_ville character varying(255) COLLATE pg_catalog."default",
-    created_at timestamp(6) without time zone NOT NULL,
-    gov_code character varying(255) COLLATE pg_catalog."default",
-    rue_ar character varying(255) COLLATE pg_catalog."default",
-    rue_fr character varying(255) COLLATE pg_catalog."default",
-    updated_at timestamp(6) without time zone NOT NULL,
-    societe_id bigint,
+CREATE TABLE IF NOT EXISTS demande.adresse (
+    id BIGINT NOT NULL DEFAULT nextval('demande.adresse_id_seq'::regclass),
+    adresse_type VARCHAR(255) NOT NULL,
+    code_postal VARCHAR(255) NOT NULL,
+    code_ville VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    gov_code VARCHAR(255) NOT NULL,
+    rue_ar VARCHAR(255) NOT NULL,
+    rue_fr VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    societe_id BIGINT NOT NULL,
     CONSTRAINT adresse_pkey PRIMARY KEY (id),
-    CONSTRAINT fk27yyasygx7ske9n59i388pi3h FOREIGN KEY (societe_id)
-        REFERENCES demande.societe (id) MATCH SIMPLE
+    CONSTRAINT fk_societe FOREIGN KEY (societe_id)
+        REFERENCES demande.societe (id)
         ON UPDATE NO ACTION
         ON DELETE CASCADE,
-    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type::text = ANY (ARRAY['SIEGE'::character varying, 'PERSONNEL'::character varying, 'ACTIVITY'::character varying,'MEMBER'::character varying]::text[]))
+    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type IN ('SIEGE', 'PERSONNEL', 'ACTIVITY', 'MEMBER'))
 );
 
 CREATE TABLE IF NOT EXISTS demande.capital
@@ -165,7 +166,7 @@ CREATE TABLE IF NOT EXISTS demande.demande
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE, 
-    CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying]::text[]))
+    CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying,'Validee'::character varying,'Refusee'::character varying]::text[]))
 );
 
 CREATE TABLE IF NOT EXISTS demande.documents

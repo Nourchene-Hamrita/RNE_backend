@@ -1,6 +1,6 @@
 package com.RNE.demande.enums;
 
 public enum StatutDemande {
-	Cree, EnCours, StatutEnCours,Refusee
+	Cree, EnCours, StatutEnCours,Validee,Refusee
 
 }

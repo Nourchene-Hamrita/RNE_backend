@@ -19,6 +19,7 @@ VALUES
     (2, 'Société Anonyme'),
     (3, 'Société Unipersonnelle à Responsabilité Limitée'),
     (4, 'Société à Responsabilité Limitée');
+
 -- Table referentiel.gouvernorats
 CREATE TABLE IF NOT EXISTS referentiel.gouvernorats
 (
@@ -108,10 +109,10 @@ CREATE TABLE IF NOT EXISTS referentiel.articles
         ON DELETE NO ACTION,
     CONSTRAINT articles_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
-INSERT INTO referentiel.articles (code, activation, autre_proposition, created_at, text_complementaire, titre_ar, titre_fr, updated_at, section_code, type_redaction_id)
+INSERT INTO referentiel.articles (code, activation, created_at, titre_ar, titre_fr, updated_at, section_code, type_redaction_id)
 VALUES 
-('ART001', 'Active', CURRENT_TIMESTAMP, 'Titre AR A', 'Titre FR A', CURRENT_TIMESTAMP, 'SEC001', 'TR001'),
-('ART002', 'Active', CURRENT_TIMESTAMP, 'Titre AR B', 'Titre FR B', CURRENT_TIMESTAMP, 'SEC002', 'TR002');
+('ART001', 'Active', CURRENT_TIMESTAMP, 'Titre AR A', 'Titre FR A', CURRENT_TIMESTAMP, 'SEC001', 'Type1'),
+('ART002', 'Active', CURRENT_TIMESTAMP, 'Titre AR B', 'Titre FR B', CURRENT_TIMESTAMP, 'SEC002', 'Type2'),
 
 
 -- Table referentiel.propositions
