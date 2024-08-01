@@ -109,24 +109,23 @@ CREATE TABLE IF NOT EXISTS demande.action
         ON DELETE CASCADE 
 );
 
-CREATE TABLE IF NOT EXISTS demande.adresse
-(
-    id bigint NOT NULL DEFAULT nextval('demande.adresse_id_seq'::regclass),
-    adresse_type character varying(255) COLLATE pg_catalog."default",
-    code_postal character varying(255) COLLATE pg_catalog."default",
-    code_ville character varying(255) COLLATE pg_catalog."default",
-    created_at timestamp(6) without time zone NOT NULL,
-    gov_code character varying(255) COLLATE pg_catalog."default",
-    rue_ar character varying(255) COLLATE pg_catalog."default",
-    rue_fr character varying(255) COLLATE pg_catalog."default",
-    updated_at timestamp(6) without time zone NOT NULL,
-    societe_id bigint,
+CREATE TABLE IF NOT EXISTS demande.adresse (
+    id BIGINT NOT NULL DEFAULT nextval('demande.adresse_id_seq'::regclass),
+    adresse_type VARCHAR(255) NOT NULL,
+    code_postal VARCHAR(255) NOT NULL,
+    code_ville VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    gov_code VARCHAR(255) NOT NULL,
+    rue_ar VARCHAR(255) NOT NULL,
+    rue_fr VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    societe_id BIGINT NOT NULL,
     CONSTRAINT adresse_pkey PRIMARY KEY (id),
-    CONSTRAINT fk27yyasygx7ske9n59i388pi3h FOREIGN KEY (societe_id)
-        REFERENCES demande.societe (id) MATCH SIMPLE
+    CONSTRAINT fk_societe FOREIGN KEY (societe_id)
+        REFERENCES demande.societe (id)
         ON UPDATE NO ACTION
         ON DELETE CASCADE,
-    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type::text = ANY (ARRAY['SIEGE'::character varying, 'PERSONNEL'::character varying, 'ACTIVITY'::character varying,'MEMBER'::character varying]::text[]))
+    CONSTRAINT adresse_adresse_type_check CHECK (adresse_type IN ('SIEGE', 'PERSONNEL', 'ACTIVITY', 'MEMBER'))
 );
 
 CREATE TABLE IF NOT EXISTS demande.capital
@@ -167,7 +166,7 @@ CREATE TABLE IF NOT EXISTS demande.demande
         REFERENCES demande.societe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE CASCADE, 
-    CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying]::text[]))
+    CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying,'Validee'::character varying,'Refusee'::character varying]::text[]))
 );
 
 CREATE TABLE IF NOT EXISTS demande.documents
