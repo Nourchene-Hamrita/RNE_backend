@@ -64,7 +64,7 @@ public class Societe implements Serializable {
 	private Boolean cEnseigne;
 
 	@Column(name = "nbEmployes")
-	private int nbEmployes;
+	private Integer nbEmployes;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "origine_Fond_Commercial")
