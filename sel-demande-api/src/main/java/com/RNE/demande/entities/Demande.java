@@ -30,44 +30,39 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Demande implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6047593005293832737L;
-	/**
-	* 
-	*/
+    private static final long serialVersionUID = -6047593005293832737L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@Column(name = "deadline")
-	@Temporal(TemporalType.DATE)
-	private Date deadline;
+    @Column(name = "deadline")
+    @Temporal(TemporalType.DATE)
+    private Date deadline;
 
-	@Column(name = "date_envoi")
-	@Temporal(TemporalType.DATE)
-	private Date dateEnvoi;
+    @Column(name = "date_envoi")
+    @Temporal(TemporalType.DATE)
+    private Date dateEnvoi;
 
-	@Column(name = "type_registre")
-	private String typeRegistre;
+    @Column(name = "type_registre")
+    private String typeRegistre;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "statut_demande")
-	private StatutDemande statutDemande;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statut_demande")
+    private StatutDemande statutDemande;
 
-	@ManyToOne
-	private Societe societe;
+    @ManyToOne
+    private Societe societe;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "demande")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "demande")
+    @JsonIgnore
+    private Set<Documents> documents;
 
-	@JsonIgnore
-	private Set<Documents> documents;
+    private String codeStatut;
 
-	private String codeStatut;
+    private String TypePaiment;
 
-	private String TypePaiment;
-
+    @Column(name = "user_id")
+    private String userId;
 }

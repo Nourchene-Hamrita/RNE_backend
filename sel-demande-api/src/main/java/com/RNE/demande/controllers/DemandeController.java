@@ -34,7 +34,7 @@ public class DemandeController {
 	}
 
 	@GetMapping("/get")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('admin')")
 	public ResponseEntity<List<Demande>> getAllRequests() {
 		return new ResponseEntity<List<Demande>>(demandeService.getAllDemandes(), HttpStatus.OK);
 	}

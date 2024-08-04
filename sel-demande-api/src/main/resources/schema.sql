@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS demande.demande
     statut_demande character varying(255) COLLATE pg_catalog."default",
     type_registre character varying(255) COLLATE pg_catalog."default",
     societe_id bigint,
+    user_id character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT demande_pkey PRIMARY KEY (id),
     CONSTRAINT fk871kx9silss1dw9a60o27gosr FOREIGN KEY (societe_id)
         REFERENCES demande.societe (id) MATCH SIMPLE
@@ -168,6 +169,7 @@ CREATE TABLE IF NOT EXISTS demande.demande
         ON DELETE CASCADE, 
     CONSTRAINT demande_statut_demande_check CHECK (statut_demande::text = ANY (ARRAY['Cree'::character varying, 'EnCours'::character varying, 'StatutEnCours'::character varying,'Validee'::character varying,'Refusee'::character varying]::text[]))
 );
+
 
 CREATE TABLE IF NOT EXISTS demande.documents
 (
