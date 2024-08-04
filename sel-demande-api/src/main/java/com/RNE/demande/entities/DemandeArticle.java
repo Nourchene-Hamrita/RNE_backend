@@ -32,8 +32,8 @@ public class DemandeArticle implements Serializable {
 		@Column(name = "code_proposition", nullable = false)
 		private String codeProposition;
 		
-		@Column(name = "user_id")
-		private Long userId;
+		@Column(name = "demande_id")
+		private Long demandeId;
 		
 
 }
