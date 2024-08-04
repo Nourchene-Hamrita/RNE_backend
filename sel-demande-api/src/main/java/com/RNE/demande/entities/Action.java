@@ -53,7 +53,7 @@ public class Action implements Serializable {
 	@ManyToOne
 	private Societe societe;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "actions")
+	@ManyToMany(mappedBy = "actions")
 	private Set<Personne> personnes;
 
 	@Column(name = "created_at", nullable = false, updatable = false)

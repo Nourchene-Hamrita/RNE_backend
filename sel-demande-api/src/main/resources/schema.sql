@@ -274,3 +274,12 @@ CREATE TABLE IF NOT EXISTS demande.personne_actions
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
+CREATE TABLE IF NOT EXISTS demande.demande_articles
+(
+    "code" VARCHAR(255) NOT NULL,
+    "code_proposition" VARCHAR(255) NOT NULL,
+    "demande_id" BIGINT,
+    CONSTRAINT "demande_articles_pkey" PRIMARY KEY ("code"),
+    CONSTRAINT "unique_demande_id" UNIQUE ("demande_id")
+);
+
