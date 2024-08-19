@@ -1,7 +1,6 @@
 package com.RNE.referentiel.dto.mappers;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.mapstruct.factory.Mappers;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.RNE.referentiel.dto.ArticleDTO;
 import com.RNE.referentiel.dto.SectionDTO;
-import com.RNE.referentiel.dto.StatutDTO;
+
 import com.RNE.referentiel.entities.Article;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Statut;
@@ -18,74 +17,57 @@ import com.RNE.referentiel.entities.Statut;
 @Component
 public class SectionMapperImpl implements SectionMapper {
 
-    private static final SectionMapper INSTANCE = Mappers.getMapper(SectionMapper.class);
-    @Autowired
-    private StatutMapper statutMapper;
-    @Autowired
-    private ArticleMapper articleMapper;
-    @Override
-    public SectionDTO toDto(Section section) {
-        if (section == null) {
-            return null;
-        }
+	
 
-        SectionDTO sectionDTO = new SectionDTO();
-        sectionDTO.setCode(section.getCode());
-        sectionDTO.setTitreFr(section.getTitreFr());
-        sectionDTO.setTitreAr(section.getTitreAr());
-        sectionDTO.setActivation(section.getActivation());
+	    @Autowired
+	    private ArticleMapper articleMapper;
 
-        // Populate StatusDTO objects
-        Set<Statut> statusEntities = section.getStatut();
-        if (statusEntities != null) {
-            sectionDTO.setStatut(statusEntities.stream()
-                .map(statutMapper::toDto)
-                .collect(Collectors.toSet()));;
-        }
+	    @Override
+	    public SectionDTO toDto(Section section) {
+	        if (section == null) {
+	            return null;
+	        }
 
-        // Populate ArticleDTO objects
-        List<Article> articleEntities = section.getArticles();
-        if (articleEntities != null) {
-            sectionDTO.setArticles(articleEntities.stream()
-                .map(articleMapper::toDto)
-                .collect(Collectors.toList()));
-        }
+	        SectionDTO sectionDTO = new SectionDTO();
+	        sectionDTO.setCode(section.getCode());
+	        sectionDTO.setTitreFr(section.getTitreFr());
+	        sectionDTO.setTitreAr(section.getTitreAr());
+	        sectionDTO.setActivation(section.getActivation());
 
-        return sectionDTO;
-    }
+	        if (section.getStatut() != null) {
+	            sectionDTO.setCodeStatut(section.getStatut().getCode());
+	        }
 
-    @Override
-    public Section toEntity(SectionDTO sectionDTO) {
-        if (sectionDTO == null) {
-            return null;
-        }
+	        if (section.getArticles() != null) {
+	            sectionDTO.setArticles(section.getArticles().stream().map(articleMapper::toDto).collect(Collectors.toList()));
+	        }
 
-        Section section = new Section();
-        section.setCode(sectionDTO.getCode());
-        section.setTitreFr(sectionDTO.getTitreAr());
-        section.setTitreAr(sectionDTO.getTitreAr());
-        section.setActivation(sectionDTO.getActivation());
+	        return sectionDTO;
+	    }
 
-        // Populate Status objects
-        Set<StatutDTO> statutDTOs = sectionDTO.getStatut();
-        if (statutDTOs != null) {
-            section.setStatut(statutDTOs.stream()
-                .map(statutMapper::toEntity)
-                .collect(Collectors.toSet()));
-        }
+	    @Override
+	    public Section toEntity(SectionDTO sectionDTO) {
+	        if (sectionDTO == null) {
+	            return null;
+	        }
 
-        // Populate Article objects
-        List<ArticleDTO> articleDTOs = sectionDTO.getArticles();
-        if (articleDTOs != null) {
-            section.setArticles(articleDTOs.stream()
-                .map(articleMapper::toEntity)
-                .collect(Collectors.toList()));
-        }
+	        Section section = new Section();
+	        section.setCode(sectionDTO.getCode());
+	        section.setTitreFr(sectionDTO.getTitreFr());
+	        section.setTitreAr(sectionDTO.getTitreAr());
+	        section.setActivation(sectionDTO.getActivation());
 
-        return section;
-    }
+	        if (sectionDTO.getCodeStatut() != null) {
+	            Statut statut = new Statut();
+	            statut.setCode(sectionDTO.getCodeStatut());
+	            section.setStatut(statut); // Just set the code to avoid circular dependency
+	        }
 
-    public static SectionMapper getInstance() {
-        return INSTANCE;
-    }
-}
+	        if (sectionDTO.getArticles() != null) {
+	            section.setArticles(sectionDTO.getArticles().stream().map(articleMapper::toEntity).collect(Collectors.toList()));
+	        }
+
+	        return section;
+	    }
+	}
+

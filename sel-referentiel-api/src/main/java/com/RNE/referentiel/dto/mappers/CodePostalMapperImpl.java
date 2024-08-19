@@ -24,8 +24,8 @@ public class CodePostalMapperImpl implements CodePostalMapper {
 
 		CodePostalDTO codePostalDTO = new CodePostalDTO();
 		codePostalDTO.setId(codePostal.getId());
-		codePostalDTO.setCodPostal(codePostal.getCodePostal());
-
+		codePostalDTO.setCodePostal(codePostal.getCodePostal());
+        codePostalDTO.setActivation(codePostal.getActivation());
 		Ville ville = codePostal.getVille();
 		if (ville != null) {
 			codePostalDTO.setVille(new VilleDTO(ville.getCode(), ville.getNomFr(), ville.getNomAr(), ville.getActivation(),
@@ -44,7 +44,7 @@ public class CodePostalMapperImpl implements CodePostalMapper {
 
 		CodePostal codePostal = new CodePostal();
 		codePostal.setId(codePostalDTO.getId());
-		codePostal.setCodePostal(codePostalDTO.getCodPostal());
+		codePostal.setCodePostal(codePostalDTO.getCodePostal());
 
 		String villeCode = codePostalDTO.getVille().getCode();
 		if (villeCode != null) {

@@ -59,7 +59,7 @@ public class SectionServiceImpl implements SectionService {
 		existSection.setTitreFr(sectionDTO.getTitreAr());
 		existSection.setTitreAr(sectionDTO.getTitreAr());
 		existSection.setActivation(sectionDTO.getActivation());
-		existSection.setStatut(sectionDTO.getStatut().stream().map(statutMapper::toEntity).collect(Collectors.toSet()));
+		existSection.getStatut().setCode(sectionDTO.getCodeStatut());
 		existSection.setArticles(
 				sectionDTO.getArticles().stream().map(articleMapper::toEntity).collect(Collectors.toList()));
 

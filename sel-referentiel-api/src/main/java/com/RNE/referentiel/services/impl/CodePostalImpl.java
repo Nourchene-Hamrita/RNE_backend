@@ -49,8 +49,8 @@ public class CodePostalImpl implements CodePostalService {
 			return null;
 		}
 
-		if (codePostalDTO.getCodPostal() != null) {
-			existCodePostal.setCodePostal(codePostalDTO.getCodPostal());
+		if (codePostalDTO.getCodePostal() != null) {
+			existCodePostal.setCodePostal(codePostalDTO.getCodePostal());
 		}
 
 		if (codePostalDTO.getVille() != null) {

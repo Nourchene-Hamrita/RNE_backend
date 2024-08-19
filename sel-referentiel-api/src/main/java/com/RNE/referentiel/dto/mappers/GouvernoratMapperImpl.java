@@ -32,11 +32,11 @@ public class GouvernoratMapperImpl implements GouvernoratMapper {
 		gouvernoratDTO.setActivation(gouvernorat.getActivation());
 
 		// Populate CityDTO objects
-		List<Ville> villeEntities = gouvernorat.getVilles();
+		/*List<Ville> villeEntities = gouvernorat.getVilles();
 		if (villeEntities != null) {
 			
 			gouvernoratDTO.setVilles(villeEntities.stream().map(villeMapper::toDto).collect(Collectors.toList()));
-		}
+		}*/
 
 		return gouvernoratDTO;
 	}
@@ -54,11 +54,11 @@ public class GouvernoratMapperImpl implements GouvernoratMapper {
 		gouvernorat.setActivation(gouvernoratDTO.getActivation());
 
 		// Populate cities objects
-		List<VilleDTO> villeDTOs = gouvernoratDTO.getVilles();
+		/*List<VilleDTO> villeDTOs = gouvernoratDTO.getVilles();
 		if (villeDTOs != null) {
 
 			gouvernorat.setVilles(villeDTOs.stream().map(villeMapper::toEntity).collect(Collectors.toList()));
-		}
+		}*/
 
 		return gouvernorat;
 	}

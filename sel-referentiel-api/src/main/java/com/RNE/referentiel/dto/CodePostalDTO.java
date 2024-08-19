@@ -1,5 +1,7 @@
 package com.RNE.referentiel.dto;
 
+import com.RNE.referentiel.enums.Activation;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +15,10 @@ public class CodePostalDTO {
 
     private Long id;
 
-    private String codPostal;
+    private String codePostal;
 
     private VilleDTO ville;
+    
+    private Activation activation;
 
 }

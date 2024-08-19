@@ -1,15 +1,19 @@
 package com.RNE.referentiel.dto;
 
 import java.util.List;
-import java.util.Set;
+
 
 import com.RNE.referentiel.enums.Activation;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SectionDTO {
 
     private String code;
@@ -20,7 +24,7 @@ public class SectionDTO {
 
     private Activation activation;
 
-    private Set<StatutDTO> statut;
+    private String codeStatut;
 
     private List<ArticleDTO> articles;
 }

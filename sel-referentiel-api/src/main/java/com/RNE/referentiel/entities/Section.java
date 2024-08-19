@@ -12,6 +12,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -52,9 +53,9 @@ public class Section implements Serializable {
 
 	private Activation activation;
 
-	@ManyToMany(mappedBy = "sections")
+	@ManyToOne
 
-	private Set<Statut> statut;
+	private Statut statut;
 
 	@OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
 

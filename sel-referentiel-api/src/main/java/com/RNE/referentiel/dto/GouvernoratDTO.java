@@ -1,6 +1,6 @@
 package com.RNE.referentiel.dto;
 
-import java.util.List;
+
 
 import com.RNE.referentiel.enums.Activation;
 
@@ -19,6 +19,6 @@ public class GouvernoratDTO {
 
 	private Activation activation;
 	
-	private List<VilleDTO> villes;
+	//private List<VilleDTO> villes;
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.StatutDTO;
+import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.dto.mappers.StatutMapper;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Statut;
@@ -23,19 +24,22 @@ public class StatutServiceImpl implements StatutService {
 
 	private StatutRepository statutRepository;
 	private StatutMapper statutMapper;
-	private SectionRepository sectionRepository;
+	private SectionMapper sectionMapper;
+	//private SectionRepository sectionRepository;
 
 	// save status service
 	@Override
 	public StatutDTO saveStatut(StatutDTO statutDTO) {
-
-		Statut statut = statutMapper.toEntity(statutDTO);
-		if (statutDTO.getSectionCodes() != null) {
-			List<Section> sections = sectionRepository.findAllById(statutDTO.getSectionCodes());
-			statut.setSections(sections);
-		}
-		return statutMapper.toDto(statutRepository.save(statut));
+	    Statut statut = statutMapper.toEntity(statutDTO);
+	   /* if (statutDTO.getSections() != null) {
+	        List<Section> sections = statutDTO.getSections().stream()
+	            .map(sectionMapper::toEntity)
+	            .collect(Collectors.toList());
+	        statut.setSections(sections);
+	    }*/
+	    return statutMapper.toDto(statutRepository.save(statut));
 	}
+
 
 	// get status by code service
 	@Override
