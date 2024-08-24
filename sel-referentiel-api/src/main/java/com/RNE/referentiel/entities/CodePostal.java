@@ -2,10 +2,13 @@ package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
 
+import com.RNE.referentiel.enums.Activation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,5 +44,9 @@ public class CodePostal implements Serializable {
 	@ManyToOne
 	@JsonBackReference
 	private Ville ville;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "activation", nullable = false)
+	private Activation activation;
 
 }

@@ -2,8 +2,10 @@ package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.CodePostalDTO;
+import com.RNE.referentiel.dto.VilleDTO;
 import com.RNE.referentiel.services.CodePostalService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/referentiel/Codepostal")
+@CrossOrigin("*")
 @AllArgsConstructor
 public class CodePostalController {
 
@@ -52,4 +56,12 @@ public class CodePostalController {
 		codePostalService.deleteCodePostal(id);
 		return new ResponseEntity<String>("CodePostal successfully deleted!", HttpStatus.OK);
 	}
+	
+	//pagination method
+	
+			@GetMapping("/pagination/{pageNumber}/{pageSize}")
+			public Page<CodePostalDTO> codePostalPagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+				return codePostalService.getPostalPagination(pageNumber,pageSize);
+			}
+
 }

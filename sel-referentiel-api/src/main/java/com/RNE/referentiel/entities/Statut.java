@@ -2,8 +2,11 @@ package com.RNE.referentiel.entities;
 
 import java.io.Serializable;
 import java.util.List;
+
+import com.RNE.referentiel.enums.Activation;
 import com.RNE.referentiel.enums.Categorie;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,11 +50,15 @@ public class Statut implements Serializable {
 	@Column(name = "categorie", nullable = false)
 	private Categorie categorie;
 
-	@ManyToMany
+	@OneToMany(mappedBy = "statut", cascade = CascadeType.ALL)
 	private List<Section> sections;
-	/*@Column(name="forme_juridique_Id")
-	private Long formeJuridiqueId;*/
+
 	@ManyToOne
 	private FormeJuridique formeJuridique;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "activation")
+
+	private Activation activation;
 
 }

@@ -2,9 +2,10 @@ package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,19 +22,20 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/referentiel/villes")
+@CrossOrigin("*")
 @AllArgsConstructor
 public class VilleController {
 
 	private final VilleService villeService;
 
 	@PostMapping
-	@PreAuthorize("hasRole('client_admin')")
+	//@PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<VilleDTO> saveCity(@RequestBody VilleDTO villeDTO) {
 		return new ResponseEntity<VilleDTO>(villeService.saveVille(villeDTO), HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	@PreAuthorize("hasRole('client_user')")
+	//@PreAuthorize("hasRole('client_user')")
 	public ResponseEntity<List<VilleDTO>> getAllCity() {
 		return new ResponseEntity<List<VilleDTO>>(villeService.getAllVille(), HttpStatus.OK);
 	}
@@ -61,5 +63,12 @@ public class VilleController {
 		villeService.deleteVille(code);
 		return new ResponseEntity<String>("Ville successfully deleted!", HttpStatus.OK);
 	}
+	
+	//pagination method
+	
+		@GetMapping("/pagination/{pageNumber}/{pageSize}")
+		public Page<VilleDTO> villePagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+			return villeService.getVillePagination(pageNumber,pageSize);
+		}
 
 }

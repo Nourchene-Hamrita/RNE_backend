@@ -13,5 +13,6 @@ spring:
 jwt:
    auth:
       converter:
-         resource-id: gestiondemande-rest-api
+
+         resource-id: referentiel-rest-api
          principle-attribute: preferred_username

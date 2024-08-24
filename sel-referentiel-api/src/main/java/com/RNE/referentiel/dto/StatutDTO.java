@@ -1,14 +1,17 @@
 package com.RNE.referentiel.dto;
 
-import java.util.List;
-
+import com.RNE.referentiel.enums.Activation;
 import com.RNE.referentiel.enums.Categorie;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StatutDTO {
 	private String code;
 
@@ -17,7 +20,11 @@ public class StatutDTO {
 	private String description;
 
 	private Categorie categorie;
-	
-	private List<String> sectionCodes;
+
+	// private List<SectionDTO> sections;
+
+	private Activation activation;
+
+	private FormeJuridiqueDto formeJuridique;
 
 }
