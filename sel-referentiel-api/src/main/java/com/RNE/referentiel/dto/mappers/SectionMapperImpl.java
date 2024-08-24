@@ -38,9 +38,9 @@ public class SectionMapperImpl implements SectionMapper {
 	            sectionDTO.setCodeStatut(section.getStatut().getCode());
 	        }
 
-	        if (section.getArticles() != null) {
+	       /* if (section.getArticles() != null) {
 	            sectionDTO.setArticles(section.getArticles().stream().map(articleMapper::toDto).collect(Collectors.toList()));
-	        }
+	        }*/
 
 	        return sectionDTO;
 	    }
@@ -63,9 +63,9 @@ public class SectionMapperImpl implements SectionMapper {
 	            section.setStatut(statut); // Just set the code to avoid circular dependency
 	        }
 
-	        if (sectionDTO.getArticles() != null) {
+	        /*if (sectionDTO.getArticles() != null) {
 	            section.setArticles(sectionDTO.getArticles().stream().map(articleMapper::toEntity).collect(Collectors.toList()));
-	        }
+	        }*/
 
 	        return section;
 	    }
