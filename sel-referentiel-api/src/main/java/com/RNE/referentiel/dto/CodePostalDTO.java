@@ -17,7 +17,8 @@ public class CodePostalDTO {
 
     private String codePostal;
 
-    private VilleDTO ville;
+   // private VilleDTO ville;
+    private String codeVille;
     
     private Activation activation;
 

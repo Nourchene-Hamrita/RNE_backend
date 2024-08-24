@@ -3,6 +3,7 @@ package com.RNE.referentiel.entities;
 import java.util.List;
 
 import com.RNE.referentiel.enums.Activation;
+import com.RNE.referentiel.enums.Categorie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,10 @@ public class FormeJuridique {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "activation",nullable=false)
 	private Activation activation;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="categorie")
+	private Categorie categorie;
 	@OneToMany(mappedBy = "formeJuridique")
 	private List<Statut> status;
 

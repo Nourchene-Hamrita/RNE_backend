@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.SectionDTO;
@@ -11,6 +14,7 @@ import com.RNE.referentiel.dto.mappers.ArticleMapper;
 import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.dto.mappers.StatutMapper;
 import com.RNE.referentiel.entities.Section;
+import com.RNE.referentiel.entities.Ville;
 import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.services.SectionService;
 import lombok.AllArgsConstructor;
@@ -78,6 +82,14 @@ public class SectionServiceImpl implements SectionService {
 	@Override
 	public void deleteSection(String code) {
 		sectionRepo.deleteById(code);
+	}
+
+	public Page<SectionDTO> getSectionPagination(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+	    Page<Section> SectionPage = sectionRepo.findAll(pageable);
+	    
+	    return  SectionPage.map(sectionMapper::toDto);
+		
 	}
 
 }

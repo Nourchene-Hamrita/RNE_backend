@@ -2,6 +2,8 @@ package com.RNE.referentiel.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.RNE.referentiel.dto.VilleDTO;
 
 public interface VilleService {
@@ -17,4 +19,6 @@ public interface VilleService {
 	public List<VilleDTO> getActivatedVille();
 
 	public void deleteVille(String code);
+
+	public Page<VilleDTO> getVillePagination(int pageNumber, int pageSize);
 }

@@ -3,12 +3,16 @@ package com.RNE.referentiel.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.VilleDTO;
 import com.RNE.referentiel.dto.mappers.VilleMapper;
+import com.RNE.referentiel.entities.Gouvernorat;
 import com.RNE.referentiel.entities.Ville;
-
+import com.RNE.referentiel.repositories.GouvernoratRepository;
 import com.RNE.referentiel.repositories.VilleRepository;
 import com.RNE.referentiel.services.VilleService;
 
@@ -19,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class VilleServiceImpl implements VilleService {
 
     private VilleRepository villeRepository;
+    private GouvernoratRepository gouvernoratRepository;
     private VilleMapper villeMapper;
 
     // save city service
@@ -49,6 +54,15 @@ public class VilleServiceImpl implements VilleService {
         existCity.setNomFr(villeDTO.getNomFr());
         existCity.setNomAr(villeDTO.getNomAr());
         existCity.setActivation(villeDTO.getActivation());
+       
+     // Retrieve the Gouvernorat entity using the gouverneratCode from the DTO
+        Gouvernorat gouvernorat = gouvernoratRepository.findById(villeDTO.getGouverneratCode())
+                .orElseThrow(() -> new RuntimeException("Gouvernorat not found"));
+
+        // Set the Gouvernorat in the Ville entity
+        existCity.setGouvernorat(gouvernorat);
+
+        // Save the updated Ville entity and return the DTO
         return villeMapper.toDto(villeRepository.save(existCity));
     }
 
@@ -62,5 +76,14 @@ public class VilleServiceImpl implements VilleService {
     public void deleteVille(String code) {
         villeRepository.deleteById(code);
     }
+
+	@Override
+	public Page<VilleDTO> getVillePagination(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+	    Page<Ville> villePage = villeRepository.findAll(pageable);
+	    
+	    return  villePage.map(villeMapper::toDto);
+		
+	}
 
 }

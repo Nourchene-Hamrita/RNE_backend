@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.GouvernoratDTO;
@@ -69,4 +72,13 @@ public class GouvernoratServiceImpl implements GouvernoratService {
 	public void deleteGouvernorat(String code) {
 		gouvernoratRepository.deleteById(code);
 	}
+
+	@Override
+	public Page<GouvernoratDTO> getGouvernoratPagination(int pageNumber, int pageSize) {
+	    Pageable pageable = PageRequest.of(pageNumber, pageSize);
+	    Page<Gouvernorat> gouvernoratPage = gouvernoratRepository.findAll(pageable);
+	    
+	    return gouvernoratPage.map(gouvernoratMapper::toDto);
+	}
+
 }

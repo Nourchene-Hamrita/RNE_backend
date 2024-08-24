@@ -2,6 +2,8 @@ package com.RNE.referentiel.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.RNE.referentiel.dto.CodePostalDTO;
 
 public interface CodePostalService {
@@ -15,4 +17,6 @@ public interface CodePostalService {
 	public CodePostalDTO updateCodePostal(Long id, CodePostalDTO codePostalDTO);
 
 	public void deleteCodePostal(Long id);
+
+	public Page<CodePostalDTO> getPostalPagination(int pageNumber, int pageSize);
 }

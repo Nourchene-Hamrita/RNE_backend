@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.RNE.referentiel.dto.FormeJuridiqueDto;
+import com.RNE.referentiel.dto.GouvernoratDTO;
 import com.RNE.referentiel.services.FormeJuridiqueService;
 
 import lombok.AllArgsConstructor;
@@ -44,4 +46,11 @@ public class FormeJuridiqueController {
 		return new ResponseEntity<FormeJuridiqueDto>(formeJuridiqueService.updateFormeJuridique(id, formeJuridiquedto),
 				HttpStatus.OK);
 	}
+	
+	//pagination method
+	
+		@GetMapping("/pagination/{pageNumber}/{pageSize}")
+		public Page<FormeJuridiqueDto> gouvernoratPagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+			return formeJuridiqueService.getFormeJuridiquePagination(pageNumber,pageSize);
+		}
 }

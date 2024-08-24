@@ -57,7 +57,7 @@ public class Statut implements Serializable {
 	private FormeJuridique formeJuridique;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "activation",nullable=false)
+	@Column(name = "activation")
 
 	private Activation activation;
 

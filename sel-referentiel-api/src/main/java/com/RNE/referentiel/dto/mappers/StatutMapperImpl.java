@@ -61,6 +61,7 @@ public class StatutMapperImpl implements StatutMapper {
 		statut.setTitre(statutDTO.getTitre());
 		statut.setDescription(statutDTO.getDescription());
 		statut.setCategorie(statutDTO.getCategorie());
+		statut.setActivation(statutDTO.getActivation());
 
 		/*
 		 * if (statutDTO.getSections() != null) {

@@ -2,6 +2,7 @@ package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -56,11 +57,18 @@ public class GouvernoratController {
 	public ResponseEntity<List<GouvernoratDTO>> getActivatedDelegations() {
 		return new ResponseEntity<List<GouvernoratDTO>>(gouvernoratService.getActivatedGouvernorats(), HttpStatus.OK);
 	}
-
+       //delete method
 	@DeleteMapping("/{code}")
 	public ResponseEntity<String> deleteDelegation(@PathVariable String code) {
 		gouvernoratService.deleteGouvernorat(code);
 		return new ResponseEntity<String>("Gouvernorat successfully deleted!", HttpStatus.OK);
+	}
+	
+	//pagination method
+	
+	@GetMapping("/pagination/{pageNumber}/{pageSize}")
+	public Page<GouvernoratDTO> gouvernoratPagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+		return gouvernoratService.getGouvernoratPagination(pageNumber,pageSize);
 	}
 
 }

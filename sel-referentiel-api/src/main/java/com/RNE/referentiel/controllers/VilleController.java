@@ -2,9 +2,9 @@ package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,5 +63,12 @@ public class VilleController {
 		villeService.deleteVille(code);
 		return new ResponseEntity<String>("Ville successfully deleted!", HttpStatus.OK);
 	}
+	
+	//pagination method
+	
+		@GetMapping("/pagination/{pageNumber}/{pageSize}")
+		public Page<VilleDTO> villePagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+			return villeService.getVillePagination(pageNumber,pageSize);
+		}
 
 }

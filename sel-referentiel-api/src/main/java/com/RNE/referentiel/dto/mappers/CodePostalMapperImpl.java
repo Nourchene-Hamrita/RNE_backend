@@ -26,11 +26,15 @@ public class CodePostalMapperImpl implements CodePostalMapper {
 		codePostalDTO.setId(codePostal.getId());
 		codePostalDTO.setCodePostal(codePostal.getCodePostal());
         codePostalDTO.setActivation(codePostal.getActivation());
-		Ville ville = codePostal.getVille();
+        // Set the codeVille from the Ville entity
+        if (codePostal.getVille() != null) {
+            codePostalDTO.setCodeVille(codePostal.getVille().getCode());
+        }
+		/*Ville ville = codePostal.getVille();
 		if (ville != null) {
 			codePostalDTO.setVille(new VilleDTO(ville.getCode(), ville.getNomFr(), ville.getNomAr(), ville.getActivation(),
 					ville.getGouvernorat().getCode()));
-		}
+		}*/
 
 		return codePostalDTO;
 	}
@@ -38,21 +42,22 @@ public class CodePostalMapperImpl implements CodePostalMapper {
 	@Override
 	public CodePostal toEntity(CodePostalDTO codePostalDTO) {
 
-		if (codePostalDTO == null) {
-			return null;
-		}
+		 if (codePostalDTO == null) {
+	            return null;
+	        }
 
-		CodePostal codePostal = new CodePostal();
-		codePostal.setId(codePostalDTO.getId());
-		codePostal.setCodePostal(codePostalDTO.getCodePostal());
+	        CodePostal codePostal = new CodePostal();
+	        codePostal.setId(codePostalDTO.getId());
+	        codePostal.setCodePostal(codePostalDTO.getCodePostal());
+	        codePostal.setActivation(codePostalDTO.getActivation());
 
-		String villeCode = codePostalDTO.getVille().getCode();
-		if (villeCode != null) {
-			Ville ville = villeRepository.findById(villeCode).orElse(null);
-			codePostal.setVille(ville);
-		}
+	        // Retrieve Ville entity using codeVille and set it to codePostal
+	        if (codePostalDTO.getCodeVille() != null) {
+	            Ville ville = villeRepository.findById(codePostalDTO.getCodeVille()).orElse(null);
+	            codePostal.setVille(ville);
+	        }
 
-		return codePostal;
-	}
+	        return codePostal;
+	    }
 
 }

@@ -21,6 +21,7 @@ public class FormeJuridiqueMapperImpl implements FormeJuridiqueMapper {
 		formeJuridiquedto.setId(formeJuridique.getId());
 		formeJuridiquedto.setNom(formeJuridique.getNom());
 		formeJuridiquedto.setActivation(formeJuridique.getActivation());
+		formeJuridiquedto.setCategorie(formeJuridique.getCategorie());
 		
 		return formeJuridiquedto;
 		
@@ -36,6 +37,7 @@ public class FormeJuridiqueMapperImpl implements FormeJuridiqueMapper {
 		formeJuridique.setId(formeJuridiqueDto.getId());
 		formeJuridique.setNom(formeJuridiqueDto.getNom());
 		formeJuridique.setActivation(formeJuridiqueDto.getActivation());
+		formeJuridique.setCategorie(formeJuridiqueDto.getCategorie());
 		
 		return formeJuridique;
 		

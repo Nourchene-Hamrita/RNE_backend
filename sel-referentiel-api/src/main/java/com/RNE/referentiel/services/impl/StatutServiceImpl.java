@@ -4,14 +4,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.RNE.referentiel.dto.StatutDTO;
+import com.RNE.referentiel.dto.mappers.FormeJuridiqueMapper;
 import com.RNE.referentiel.dto.mappers.SectionMapper;
 import com.RNE.referentiel.dto.mappers.StatutMapper;
+import com.RNE.referentiel.entities.FormeJuridique;
 import com.RNE.referentiel.entities.Section;
 import com.RNE.referentiel.entities.Statut;
-
+import com.RNE.referentiel.entities.Ville;
 import com.RNE.referentiel.repositories.SectionRepository;
 import com.RNE.referentiel.repositories.StatutRepository;
 import com.RNE.referentiel.services.StatutService;
@@ -25,6 +30,7 @@ public class StatutServiceImpl implements StatutService {
 	private StatutRepository statutRepository;
 	private StatutMapper statutMapper;
 	private SectionMapper sectionMapper;
+	private FormeJuridiqueMapper formeJuridiqueMapper;
 	//private SectionRepository sectionRepository;
 
 	// save status service
@@ -58,21 +64,35 @@ public class StatutServiceImpl implements StatutService {
 	// update status service
 	@Override
 	public StatutDTO updateStatut(String code, StatutDTO statutDTO) {
-		Statut existStatus = statutRepository.findById(code).orElse(null);
-		if (existStatus == null) {
-			return null;
-		}
+		 Statut existStatus = statutRepository.findById(code).orElse(null);
+		    if (existStatus == null) {
+		        return null;
+		    }
 
-		existStatus.setTitre(statutDTO.getTitre());
-		existStatus.setDescription(statutDTO.getDescription());
-		existStatus.setCategorie(statutDTO.getCategorie());
+		    existStatus.setTitre(statutDTO.getTitre());
+		    existStatus.setDescription(statutDTO.getDescription());
+		    existStatus.setCategorie(statutDTO.getCategorie());
+		    existStatus.setActivation(statutDTO.getActivation());
 
-		return statutMapper.toDto(statutRepository.save(existStatus));
+		    // Convert FormeJuridiqueDto to FormeJuridique
+		    FormeJuridique formeJuridique = formeJuridiqueMapper.toEntity(statutDTO.getFormeJuridique());
+		    existStatus.setFormeJuridique(formeJuridique);
+
+		    return statutMapper.toDto(statutRepository.save(existStatus));
 	}
 
 	@Override
 	public void deleteStatut(String code) {
 		statutRepository.deleteById(code);
+	}
+
+
+	@Override
+	public Page<StatutDTO> getStatutPagination(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+	    Page<Statut> villePage = statutRepository.findAll(pageable);
+	    
+	    return  villePage.map(statutMapper::toDto);
 	}
 
 }

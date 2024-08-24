@@ -2,6 +2,7 @@ package com.RNE.referentiel.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RNE.referentiel.dto.StatutDTO;
+import com.RNE.referentiel.dto.VilleDTO;
 import com.RNE.referentiel.services.StatutService;
 
 import lombok.AllArgsConstructor;
@@ -53,4 +55,12 @@ public class StatutController {
         statutService.deleteStatut(code);
         return new ResponseEntity<String>("Statut successfully deleted!", HttpStatus.OK);
     }
+    
+  //pagination method
+	
+  		@GetMapping("/pagination/{pageNumber}/{pageSize}")
+  		public Page<StatutDTO> statutPagination(@PathVariable int pageNumber,@PathVariable int pageSize){
+  			return statutService.getStatutPagination(pageNumber,pageSize);
+  		}
+
 }
