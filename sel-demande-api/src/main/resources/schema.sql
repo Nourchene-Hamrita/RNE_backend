@@ -279,7 +279,8 @@ CREATE TABLE IF NOT EXISTS demande.demande_articles
     "code" VARCHAR(255) NOT NULL,
     "code_proposition" VARCHAR(255) NOT NULL,
     "demande_id" BIGINT NOT NULL,
-    CONSTRAINT "demande_articles_pkey" PRIMARY KEY ("code", "demande_id")
+    CONSTRAINT "demande_articles_pkey" PRIMARY KEY ("code", "demande_id"),
+    CONSTRAINT "fk_demande_id" FOREIGN KEY ("demande_id") REFERENCES demande.demande("id")
  
 
 );

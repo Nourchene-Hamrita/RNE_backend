@@ -1,51 +1,51 @@
 eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+   instance:
+      hostname: localhost
+   client:
+      service-url:
+         defaultZone: http://localhost:8761/eureka
 
 server:
-  port: 8082
+   port: 8082
 
 spring:
-  application:
-    name: demande
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
-    username: postgres
-    password: youssef31
-   
-          
-  mail:
-    default-encoding: UTF-8
-    host: smtp.gmail.com
-    port: 587
-    username: zainebbouallagui3@gmail.com
-    password: Zaineb*123
+   application:
+      name: demande
+   datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
+      username: postgres
+      password: nour123
+
+
+   mail:
+      default-encoding: UTF-8
+      host: smtp.gmail.com
+      port: 587
+      username: zainebbouallagui3@gmail.com
+      password: Zaineb*123
 
 
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-        debug: true
-    test-connection: false
-    protocol: smtp
+   jpa:
+      hibernate:
+         ddl-auto: update
+      properties:
+         mail:
+            smtp:
+               auth: true
+               starttls:
+                  enable: true
+            debug: true
+      test-connection: false
+      protocol: smtp
 
 
 
 management:
-  tracing:
-    sampling:
-      probability: 1.0
+   tracing:
+      sampling:
+         probability: 1.0
 logging:
-  level:
-    org.springframework.security: DEBUG
+   level:
+      org.springframework.security: DEBUG
