@@ -60,7 +60,7 @@ public class SectionServiceImpl implements SectionService {
 			return null;
 		}
 
-		existSection.setTitreFr(sectionDTO.getTitreAr());
+		existSection.setTitreFr(sectionDTO.getTitreFr());
 		existSection.setTitreAr(sectionDTO.getTitreAr());
 		existSection.setActivation(sectionDTO.getActivation());
 		existSection.getStatut().setCode(sectionDTO.getCodeStatut());
