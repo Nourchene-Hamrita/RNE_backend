@@ -54,11 +54,7 @@ public class Article implements Serializable {
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
 
-	@Column(name = "text_complementaire")
-	private String textComplementaire;
-
-	@Column(name = "autre_proposition")
-	private String autreProposition;
+	
 
 	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
 	private List<Proposition> proposition = new ArrayList<>();
@@ -67,8 +63,7 @@ public class Article implements Serializable {
 	@JoinColumn(name = "section_code", referencedColumnName = "code")
 	private Section section;
 
-	@ManyToOne
-	private TypeRedaction typeRedaction;
+	
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
