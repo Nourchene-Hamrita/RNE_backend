@@ -26,5 +26,5 @@ public class SectionDTO {
 
     private String codeStatut;
 
-    private List<ArticleDTO> articles;
+    //private List<ArticleDTO> articles;
 }
