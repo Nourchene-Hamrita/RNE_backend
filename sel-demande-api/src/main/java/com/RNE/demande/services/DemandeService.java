@@ -15,4 +15,10 @@ public interface DemandeService {
 
 	public Demande updateDemande(Long id, Demande demande);
 
+	public long getTotalDemandes();
+
+	public long getTotalAcceptedDemandes();
+
+	public long getTotalRejectedDemandes();
+
 }

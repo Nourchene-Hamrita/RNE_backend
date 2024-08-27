@@ -3,6 +3,7 @@ package com.RNE.demande.services.impl;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.RNE.demande.entities.Demande;
+import com.RNE.demande.enums.StatutDemande;
 import com.RNE.demande.repositories.DemandeRepository;
 import com.RNE.demande.services.DemandeService;
 
@@ -12,7 +13,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DemandeServiceImpl implements DemandeService {
 
-    private DemandeRepository demandeRepository;
+	private DemandeRepository demandeRepository;
 
 	@Override
 	public Demande saveDemande(Demande demande) {
@@ -32,7 +33,6 @@ public class DemandeServiceImpl implements DemandeService {
 		return demandeRepository.findById(id).get();
 	}
 
-
 	@Override
 	public void deleteDemande(Long id) {
 		// TODO Auto-generated method stub
@@ -44,5 +44,20 @@ public class DemandeServiceImpl implements DemandeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-    
+
+	@Override
+	public long getTotalDemandes() {
+		return demandeRepository.count();
+	}
+
+	@Override
+	public long getTotalAcceptedDemandes() {
+		return demandeRepository.countDemandesByStatutDemande(StatutDemande.Validee);
+	}
+
+	@Override
+	public long getTotalRejectedDemandes() {
+		return demandeRepository.countDemandesByStatutDemande(StatutDemande.Refusee);
+	}
+
 }

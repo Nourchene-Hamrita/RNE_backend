@@ -1,6 +1,8 @@
 package com.RNE.demande.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +57,15 @@ public class DemandeController {
 	public ResponseEntity<String> deleteRequest(@PathVariable Long id) {
 		demandeService.deleteDemande(id);
 		return new ResponseEntity<String>("Demande deleted successfully", HttpStatus.OK);
+	}
+	
+	@GetMapping("/statistics")
+	public Map<String, Long> getStatistics() {
+		Map<String, Long> stats = new HashMap<>();
+		stats.put("totalDemandes", demandeService.getTotalDemandes());
+		stats.put("totalAcceptedDemandes", demandeService.getTotalAcceptedDemandes());
+		stats.put("totalRejectedDemandes", demandeService.getTotalRejectedDemandes());
+		return stats;
 	}
 
 }
