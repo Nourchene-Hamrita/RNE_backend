@@ -15,16 +15,10 @@ spring:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
       username: postgres
-      password: nour123
+      password: youssef31
 
 
-   mail:
-      default-encoding: UTF-8
-      host: smtp.gmail.com
-      port: 587
-      username: zainebbouallagui3@gmail.com
-      password: Zaineb*123
-
+ 
 
 
    jpa:
