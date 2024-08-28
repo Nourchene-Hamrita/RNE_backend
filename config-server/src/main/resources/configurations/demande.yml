@@ -1,9 +1,9 @@
 eureka:
-   instance:
-      hostname: localhost
-   client:
-      service-url:
-         defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: config-server
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka
 
 server:
    port: 8082
@@ -13,33 +13,25 @@ spring:
       name: demande
    datasource:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
+      url: jdbc:postgresql://db:5432/RNEdb?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&currentSchema=demande
       username: postgres
       password: nour123
-
-
- 
-
 
    jpa:
       hibernate:
          ddl-auto: update
+         dialect: org.hibernate.dialect.PostgreSQLDialect  
       properties:
-         mail:
-            smtp:
-               auth: true
-               starttls:
-                  enable: true
-            debug: true
-      test-connection: false
-      protocol: smtp
-
-
+         hibernate:
+            format_sql: true
+      show-sql: true  
 
 management:
    tracing:
       sampling:
          probability: 1.0
+
 logging:
    level:
       org.springframework.security: DEBUG
+      org.hibernate: DEBUG  # To log Hibernate activities
