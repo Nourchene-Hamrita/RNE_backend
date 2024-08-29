@@ -1,165 +1,192 @@
--- Créer les séquences si elles n'existent pas
-CREATE SEQUENCE IF NOT EXISTS referentiel.code_postal_id_seq;
+-- Create the sequence if it doesn't exist
 CREATE SEQUENCE IF NOT EXISTS referentiel.forme_juridique_id_seq;
-
--- Table referentiel.type_redaction
-CREATE TABLE IF NOT EXISTS referentiel.type_redaction
-(
-    id character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT type_redaction_pkey PRIMARY KEY (id)
+CREATE SEQUENCE IF NOT EXISTS referentiel.propositions_id_seq;
+-- Create table forme_juridique
+DROP TABLE IF EXISTS referentiel.forme_juridique;
+CREATE TABLE IF NOT EXISTS referentiel.forme_juridique (
+    id BIGINT NOT NULL DEFAULT nextval('referentiel.forme_juridique_id_seq'::regclass),
+    activation VARCHAR(255) COLLATE pg_catalog."default" NOT NULL,
+    categorie VARCHAR(255) COLLATE pg_catalog."default",
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    nom VARCHAR(255) COLLATE pg_catalog."default",
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL,
+    CONSTRAINT forme_juridique_pkey PRIMARY KEY (id),
+    CONSTRAINT forme_juridique_activation_check CHECK (activation::TEXT = ANY (ARRAY['Active', 'Desactive']::TEXT[])),
+    CONSTRAINT forme_juridique_categorie_check CHECK (categorie::TEXT = ANY (ARRAY['Association', 'Societe']::TEXT[]))
 );
-INSERT INTO referentiel.type_redaction (id) VALUES ('Type1'), ('Type2');
--- Table referentiel.forme_juridique
-CREATE TABLE IF NOT EXISTS referentiel.forme_juridique
-(
-    id bigint NOT NULL DEFAULT nextval('referentiel.forme_juridique_id_seq'::regclass),
-    nom character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT forme_juridique_pkey PRIMARY KEY (id)
-);
 
--- Insertion des données dans forme_juridique
-INSERT INTO referentiel.forme_juridique (id, nom)
+-- Insert data into forme_juridique
+INSERT INTO referentiel.forme_juridique (id, activation, categorie, nom, created_at, updated_at)
 VALUES 
-    (1, 'Société Civile'),
-    (2, 'Société Anonyme'),
-    (3, 'Société Unipersonnelle à Responsabilité Limitée'),
-    (4, 'Société à Responsabilité Limitée');
-
+    (1, 'Active', 'Societe', 'Société Civile', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (2, 'Active', 'Societe', 'Société Anonyme', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (3, 'Active', 'Societe', 'Société Unipersonnelle à Responsabilité Limitée', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (4, 'Active', 'Societe', 'Société à Responsabilité Limitée', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 -- Table referentiel.gouvernorats
+DROP TABLE IF EXISTS referentiel.gouvernorats;
 CREATE TABLE IF NOT EXISTS referentiel.gouvernorats
 (
     code character varying(255) COLLATE pg_catalog."default" NOT NULL,
     activation character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
     nom_ar character varying(255) COLLATE pg_catalog."default" NOT NULL,
     nom_fr character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     CONSTRAINT gouvernorats_pkey PRIMARY KEY (code),
-    CONSTRAINT gouvernorats_activation_check CHECK (activation::text = ANY (ARRAY['Active', 'Desactive']::text[]))
+    CONSTRAINT gouvernorats_activation_check CHECK (activation::text = ANY (ARRAY['Active'::character varying, 'Desactive'::character varying]::text[]))
 );
 
 -- Insertion des données dans gouvernorats
-INSERT INTO referentiel.gouvernorats (code, activation, nom_ar, nom_fr)
+INSERT INTO referentiel.gouvernorats (code, activation,created_at, nom_ar, nom_fr,updated_at)
 VALUES 
-    ('GOUV001', 'Active', 'تونس', 'Tunis'),
-    ('GOUV002', 'Active', 'أريانة', 'Ariana');
-
--- Table referentiel.sections
-CREATE TABLE IF NOT EXISTS referentiel.sections
-(
-    code character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    activation character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    titre_ar character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    titre_fr character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT sections_pkey PRIMARY KEY (code),
-    CONSTRAINT sections_activation_check CHECK (activation::text = ANY (ARRAY['Active', 'Desactive']::text[]))
-);
-
--- Insertion des données dans sections
-INSERT INTO referentiel.sections (code, activation, titre_ar, titre_fr) VALUES 
-('SEC001', 'Active', 'قسم 1', 'Section 1'),
-('SEC002', 'Active', 'قسم 2', 'Section 2');
-
--- Table referentiel.villes
-CREATE TABLE IF NOT EXISTS referentiel.villes
-(
-    code character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    activation character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    name_ar character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    nom_fr character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    gouvernorat_code character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT villes_pkey PRIMARY KEY (code),
-    CONSTRAINT fkhiuoi5utrfkr2w33e2df7i43n FOREIGN KEY (gouvernorat_code)
-        REFERENCES referentiel.gouvernorats (code) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT villes_activation_check CHECK (activation::text = ANY (ARRAY['Active', 'Desactive']::text[]))
-);
-
--- Insertion des données dans villes
-INSERT INTO referentiel.villes (code, activation, name_ar, nom_fr, gouvernorat_code)
-VALUES 
-    ('VILLE001', 'Active', 'مدينة تونس', 'Ville de Tunis', 'GOUV001'),
-    ('VILLE002', 'Active', 'سكرة', 'Soukra', 'GOUV002');
-
--- Table referentiel.code_postal
-CREATE TABLE IF NOT EXISTS referentiel.code_postal
-(
-    id bigint NOT NULL DEFAULT nextval('referentiel.code_postal_id_seq'::regclass),
-    code_postal character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    ville_code character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT code_postal_pkey PRIMARY KEY (id),
-    CONSTRAINT fkm5co6047d6buipnn602ymsae7 FOREIGN KEY (ville_code)
-        REFERENCES referentiel.villes (code) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-);
-
--- Insertion des données dans code_postal
-INSERT INTO referentiel.code_postal (id, code_postal, ville_code)
-VALUES 
-    (1, '1000', 'VILLE001'),
-    (2, '2000', 'VILLE002');
-
--- Table referentiel.articles
-CREATE TABLE IF NOT EXISTS referentiel.articles
-(
-    code character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    activation character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    autre_proposition character varying(255) COLLATE pg_catalog."default",
-    created_at timestamp(6) without time zone NOT NULL,
-    text_complementaire character varying(255) COLLATE pg_catalog."default",
-    titre_ar character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    titre_fr character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    section_code character varying(255) COLLATE pg_catalog."default",
-    type_redaction_id character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT articles_pkey PRIMARY KEY (code),
-    CONSTRAINT fk4u3w0wo8inv0n8f4m3xll0t0e FOREIGN KEY (section_code)
-        REFERENCES referentiel.sections (code) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk6ewh6sk1hm5393089nx7ts3rg FOREIGN KEY (type_redaction_id)
-        REFERENCES referentiel.type_redaction (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT articles_activation_check CHECK (activation::text = ANY (ARRAY['Active', 'Desactive']::text[]))
-);
-
--- Insertion des données dans articles
-INSERT INTO referentiel.articles (code, activation, created_at, titre_ar, titre_fr, updated_at, section_code, type_redaction_id)
-VALUES 
-('ART001', 'Active', CURRENT_TIMESTAMP, 'Titre AR A', 'Titre FR A', CURRENT_TIMESTAMP, 'SEC001', 'Type1'),
-('ART002', 'Active', CURRENT_TIMESTAMP, 'Titre AR B', 'Titre FR B', CURRENT_TIMESTAMP, 'SEC002', 'Type2');
-
--- Table referentiel.propositions
-CREATE TABLE IF NOT EXISTS referentiel.propositions
-(
-    code character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    activation character varying(255) COLLATE pg_catalog."default",
-    texte_ar character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    texte_fr character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    article_code character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT propositions_pkey PRIMARY KEY (code),
-    CONSTRAINT fkijfr59b8xqvkihwt68pmnahcs FOREIGN KEY (article_code)
-        REFERENCES referentiel.articles (code) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT propositions_activation_check CHECK (activation::text = ANY (ARRAY['Active', 'Desactive']::text[]))
-);
-
--- Table referentiel.statuts
-CREATE TABLE IF NOT EXISTS referentiel.statuts
-(
-    code character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    categorie character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    description character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    forme_juridique_id bigint,
-    titre character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    ('GOUV001', 'Active',CURRENT_TIMESTAMP, 'تونس', 'Tunis',CURRENT_TIMESTAMP),
+    ('GOUV002', 'Active',CURRENT_TIMESTAMP, 'أريانة', 'Ariana',CURRENT_TIMESTAMP);
+-- Create table statuts
+DROP TABLE IF EXISTS referentiel.statuts;
+CREATE TABLE IF NOT EXISTS referentiel.statuts (
+    code VARCHAR(255) NOT NULL,
+    activation VARCHAR(255),
+    categorie VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255) NOT NULL,
+    titre VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    forme_juridique_id BIGINT,
     CONSTRAINT statuts_pkey PRIMARY KEY (code),
-    CONSTRAINT statuts_categorie_check CHECK (categorie::text = ANY (ARRAY['Association', 'Societe']::text[]))
+    CONSTRAINT statuts_forme_juridique_fkey FOREIGN KEY (forme_juridique_id)
+        REFERENCES referentiel.forme_juridique (id) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT statuts_activation_check CHECK (activation IN ('Active', 'Desactive')),
+    CONSTRAINT statuts_categorie_check CHECK (categorie IN ('Association', 'Societe'))
 );
 
--- Insertion des données dans statuts
-INSERT INTO referentiel.statuts (code, categorie, description, forme_juridique_id, titre)
+-- Insert data into statuts
+INSERT INTO referentiel.statuts (code, activation, categorie, created_at, description, updated_at, forme_juridique_id, titre)
 VALUES 
-('STAT001', 'Societe', 'Description du statut 1', 1, 'Titre du statut 1'),
-('STAT002', 'Association', 'Description du statut 2', 2, 'Titre du statut 2');
+    ('STAT001', 'Active', 'Societe', CURRENT_TIMESTAMP, 'Description du statut 1', CURRENT_TIMESTAMP, 1, 'Titre du statut 1'),
+    ('STAT002', 'Active', 'Societe', CURRENT_TIMESTAMP, 'Description du statut 2', CURRENT_TIMESTAMP, 2, 'Titre du statut 2');
+
+-- Create table sections
+DROP TABLE IF EXISTS referentiel.sections;
+CREATE TABLE IF NOT EXISTS referentiel.sections (
+    code VARCHAR(255) NOT NULL,
+    activation VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    titre_ar VARCHAR(255) NOT NULL,
+    titre_fr VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    statut_code VARCHAR(255),
+    CONSTRAINT sections_pkey PRIMARY KEY (code),
+    CONSTRAINT sections_statut_fkey FOREIGN KEY (statut_code)
+        REFERENCES referentiel.statuts (code) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT sections_activation_check CHECK (activation IN ('Active', 'Desactive'))
+);
+
+-- Insert data into sections
+INSERT INTO referentiel.sections (code, activation, created_at, titre_ar, titre_fr, updated_at, statut_code)
+VALUES 
+    ('SEC001', 'Active', CURRENT_TIMESTAMP, 'قسم 1', 'Section 1', CURRENT_TIMESTAMP, 'STAT001'),
+    ('SEC002', 'Active', CURRENT_TIMESTAMP, 'قسم 2', 'Section 2', CURRENT_TIMESTAMP, 'STAT001');
+
+-- Create table villes
+DROP TABLE IF EXISTS referentiel.villes;
+
+CREATE TABLE IF NOT EXISTS referentiel.villes (
+    code VARCHAR(255) NOT NULL,
+    activation VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name_ar VARCHAR(255) NOT NULL,
+    nom_fr VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    gouvernorat_code VARCHAR(255),
+    CONSTRAINT villes_pkey PRIMARY KEY (code),
+    CONSTRAINT villes_gouvernorat_fkey FOREIGN KEY (gouvernorat_code)
+        REFERENCES referentiel.gouvernorats (code) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT villes_activation_check CHECK (activation IN ('Active', 'Desactive'))
+);
+
+-- Insert data into villes
+INSERT INTO referentiel.villes (code, activation, created_at, name_ar, nom_fr, updated_at, gouvernorat_code)
+VALUES 
+    ('VILLE001', 'Active', CURRENT_TIMESTAMP, 'مدينة تونس', 'Ville de Tunis', CURRENT_TIMESTAMP, 'GOUV001'),
+    ('VILLE002', 'Active', CURRENT_TIMESTAMP, 'سكرة', 'Soukra', CURRENT_TIMESTAMP, 'GOUV002');
+
+
+
+-- Create table code_postal
+DROP TABLE IF EXISTS referentiel.code_postal;
+CREATE TABLE IF NOT EXISTS referentiel.code_postal (
+    id BIGINT NOT NULL DEFAULT nextval('referentiel.code_postal_id_seq'::regclass),
+    activation VARCHAR(255) NOT NULL,
+    code_postal VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    ville_code VARCHAR(255),
+    CONSTRAINT code_postal_pkey PRIMARY KEY (id),
+    CONSTRAINT code_postal_ville_fkey FOREIGN KEY (ville_code)
+        REFERENCES referentiel.villes (code) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT code_postal_activation_check CHECK (activation IN ('Active', 'Desactive'))
+);
+
+-- Insert data into code_postal
+INSERT INTO referentiel.code_postal (id, activation, code_postal, created_at, updated_at, ville_code)
+VALUES 
+    (1, 'Active', '1000', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'VILLE001'),
+    (2, 'Active', '2000', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'VILLE002');
+
+-- Create table articles
+DROP TABLE IF EXISTS referentiel.articles;
+CREATE TABLE IF NOT EXISTS referentiel.articles (
+    code VARCHAR(255) NOT NULL,
+    activation VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    titre_ar VARCHAR(255) NOT NULL,
+    titre_fr VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    section_code VARCHAR(255),
+    CONSTRAINT articles_pkey PRIMARY KEY (code),
+    CONSTRAINT articles_section_fkey FOREIGN KEY (section_code)
+        REFERENCES referentiel.sections (code) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT articles_activation_check CHECK (activation IN ('Active', 'Desactive'))
+);
+
+-- Insert data into articles
+INSERT INTO referentiel.articles (code, activation, created_at, titre_ar, titre_fr, updated_at, section_code)
+VALUES 
+    ('ART001', 'Active', CURRENT_TIMESTAMP, 'Titre AR A', 'Titre FR A', CURRENT_TIMESTAMP, 'SEC001'),
+    ('ART002', 'Active', CURRENT_TIMESTAMP, 'Titre AR B', 'Titre FR B', CURRENT_TIMESTAMP, 'SEC002');
+
+-- Create the sequence if it doesn't exist
+CREATE SEQUENCE IF NOT EXISTS referentiel.propositions_id_seq;
+
+-- Create table propositions
+DROP TABLE IF EXISTS referentiel.propositions;
+CREATE TABLE IF NOT EXISTS referentiel.propositions (
+    id BIGINT NOT NULL DEFAULT nextval('referentiel.propositions_id_seq'::regclass),
+    activation VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    description TEXT,
+    updated_at TIMESTAMP(6) WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    code_article VARCHAR(255),
+    CONSTRAINT propositions_pkey PRIMARY KEY (id),
+    CONSTRAINT propositions_article_fkey FOREIGN KEY (code_article)
+        REFERENCES referentiel.articles (code) 
+        ON UPDATE NO ACTION 
+        ON DELETE NO ACTION,
+    CONSTRAINT propositions_activation_check CHECK (activation IN ('Active', 'Desactive'))
+);
+
+-- Insert data into propositions
+INSERT INTO referentiel.propositions (id, activation, created_at, description, updated_at, code_article)
+VALUES 
+    (1, 'Active', CURRENT_TIMESTAMP, 'Description proposition 1', CURRENT_TIMESTAMP, 'ART001'),
+    (2, 'Active', CURRENT_TIMESTAMP, 'Description proposition 2', CURRENT_TIMESTAMP, 'ART002');
