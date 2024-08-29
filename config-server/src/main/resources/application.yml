@@ -1,13 +1,27 @@
 server:
-   port: 8888
+  port: 8888
 
 spring:
-   profiles:
-      active: native
-   application:
-      name: config-server
-   cloud:
-      config:
-         server:
-            native:
-               search-locations: classpath:/configurations
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configurations # Assuming your configuration files are within the Docker image's classpath
+
+# Ensure Docker can reach this config server
+eureka:
+  instance:
+    hostname: config-server
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  

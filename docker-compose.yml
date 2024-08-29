@@ -1,0 +1,143 @@
+version: '3.8'
+
+services:
+  # Config Server
+  config-server:
+    image: config-server:latest
+    container_name: config-server
+    networks:
+      - spring-boot-network
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Discovery Service
+  discovery:
+    image: discovery:latest
+    container_name: discovery
+    networks:
+      - spring-boot-network
+    ports:
+      - "8761:8761"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Gateway Service
+  gateway:
+    image: gateway:latest
+    container_name: gateway
+    networks:
+      - spring-boot-network
+    ports:
+      - "8222:8222"
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8222/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # sel-referentiel-api Service
+  sel-referentiel-api:
+    image: sel-referentiel-api:latest
+    container_name: sel-referentiel-api
+    networks:
+      - spring-boot-network
+    ports:
+      - "8081:8081"
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+ # sel-demande-api Service
+  sel-demande-api:
+    image: sel-demande-api:latest
+    container_name: sel-demande-api
+    networks:
+      - spring-boot-network
+    ports:
+      - "8082:8082"
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Keycloak Service
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.2
+    container_name: keycloak
+    networks:
+      - spring-boot-network
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: start-dev
+
+  # PostgreSQL Service
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nour123
+      POSTGRES_DB: RNEdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - spring-boot-network
+
+  # PGAdmin Service
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - spring-boot-network
+
+networks:
+  spring-boot-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

@@ -13,11 +13,11 @@ spring:
                enabled: true
          routes:
          -  id: referentiel
-            uri: http://localhost:8081
+            uri: http://sel-referentiel-api:8081
             predicates:
             - Path=/api/referentiel/**
          -  id: request
-            uri: http://localhost:8082
+            uri: http://sel-demande-api:8082
             predicates:
             - Path=/api/demande/**    
 
