@@ -51,6 +51,7 @@ public class CodePostal implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "activation", nullable = false)
 	private Activation activation;
+	
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 

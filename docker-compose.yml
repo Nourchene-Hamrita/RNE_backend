@@ -72,7 +72,7 @@ services:
       timeout: 10s
       retries: 3
 
- # sel-demande-api Service
+  # sel-demande-api Service
   sel-demande-api:
     image: sel-demande-api:latest
     container_name: sel-demande-api
@@ -108,11 +108,11 @@ services:
 
   # PostgreSQL Service
   db:
-    image: postgres:16
+    image: postgres:15
     container_name: postgres-db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: nour123
+      POSTGRES_PASSWORD: youssef31
       POSTGRES_DB: RNEdb
     ports:
       - "5433:5432"
@@ -134,6 +134,15 @@ services:
       - db
     networks:
       - spring-boot-network
+
+  # Angular App Service
+  angular-app:
+    image: angularapp:latest
+    container_name: angular-app
+    networks:
+      - spring-boot-network
+    ports:
+      - "4200:4200"  # Exposing port 4200 to access the Angular app
 
 networks:
   spring-boot-network:
