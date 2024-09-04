@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS demande.benifvalidation
 
 INSERT INTO demande.benifvalidation (nom, prenom, numbenif)
 VALUES 
-    ('Dupont', 'Jean', 'BENIF123'),
-    ('Martin', 'Paul', 'BENIF124');
+    ('Dupont', 'Jean', '123'),
+    ('Martin', 'Paul', '124');
    
 
 CREATE TABLE IF NOT EXISTS demande.identifiant_unique
@@ -274,16 +274,26 @@ CREATE TABLE IF NOT EXISTS demande.personne_actions
         ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
+-- CREATE TABLE IF NOT EXISTS demande.demande_articles
+-- (
+--     "code" VARCHAR(255) NOT NULL,
+--     "code_proposition" VARCHAR(255) NOT NULL,
+--     "demande_id" BIGINT NOT NULL,
+--     CONSTRAINT "demande_articles_pkey" PRIMARY KEY ("code", "demande_id"),
+--     CONSTRAINT "fk_demande_id" FOREIGN KEY ("demande_id") REFERENCES demande.demande("id")
+-- );
 CREATE TABLE IF NOT EXISTS demande.demande_articles
 (
-    "code" VARCHAR(255) NOT NULL,
-    "code_proposition" VARCHAR(255) NOT NULL,
-    "demande_id" BIGINT NOT NULL,
-    CONSTRAINT "demande_articles_pkey" PRIMARY KEY ("code", "demande_id"),
-    CONSTRAINT "fk_demande_id" FOREIGN KEY ("demande_id") REFERENCES demande.demande("id")
- 
-
+    code VARCHAR(255) NOT NULL,
+    code_proposition VARCHAR(255) NOT NULL,
+    demande_id BIGINT NOT NULL,
+    CONSTRAINT demande_articles_pkey PRIMARY KEY (code, demande_id),
+    CONSTRAINT fk_demande_id FOREIGN KEY (demande_id) REFERENCES demande.demande(id),
+    CONSTRAINT fk_code_proposition FOREIGN KEY (code_proposition) REFERENCES referentiel.propositions(code)
+     ON UPDATE NO ACTION
+     ON DELETE CASCADE
 );
+
 
 
 

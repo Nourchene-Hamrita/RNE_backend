@@ -112,7 +112,7 @@ services:
     container_name: postgres-db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: nour123
+      POSTGRES_PASSWORD: rne
       POSTGRES_DB: RNEdb
     ports:
       - "5433:5432"
